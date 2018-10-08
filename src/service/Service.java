@@ -19,9 +19,10 @@ public class Service {
 	}
 
 	// ProduktKategori
-	public static void opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
+	public static Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
 		Produkt p = new Produkt(navn, pris, str);
 		Storage.addProdukt(pk, p);
+		return p;
 	}
 
 }
