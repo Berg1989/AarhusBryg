@@ -1,0 +1,34 @@
+package model;
+
+import java.util.ArrayList;
+
+public class ProduktKategori {
+	private String navn;
+	private ArrayList<Produkt> produkter;
+
+	public ProduktKategori(String navn) {
+		this.navn = navn;
+	}
+
+	public void createProdukt(String navn, double pris, String str) {
+		Produkt np = new Produkt(navn, pris, str);
+		produkter.add(np);
+	}
+
+	public void redigerNavn(Produkt p, String navn) {
+		p.setNavn(navn);
+	}
+
+	public void redigerPris(Produkt p, double pris) {
+		p.setPris(pris);
+	}
+
+	public void redigerStr(Produkt p, String str) {
+		p.setStr(str);
+	}
+
+	public ArrayList<Produkt> getProdukter() {
+		return new ArrayList<>(produkter);
+	}
+
+}
