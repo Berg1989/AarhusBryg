@@ -6,15 +6,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import service.Service;
 
 public class MainWindow extends Application {
+
+    private Service service;
+
     public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
     public void init() {
-        // Service.initStorage();
+        service = Service.getTestService();
+        service.initStorage();
+
     }
 
     @Override
