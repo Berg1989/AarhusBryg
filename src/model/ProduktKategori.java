@@ -10,9 +10,8 @@ public class ProduktKategori {
 		this.navn = navn;
 	}
 
-	public void createProdukt(String navn, double pris, String str) {
-		Produkt np = new Produkt(navn, pris, str);
-		produkter.add(np);
+	public void addProdukt(Produkt p) {
+		produkter.add(p);
 	}
 
 	public void redigerNavn(Produkt p, String navn) {
@@ -29,6 +28,10 @@ public class ProduktKategori {
 
 	public ArrayList<Produkt> getProdukter() {
 		return new ArrayList<>(produkter);
+	}
+
+	public Produkt getProdukt(Produkt p) {
+		return p;
 	}
 
 }
