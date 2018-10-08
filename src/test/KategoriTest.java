@@ -19,7 +19,7 @@ public class KategoriTest {
 	
 	@Test
 	public void testCreateProcukt() {
-		p = k.createProdukt("Pilser",50.0, "50 cL");
+		p = new Produkt("Pilser",50.0, "50 cL");
 		assertNotNull(p);
 	}
 	
