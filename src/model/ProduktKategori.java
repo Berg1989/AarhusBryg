@@ -34,4 +34,9 @@ public class ProduktKategori {
         return p;
     }
 
+    @Override
+    public String toString() {
+        return navn;
+    }
+
 }

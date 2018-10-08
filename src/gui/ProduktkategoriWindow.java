@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.ProduktKategori;
+import storage.Storage;
 
 public class ProduktkategoriWindow extends Stage {
 
@@ -42,9 +43,11 @@ public class ProduktkategoriWindow extends Stage {
         pane.add(lwPKategori, 0, 1, 1, 3);
         lwPKategori.setPrefHeight(250);
         lwPKategori.setPrefWidth(180);
+        lwPKategori.getItems().addAll(Storage.getAllProduktKategorier());
 
         btnOpret = new Button("Opret Kategori");
         pane.add(btnOpret, 1, 1);
+        btnOpret.setOnAction(event -> btnOpretAction());
 
         btnRemove = new Button("Slet Kategori");
         pane.add(btnRemove, 1, 2);
@@ -54,6 +57,12 @@ public class ProduktkategoriWindow extends Stage {
 
         btnGaaTil = new Button("Gå Til");
         pane.add(btnGaaTil, 0, 4);
+
+    }
+
+    private void btnOpretAction() {
+        OpretKategoriWindow okw = new OpretKategoriWindow();
+        okw.showAndWait();
 
     }
 

@@ -26,6 +26,7 @@ public class Service {
     // ProduktKategori
     public ProduktKategori opretProduktKategori(String navn) {
         ProduktKategori pk = new ProduktKategori(navn);
+        Storage.addProduktKategori(pk);
         return pk;
     }
 
@@ -40,9 +41,9 @@ public class Service {
     public void initStorage() {
 
         // Produk Kategorier
-        ProduktKategori pk1 = opretProduktKategori("Kategori4");
-        ProduktKategori pk2 = opretProduktKategori("Kategori5");
-        ProduktKategori pk3 = opretProduktKategori("Kategori6");
+        ProduktKategori pk1 = opretProduktKategori("Kategori1");
+        ProduktKategori pk2 = opretProduktKategori("Kategori2");
+        ProduktKategori pk3 = opretProduktKategori("Kategori3");
 
         // Produkter
         opretProdukt(pk1, "Øl", 35, "0.33 L");
