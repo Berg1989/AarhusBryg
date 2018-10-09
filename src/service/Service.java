@@ -47,7 +47,12 @@ public class Service {
 
     public KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
         KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
+        Storage.addKlippeKort(kk);
         return kk;
+    }
+
+    public void sletKlippeKort(KlippeKort kk) {
+        Storage.getAllKlippeKort().remove(kk);
     }
 
     public void initStorage() {
