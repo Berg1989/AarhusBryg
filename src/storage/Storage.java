@@ -30,4 +30,8 @@ public class Storage {
         klippeKortList.add(kk);
     }
 
+    public static void removeKlippeKort(KlippeKort kk) {
+        klippeKortList.remove(kk);
+    }
+
 }

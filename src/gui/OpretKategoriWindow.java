@@ -52,7 +52,8 @@ public class OpretKategoriWindow extends Stage {
 
     private void btnOpretAction() {
         String navn = txfKategoriNavn.getText().trim();
-        Service.getService().opretProduktKategori(navn);
+        Service.getService();
+        Service.opretProduktKategori(navn);
         hide();
 
     }

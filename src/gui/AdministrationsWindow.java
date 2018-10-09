@@ -55,6 +55,8 @@ public class AdministrationsWindow extends Stage {
     }
 
     private void btnKlippekortAction() {
+        KlippeKortWindow kkw = new KlippeKortWindow();
+        kkw.showAndWait();
 
     }
 

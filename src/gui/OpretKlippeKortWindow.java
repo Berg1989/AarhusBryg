@@ -9,22 +9,16 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Produkt;
-import model.ProduktKategori;
 import service.Service;
 
-public class RedigerProduktWindow extends Stage {
+public class OpretKlippeKortWindow extends Stage {
 
-    private Produkt p;
-    private ProduktKategori pk;
+    public OpretKlippeKortWindow() {
 
-    public RedigerProduktWindow(ProduktKategori pk, Produkt p) {
-        this.pk = pk;
-        this.p = p;
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Opret produkt window");
+        setTitle("Administrator Window");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -32,9 +26,9 @@ public class RedigerProduktWindow extends Stage {
         setScene(scene);
     }
 
-    private Label lbNavn, lbStr, lbPris;
-    private TextField txfNavn, txfStr, txfPris;
-    private Button btnRediger, btnLuk;
+    private Label lbNavn, lbAntalKlip, lbPris;
+    private TextField txfNavn, txfAntalKlip, txfPris;
+    private Button btnOpret, btnLuk;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -42,17 +36,17 @@ public class RedigerProduktWindow extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        lbNavn = new Label("Produkt navn:");
+        lbNavn = new Label("Klippekort navn: ");
         pane.add(lbNavn, 0, 0);
 
         txfNavn = new TextField();
         pane.add(txfNavn, 1, 0);
 
-        lbStr = new Label("Produktets Størrelse:");
-        pane.add(lbStr, 0, 1);
+        lbAntalKlip = new Label("Antal Klip: ");
+        pane.add(lbAntalKlip, 0, 1);
 
-        txfStr = new TextField();
-        pane.add(txfStr, 1, 1);
+        txfAntalKlip = new TextField();
+        pane.add(txfAntalKlip, 1, 1);
 
         lbPris = new Label("Produkt Pris:");
         pane.add(lbPris, 0, 2);
@@ -60,9 +54,9 @@ public class RedigerProduktWindow extends Stage {
         txfPris = new TextField();
         pane.add(txfPris, 1, 2);
 
-        btnRediger = new Button("Opret");
-        pane.add(btnRediger, 0, 3);
-        btnRediger.setOnAction(event -> btnRedigerAction());
+        btnOpret = new Button("Opret");
+        pane.add(btnOpret, 0, 3);
+        btnOpret.setOnAction(event -> btnOpretAction());
 
         btnLuk = new Button("Luk");
         pane.add(btnLuk, 1, 3);
@@ -70,17 +64,17 @@ public class RedigerProduktWindow extends Stage {
 
     }
 
-    private void btnRedigerAction() {
+    private void btnOpretAction() {
         String navn = txfNavn.getText().trim();
-        String str = txfStr.getText().trim();
+        int antal = Integer.parseInt(txfAntalKlip.getText().trim());
         Double pris = Double.parseDouble(txfPris.getText().trim());
         Service.getService();
-        Service.RedigerProdukt(pk, p, navn, pris, str);
+        Service.opretKlippeKort(navn, antal, pris);
         hide();
-
     }
 
     private void btnLukAction() {
         hide();
     }
+
 }

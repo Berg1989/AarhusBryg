@@ -132,7 +132,8 @@ public class GaaTilWindow extends Stage {
 
     private void btnSletAction() {
         Produkt p = lwProdukter.getSelectionModel().getSelectedItem();
-        Service.getService().sletProdukt(this.pk, p);
+        Service.getService();
+        Service.sletProdukt(this.pk, p);
         lwProdukter.getItems().setAll(initAllProdukter());
 
     }

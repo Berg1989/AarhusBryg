@@ -29,30 +29,30 @@ public class Service {
         return p;
     }
 
-    public void sletProdukt(ProduktKategori pk, Produkt p) {
+    public static void sletProdukt(ProduktKategori pk, Produkt p) {
         pk.sletProdukt(p);
     }
 
-    public void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
+    public static void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
         pk.redigerNavn(p, navn);
         pk.redigerPris(p, pris);
         pk.redigerStr(p, str);
     }
 
-    public ProduktKategori opretProduktKategori(String navn) {
+    public static ProduktKategori opretProduktKategori(String navn) {
         ProduktKategori pk = new ProduktKategori(navn);
         Storage.addProduktKategori(pk);
         return pk;
     }
 
-    public KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
+    public static KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
         KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
         Storage.addKlippeKort(kk);
         return kk;
     }
 
-    public void sletKlippeKort(KlippeKort kk) {
-        Storage.getAllKlippeKort().remove(kk);
+    public static void sletKlippeKort(KlippeKort kk) {
+        Storage.removeKlippeKort(kk);
     }
 
     public void initStorage() {
@@ -68,6 +68,10 @@ public class Service {
         opretProdukt(pk2, "Vodka", 120, "1 L");
         opretProdukt(pk3, "Single Malt Whisky", 350, "0.66 L");
         opretProdukt(pk3, "Saftevand", 10, "1.5 L");
+
+        // Klippekort
+        opretKlippeKort("Kort1", 4, 100);
+
     }
 
 }
