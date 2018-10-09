@@ -1,5 +1,8 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -54,11 +57,8 @@ public class GaaTilWindow extends Stage {
         lwProdukter.setPrefWidth(180);
         lwProdukter.getItems().addAll(pk.getProdukter());
 
-        ChangeListener<Produkt> listener = (op, oldProduct, newProduct) -> selectedProductChanged();
+        ChangeListener<Produkt> listener = (op, oldProduct, newProduct) -> updateControls();
         lwProdukter.getSelectionModel().selectedItemProperty().addListener(listener);
-
-        ChangeListener<Produkt> listenerProdukter = (op, oldProduct, newProduct) -> selectedProductChanged();
-        lwProdukter.getSelectionModel().selectedItemProperty().addListener(listenerProdukter);
 
         VBox vboks = new VBox();
         pane.add(vboks, 1, 1);
@@ -91,7 +91,7 @@ public class GaaTilWindow extends Stage {
         hboks.getChildren().add(btnOpret);
         btnOpret.setOnAction(event -> btnOpretAction());
 
-        btnRedigere = new Button("Redigere");
+        btnRedigere = new Button("Rediger");
         hboks.getChildren().add(btnRedigere);
 
         btnRemove = new Button("Remove");
@@ -102,9 +102,18 @@ public class GaaTilWindow extends Stage {
 
     }
 
+    private List<Produkt> initAllProdukter() {
+        List<Produkt> list = new ArrayList<>();
+        for (Produkt p : pk.getProdukter()) {
+            list.add(p);
+        }
+        return list;
+    }
+
     private void btnOpretAction() {
         OpretProduktWindow opw = new OpretProduktWindow(this.pk);
         opw.showAndWait();
+        lwProdukter.getItems().setAll(initAllProdukter());
 
     }
 
@@ -116,10 +125,6 @@ public class GaaTilWindow extends Stage {
             txfPris.setText(Double.toString(produkt.getPris()));
         }
 
-    }
-
-    private void selectedProductChanged() {
-        updateControls();
     }
 
 }
