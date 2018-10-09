@@ -1,5 +1,6 @@
 package service;
 
+import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
 import storage.Storage;
@@ -32,6 +33,11 @@ public class Service {
 		ProduktKategori pk = new ProduktKategori(navn);
 		Storage.addProduktKategori(pk);
 		return pk;
+	}
+
+	public KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
+		KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
+		return kk;
 	}
 
 	public void initStorage() {
