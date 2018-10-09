@@ -1,6 +1,7 @@
 package model;
 
 public class Produkt {
+
 	private String navn;
 	private double pris;
 	private String str;
@@ -33,6 +34,11 @@ public class Produkt {
 
 	public void setStr(String str) {
 		this.str = str;
+	}
+
+	@Override
+	public String toString() {
+		return navn + " " + str + " " + pris + " kr.";
 	}
 
 }
