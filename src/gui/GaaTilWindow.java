@@ -57,6 +57,9 @@ public class GaaTilWindow extends Stage {
         ChangeListener<Produkt> listener = (op, oldProduct, newProduct) -> selectedProductChanged();
         lwProdukter.getSelectionModel().selectedItemProperty().addListener(listener);
 
+        ChangeListener<Produkt> listenerProdukter = (op, oldProduct, newProduct) -> selectedProductChanged();
+        lwProdukter.getSelectionModel().selectedItemProperty().addListener(listenerProdukter);
+
         VBox vboks = new VBox();
         pane.add(vboks, 1, 1);
         vboks.setPadding(new Insets(10, 0, 0, 10));
@@ -100,7 +103,7 @@ public class GaaTilWindow extends Stage {
     }
 
     private void btnOpretAction() {
-        OpretProduktWindow opw = new OpretProduktWindow();
+        OpretProduktWindow opw = new OpretProduktWindow(this.pk);
         opw.showAndWait();
 
     }
@@ -112,6 +115,7 @@ public class GaaTilWindow extends Stage {
             txfStr.setText(produkt.getStr());
             txfPris.setText(Double.toString(produkt.getPris()));
         }
+
     }
 
     private void selectedProductChanged() {
