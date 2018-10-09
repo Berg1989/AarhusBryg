@@ -40,7 +40,7 @@ public class GaaTilWindow extends Stage {
     private ListView<Produkt> lwProdukter;
     private Label lbPiKategori, lbNavn, lbStørrelse, lbBeskrivelse, lbPris;
     private TextField txfNavn, txfStr, txfBeskrivelse, txfPris;
-    private Button btnOpret, btnRemove, btnRedigere, btnLuk;
+    private Button btnOpret, btnSlet, btnRediger, btnLuk;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -91,11 +91,13 @@ public class GaaTilWindow extends Stage {
         hboks.getChildren().add(btnOpret);
         btnOpret.setOnAction(event -> btnOpretAction());
 
-        btnRedigere = new Button("Rediger");
-        hboks.getChildren().add(btnRedigere);
+        btnRediger = new Button("Rediger");
+        hboks.getChildren().add(btnRediger);
+        btnRediger.setOnAction(event -> btnRedigerAction());
 
-        btnRemove = new Button("Remove");
-        hboks.getChildren().add(btnRemove);
+        btnSlet = new Button("Slet");
+        hboks.getChildren().add(btnSlet);
+        btnSlet.setOnAction(event -> btnSletAction());
 
         btnLuk = new Button("Luk");
         hboks.getChildren().add(btnLuk);
@@ -114,6 +116,14 @@ public class GaaTilWindow extends Stage {
         OpretProduktWindow opw = new OpretProduktWindow(this.pk);
         opw.showAndWait();
         lwProdukter.getItems().setAll(initAllProdukter());
+
+    }
+
+    private void btnRedigerAction() {
+
+    }
+
+    private void btnSletAction() {
 
     }
 
