@@ -13,12 +13,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Produkt;
 import model.ProduktKategori;
 
 public class GaaTilWindow extends Stage {
 
-    public GaaTilWindow() {
+    private ProduktKategori pk;
 
+    public GaaTilWindow(ProduktKategori pk) {
+        this.pk = pk;
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
@@ -30,7 +33,7 @@ public class GaaTilWindow extends Stage {
         setScene(scene);
     }
 
-    private ListView<ProduktKategori> lwProdukter;
+    private ListView<Produkt> lwProdukter;
     private Label lbPiKategori, lbNavn, lbStørrelse, lbBeskrivelse, lbPris;
     private TextField txfNavn, txfStørrelse, txfBeskrivelse, txfPris;
     private Button btnOpret, btnRemove, btnRedigere, btnLuk;
@@ -48,7 +51,7 @@ public class GaaTilWindow extends Stage {
         pane.add(lwProdukter, 0, 1);
         lwProdukter.setPrefHeight(250);
         lwProdukter.setPrefWidth(180);
-        // Mangler Produkter i Storage.
+        lwProdukter.getItems().addAll(pk.getProdukter());
 
         VBox vboks = new VBox();
         pane.add(vboks, 1, 1);
