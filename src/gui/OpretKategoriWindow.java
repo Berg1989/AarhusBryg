@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import service.Service;
 
 public class OpretKategoriWindow extends Stage {
 
@@ -16,7 +17,7 @@ public class OpretKategoriWindow extends Stage {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Administrator Window");
+        setTitle("Opret Kategori Window");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -42,9 +43,23 @@ public class OpretKategoriWindow extends Stage {
 
         btnOpret = new Button("Opret");
         pane.add(btnOpret, 0, 2);
+        btnOpret.setOnAction(event -> btnOpretAction());
 
         btnLuk = new Button("Luk");
         pane.add(btnLuk, 1, 2);
+        btnLuk.setOnAction(event -> btnLukAction());
+    }
+
+    private void btnOpretAction() {
+        String navn = txfKategoriNavn.getText().trim();
+        Service.getService().opretProduktKategori(navn);
+        hide();
+
+    }
+
+    private void btnLukAction() {
+        hide();
+
     }
 
 }
