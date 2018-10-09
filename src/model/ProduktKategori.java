@@ -10,15 +10,19 @@ public class ProduktKategori {
         this.navn = navn;
     }
 
-	public Produkt createProdukt(String navn, double pris, String str) {
-		Produkt p = new Produkt(navn, pris, str);
-		produkter.add(p);
-		return p;
-	}
+    public Produkt createProdukt(String navn, double pris, String str) {
+        Produkt p = new Produkt(navn, pris, str);
+        produkter.add(p);
+        return p;
+    }
 
-	public void addProdukt(Produkt p) {
-		produkter.add(p);
-	}
+    public void addProdukt(Produkt p) {
+        produkter.add(p);
+    }
+
+    public void sletProdukt(Produkt p) {
+        produkter.remove(p);
+    }
 
     public void redigerNavn(Produkt p, String navn) {
         p.setNavn(navn);

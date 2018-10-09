@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Produkt;
 import model.ProduktKategori;
+import service.Service;
 
 public class GaaTilWindow extends Stage {
 
@@ -38,8 +39,8 @@ public class GaaTilWindow extends Stage {
     }
 
     private ListView<Produkt> lwProdukter;
-    private Label lbPiKategori, lbNavn, lbStørrelse, lbBeskrivelse, lbPris;
-    private TextField txfNavn, txfStr, txfBeskrivelse, txfPris;
+    private Label lbPiKategori, lbNavn, lbStørrelse, lbPris;
+    private TextField txfNavn, txfStr, txfPris;
     private Button btnOpret, btnSlet, btnRediger, btnLuk;
 
     private void initContent(GridPane pane) {
@@ -120,10 +121,19 @@ public class GaaTilWindow extends Stage {
     }
 
     private void btnRedigerAction() {
+        if (lwProdukter.getSelectionModel().getSelectedItem() != null) {
+            Produkt p = lwProdukter.getSelectionModel().getSelectedItem();
+            RedigerProduktWindow rpw = new RedigerProduktWindow(this.pk, p);
+            rpw.showAndWait();
+            lwProdukter.getItems().setAll(initAllProdukter());
+        }
 
     }
 
     private void btnSletAction() {
+        Produkt p = lwProdukter.getSelectionModel().getSelectedItem();
+        Service.getService().sletProdukt(this.pk, p);
+        lwProdukter.getItems().setAll(initAllProdukter());
 
     }
 
@@ -133,8 +143,12 @@ public class GaaTilWindow extends Stage {
             txfNavn.setText(produkt.getNavn());
             txfStr.setText(produkt.getStr());
             txfPris.setText(Double.toString(produkt.getPris()));
-        }
 
+        } else {
+            txfNavn.clear();
+            txfStr.clear();
+            txfPris.clear();
+        }
     }
 
 }

@@ -9,15 +9,18 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Produkt;
 import model.ProduktKategori;
+import service.Service;
 
 public class RedigerProduktWindow extends Stage {
 
+    private Produkt p;
     private ProduktKategori pk;
 
-    public RedigerProduktWindow(ProduktKategori pk) {
-
+    public RedigerProduktWindow(ProduktKategori pk, Produkt p) {
         this.pk = pk;
+        this.p = p;
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
@@ -68,6 +71,11 @@ public class RedigerProduktWindow extends Stage {
     }
 
     private void btnRedigerAction() {
+        String navn = txfNavn.getText().trim();
+        String str = txfStr.getText().trim();
+        Double pris = Double.parseDouble(txfPris.getText().trim());
+        Service.getService().RedigerProdukt(pk, p, navn, pris, str);
+        hide();
 
     }
 
