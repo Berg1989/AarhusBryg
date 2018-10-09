@@ -9,9 +9,16 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.ProduktKategori;
+import service.Service;
 
 public class OpretProduktWindow extends Stage {
-    public OpretProduktWindow() {
+
+    private ProduktKategori pk;
+
+    public OpretProduktWindow(ProduktKategori pk) {
+
+        this.pk = pk;
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
@@ -51,6 +58,27 @@ public class OpretProduktWindow extends Stage {
         txfPris = new TextField();
         pane.add(txfPris, 1, 2);
 
+        btnOpret = new Button("Opret");
+        pane.add(btnOpret, 0, 3);
+        btnOpret.setOnAction(event -> btnOpretAction());
+
+        btnLuk = new Button("Luk");
+        pane.add(btnLuk, 1, 3);
+        btnLuk.setOnAction(event -> btnLukAction());
+
+    }
+
+    private void btnOpretAction() {
+        String navn = txfNavn.getText().trim();
+        String str = txfStr.getText().trim();
+        Double pris = Double.parseDouble(txfPris.getText().trim());
+        Service.getService();
+        Service.opretProdukt(pk, navn, pris, str);
+        hide();
+    }
+
+    private void btnLukAction() {
+        hide();
     }
 
 }
