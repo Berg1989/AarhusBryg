@@ -2,6 +2,7 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -24,6 +25,7 @@ public class OpretProduktWindow extends Stage {
 
     private Label lbNavn, lbStr, lbPris;
     private TextField txfNavn, txfStr, txfPris;
+    private Button btnOpret, btnLuk;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -38,7 +40,16 @@ public class OpretProduktWindow extends Stage {
         pane.add(txfNavn, 1, 0);
 
         lbStr = new Label("Produktets Størrelse:");
-        pane.add(lbStr, 0, 2);
+        pane.add(lbStr, 0, 1);
+
+        txfStr = new TextField();
+        pane.add(txfStr, 1, 1);
+
+        lbPris = new Label("Produkt Pris:");
+        pane.add(lbPris, 0, 2);
+
+        txfPris = new TextField();
+        pane.add(txfPris, 1, 2);
 
     }
 
