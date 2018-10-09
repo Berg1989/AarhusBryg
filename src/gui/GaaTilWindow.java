@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -35,7 +36,7 @@ public class GaaTilWindow extends Stage {
 
     private ListView<Produkt> lwProdukter;
     private Label lbPiKategori, lbNavn, lbStørrelse, lbBeskrivelse, lbPris;
-    private TextField txfNavn, txfStørrelse, txfBeskrivelse, txfPris;
+    private TextField txfNavn, txfStr, txfBeskrivelse, txfPris;
     private Button btnOpret, btnRemove, btnRedigere, btnLuk;
 
     private void initContent(GridPane pane) {
@@ -53,6 +54,9 @@ public class GaaTilWindow extends Stage {
         lwProdukter.setPrefWidth(180);
         lwProdukter.getItems().addAll(pk.getProdukter());
 
+        ChangeListener<Produkt> listener = (op, oldProduct, newProduct) -> selectedProductChanged();
+        lwProdukter.getSelectionModel().selectedItemProperty().addListener(listener);
+
         VBox vboks = new VBox();
         pane.add(vboks, 1, 1);
         vboks.setPadding(new Insets(10, 0, 0, 10));
@@ -66,14 +70,8 @@ public class GaaTilWindow extends Stage {
         lbStørrelse = new Label("Produktets Størrelse:");
         vboks.getChildren().add(lbStørrelse);
 
-        txfStørrelse = new TextField();
-        vboks.getChildren().add(txfStørrelse);
-
-        lbBeskrivelse = new Label("Produkt beskrielse: ");
-        vboks.getChildren().add(lbBeskrivelse);
-
-        txfBeskrivelse = new TextField();
-        vboks.getChildren().add(txfBeskrivelse);
+        txfStr = new TextField();
+        vboks.getChildren().add(txfStr);
 
         lbPris = new Label("Produkt Pris");
         vboks.getChildren().add(lbPris);
@@ -88,6 +86,7 @@ public class GaaTilWindow extends Stage {
 
         btnOpret = new Button("Opret");
         hboks.getChildren().add(btnOpret);
+        btnOpret.setOnAction(event -> btnOpretAction());
 
         btnRedigere = new Button("Redigere");
         hboks.getChildren().add(btnRedigere);
@@ -99,4 +98,24 @@ public class GaaTilWindow extends Stage {
         hboks.getChildren().add(btnLuk);
 
     }
+
+    private void btnOpretAction() {
+        OpretProduktWindow opw = new OpretProduktWindow();
+        opw.showAndWait();
+
+    }
+
+    private void updateControls() {
+        Produkt produkt = lwProdukter.getSelectionModel().getSelectedItem();
+        if (produkt != null) {
+            txfNavn.setText(produkt.getNavn());
+            txfStr.setText(produkt.getStr());
+            txfPris.setText(Double.toString(produkt.getPris()));
+        }
+    }
+
+    private void selectedProductChanged() {
+        updateControls();
+    }
+
 }
