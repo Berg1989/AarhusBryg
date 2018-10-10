@@ -4,14 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,7 +24,7 @@ public class OpretRundvisningWindow extends Stage {
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);
-		setTitle("Klippekort");
+		setTitle("Opretning af Rundvisning");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
@@ -32,9 +33,8 @@ public class OpretRundvisningWindow extends Stage {
 	}
 
 	private DatePicker dp;
-	private ComboBox cbbRM;
-	private Label lbDatePicker, lbRM, lbTidspunkt, lbAntal, lbTotalPris, lbKundeNavn;
-	private CheckBox chbSpisning;
+	private Label lbDatePicker, lbAntalS, lbTidspunkt, lbAntal, lbTotalPris, lbKundeNavn;
+	private CheckBox chbSpisning, chbStuderende;
 	private TextField txfTidspunkt, txfAntalM, txfAntalS, txfTotalPris, txfKundeNavn;
 	private Button btnReserver, btnLuk;
 
@@ -44,11 +44,15 @@ public class OpretRundvisningWindow extends Stage {
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
 
-		lbKundeNavn = new Label("Kunde's navn :");
-		pane.add(lbKundeNavn, 0, 0);
+		HBox Hnavn = new HBox();
+		pane.add(Hnavn, 0, 0);
+		Hnavn.setAlignment(Pos.TOP_LEFT);
+
+		lbKundeNavn = new Label("Kunde's navn:  ");
+		Hnavn.getChildren().add(lbKundeNavn);
 
 		txfKundeNavn = new TextField();
-		pane.add(txfKundeNavn, 1, 0);
+		Hnavn.getChildren().add(txfKundeNavn);
 
 		lbDatePicker = new Label("Vælg dato");
 		pane.add(lbDatePicker, 0, 1);
@@ -56,35 +60,38 @@ public class OpretRundvisningWindow extends Stage {
 		dp = new DatePicker();
 		pane.add(dp, 0, 2);
 
-		lbRM = new Label("Vælg Rundvisning");
-		pane.add(lbRM, 0, 3);
-
-		cbbRM = new ComboBox();
-		pane.add(cbbRM, 0, 4);
+		chbStuderende = new CheckBox("Studerende");
+		pane.add(chbStuderende, 0, 3);
 
 		lbTidspunkt = new Label("Tidspunkt");
-		pane.add(lbTidspunkt, 0, 6);
+		pane.add(lbTidspunkt, 0, 5);
 
 		txfTidspunkt = new TextField();
-		pane.add(txfTidspunkt, 0, 7);
+		pane.add(txfTidspunkt, 0, 6);
 
 		lbAntal = new Label("Antal");
-		pane.add(lbAntal, 1, 6);
+		pane.add(lbAntal, 1, 5);
 
 		txfAntalM = new TextField();
-		pane.add(txfAntalM, 1, 7);
+		pane.add(txfAntalM, 1, 6);
 
-		chbSpisning = new CheckBox("Spisning Ønskes");
-		pane.add(chbSpisning, 0, 8);
+		chbSpisning = new CheckBox("Spisning Ønskes - 120 kr.- pr. person");
+		pane.add(chbSpisning, 0, 7);
+		chbSpisning.setOnAction(event -> selectedSpisning());
+
+		lbAntalS = new Label("Antal for spisning");
+		pane.add(lbAntalS, 0, 8);
 
 		txfAntalS = new TextField();
 		pane.add(txfAntalS, 0, 9);
+		txfAntalS.setDisable(true);
 
 		lbTotalPris = new Label("Total Pris");
 		pane.add(lbTotalPris, 0, 10);
 
 		txfTotalPris = new TextField();
 		pane.add(txfTotalPris, 0, 11);
+		txfTotalPris.setEditable(false);
 
 		btnReserver = new Button("Reserver");
 		pane.add(btnReserver, 0, 12);
@@ -109,6 +116,12 @@ public class OpretRundvisningWindow extends Stage {
 
 	private void btnLukAction() {
 		hide();
+	}
+
+	private void selectedSpisning() {
+		if (chbSpisning.isSelected()) {
+			txfAntalS.setDisable(false);
+		}
 	}
 
 }
