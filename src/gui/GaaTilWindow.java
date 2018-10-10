@@ -39,7 +39,7 @@ public class GaaTilWindow extends Stage {
     }
 
     private ListView<Produkt> lwProdukter;
-    private Label lbPiKategori, lbNavn, lbStørrelse, lbPris;
+    private Label lbPiKategori, lbNavn, lbStoerrelse, lbPris;
     private TextField txfNavn, txfStr, txfPris;
     private Button btnOpret, btnSlet, btnRediger, btnLuk;
 
@@ -71,8 +71,8 @@ public class GaaTilWindow extends Stage {
         txfNavn = new TextField();
         vboks.getChildren().add(txfNavn);
 
-        lbStørrelse = new Label("Produktets Størrelse:");
-        vboks.getChildren().add(lbStørrelse);
+        lbStoerrelse = new Label("Produktets Størrelse:");
+        vboks.getChildren().add(lbStoerrelse);
 
         txfStr = new TextField();
         vboks.getChildren().add(txfStr);
