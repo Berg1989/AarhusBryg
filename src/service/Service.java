@@ -1,8 +1,12 @@
 package service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
+import model.Rundvisning;
 import storage.Storage;
 
 public class Service {
@@ -53,6 +57,16 @@ public class Service {
 
     public static void sletKlippeKort(KlippeKort kk) {
         Storage.removeKlippeKort(kk);
+    }
+    
+    public static Rundvisning opretRundvisning(String kunde, LocalDate dato, LocalTime tid) {
+        Rundvisning r = new Rundvisning(kunde, dato, tid);
+        Storage.addRundvisning(r);
+        return r;
+    }
+
+    public static void sletRundvisning(Rundvisning r) {
+        Storage.removeRundvisning(r);
     }
 
     public void initStorage() {

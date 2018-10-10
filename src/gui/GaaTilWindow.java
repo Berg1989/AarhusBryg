@@ -30,7 +30,7 @@ public class GaaTilWindow extends Stage {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Administrator Window");
+        setTitle("Produkter");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);

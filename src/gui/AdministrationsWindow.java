@@ -61,6 +61,7 @@ public class AdministrationsWindow extends Stage {
     }
 
     private void btnBookingAction() {
-
+    	BookingWindow bw = new BookingWindow();
+    	bw.showAndWait();
     }
 }
