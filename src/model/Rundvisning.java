@@ -16,12 +16,13 @@ public class Rundvisning {
     private int antalSpisende;
 
 
-    public Rundvisning(String kunde, LocalDate dato, int gaester, LocalTime tid) {
+    public Rundvisning(String kunde, LocalDate dato, LocalTime tid, int gaester) {
          this.kundeNavn = kunde;
          this.dato = dato;
          this.tid = tid;
          this.antalGaester = gaester;
          this.betalt = false;
+         this.spisning = false;
     }
 
    
@@ -194,6 +195,6 @@ public class Rundvisning {
     	return pris;
     }
     
-    //Made's push
+  
 
 }
