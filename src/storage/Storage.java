@@ -19,6 +19,10 @@ public class Storage {
     public static void addProduktKategori(ProduktKategori pk) {
         produktKategoriList.add(pk);
     }
+    
+    public static void removeProduktKategori(ProduktKategori pk){
+    	produktKategoriList.remove(pk);
+    }
 
     public static void addProdukt(ProduktKategori pk, Produkt p) {
         pk.addProdukt(p);

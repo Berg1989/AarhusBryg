@@ -48,6 +48,10 @@ public class Service {
         Storage.addProduktKategori(pk);
         return pk;
     }
+    
+    public static void sletProduktKategori(ProduktKategori pk){
+    	Storage.removeProduktKategori(pk);
+    }
 
     public static KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
         KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
