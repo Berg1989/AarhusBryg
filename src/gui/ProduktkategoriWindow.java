@@ -58,7 +58,7 @@ public class ProduktkategoriWindow extends Stage {
         pane.add(btnLuk, 1, 4);
         btnLuk.setOnAction(event -> btnLukAction());
 
-        btnGaaTil = new Button("GÃ¥ Til");
+        btnGaaTil = new Button("Gå Til");
         pane.add(btnGaaTil, 0, 4);
         btnGaaTil.setOnAction(event -> btnGaaTilAction());
 
@@ -75,9 +75,11 @@ public class ProduktkategoriWindow extends Stage {
     }
 
     private void btnGaaTilAction() {
+    	if(lwPKategori.getSelectionModel().getSelectedItem() != null){
         pk = lwPKategori.getSelectionModel().getSelectedItem();
         GaaTilWindow gtw = new GaaTilWindow(pk);
         gtw.showAndWait();
+    	}
     }
 
     private void btnLukAction() {

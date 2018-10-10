@@ -71,7 +71,7 @@ public class GaaTilWindow extends Stage {
         txfNavn = new TextField();
         vboks.getChildren().add(txfNavn);
 
-        lbStoerrelse = new Label("Produktets StÃ¸rrelse:");
+        lbStoerrelse = new Label("Produktets Størrelse:");
         vboks.getChildren().add(lbStoerrelse);
 
         txfStr = new TextField();

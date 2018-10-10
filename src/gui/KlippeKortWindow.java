@@ -27,7 +27,7 @@ public class KlippeKortWindow extends Stage {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Administrator Window");
+        setTitle("Klippekort");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -95,6 +95,7 @@ public class KlippeKortWindow extends Stage {
 
         btnLuk = new Button("Luk");
         hboks.getChildren().add(btnLuk);
+        btnLuk.setOnAction(event -> btnLukAction());
 
     }
 
@@ -119,6 +120,10 @@ public class KlippeKortWindow extends Stage {
         Service.sletKlippeKort(k);
         lwKlippeKort.getItems().setAll(initAllProdukter());
 
+    }
+    
+    private void btnLukAction(){
+    	hide();
     }
 
     private void updateControls() {

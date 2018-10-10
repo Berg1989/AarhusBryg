@@ -63,7 +63,7 @@ public class Service {
         ProduktKategori pk3 = opretProduktKategori("Kategori3");
 
         // Produkter
-        opretProdukt(pk1, "Ã˜l", 35, "0.33 L");
+        opretProdukt(pk1, "Øl", 35, "0.33 L");
         opretProdukt(pk1, "Tis", 22, "0.20 CL");
         opretProdukt(pk2, "Vodka", 120, "1 L");
         opretProdukt(pk3, "Single Malt Whisky", 350, "0.66 L");
