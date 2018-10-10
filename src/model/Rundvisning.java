@@ -7,9 +7,12 @@ public class Rundvisning {
 	private String kundeNavn;
 	private LocalDate dato;
 	private LocalTime tid;
+	private int antalGaester;
 	private double pris;
 	private boolean betalt;
 	private String rundviser;
+	private boolean spisning;
+	private int antalSpisende;
 	
 	
 	public Rundvisning(String kunde, LocalDate dato, LocalTime tid) {
@@ -30,6 +33,10 @@ public class Rundvisning {
 		this.tid = t;
 	}
 	
+	public void setAntalGaester(int a) {
+		this.antalGaester = a;
+	}
+	
 	public void setPris(double p) {
 		this.pris = p;
 	}
@@ -40,6 +47,14 @@ public class Rundvisning {
 	
 	public void setRundviser(String rv) {
 		this.rundviser = rv;
+	}
+	
+	public void setSpisning(boolean b) {
+		this.spisning = b;
+	}
+	
+	public void setAntalSpisende(int as) {
+		this.antalSpisende = as;
 	}
 	
 	public String getKunde() {
@@ -66,5 +81,42 @@ public class Rundvisning {
 		return this.rundviser;
 	}
 	
+	public int getAntalGaester() {
+		return this.antalGaester;
+	}
+	
+	public boolean hasSpisning() {
+		return this.spisning;
+	}
+	
+	public int antalSpisende() {
+		return this.antalSpisende;
+	}
+	
+	public boolean isTilgaengeligt() {
+		if (this.dato.getDayOfWeek().toString().equals("SATURDAY") || this.dato.getDayOfWeek().toString().equals("SUNDAY")) {
+			return false;
+		}
+		else if (this.dato.getDayOfWeek().toString().equals("FRIDAY")) {
+			return false;
+		}
+		return false;
+	}
+	
+	public double beregnPris() {
+		double pris = 0;
+		LocalTime fyraften = LocalTime.of(16, 00).minusMinutes(1);
+		if (this.tid.isAfter(fyraften)) {
+			pris += this.antalGaester * 120;
+		}
+		else {
+			pris += this.antalGaester * 100;
+		}
+		
+		if (this.spisning) {
+			return 0.0;
+		}
+		return 0.0;
+	}
 	
 }
