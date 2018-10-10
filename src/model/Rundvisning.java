@@ -15,9 +15,6 @@ public class Rundvisning {
     private boolean spisning;
     private int antalSpisende;
 
-   
-
-   
 
     public Rundvisning(String kunde, LocalDate dato, int gaester, LocalTime tid) {
          this.kundeNavn = kunde;
@@ -138,11 +135,11 @@ public class Rundvisning {
 
     public boolean isTilgaengeligt() {
 
-         if (this.dato.getDayOfWeek().toString().equals("SATURDAY") || this.dato.getDayOfWeek().toString().equals("SUNDAY")) {
+         if (this.dato.getDayOfWeek().toString().equals("SATURDAY") || this.dato.getDayOfWeek().toString().equals("SUNDAY")) { //Make Pretty
               return false;
          }
 
-         else if (this.dato.getDayOfWeek().toString().equals("FRIDAY") && this.tid.isAfter(LocalTime.of(15, 59))) {
+         else if (this.dato.getDayOfWeek().toString().equals("FRIDAY") && this.tid.isAfter(LocalTime.of(15, 59))) { //Make Pretty
               return false;
          }
          return true;
@@ -152,19 +149,21 @@ public class Rundvisning {
 
     public double beregnPris() {
          double pris = 0;
-         LocalTime fyraften = LocalTime.of(16, 00).minusMinutes(1);
-         if (this.tid.isAfter(fyraften)) {
+         LocalTime fyraftenNomral = LocalTime.of(16, 00).minusMinutes(1);
+         LocalTime fyraftenFredag = LocalTime.of(16, 00).minusMinutes(1);
+         if ((this.tid.isAfter(fyraftenFredag) && this.dato.getDayOfWeek().toString().equals("FRIDAY")) || this.tid.isAfter(fyraftenNomral)) { //Make Pretty
               pris += this.antalGaester * 120;
          }
+        
          else {
               pris += this.antalGaester * 100;
          }
          if (this.spisning) {
-              return 0.0;
+        	 pris += this.antalSpisende * 130;
          }
-         return 0.0;
+         return pris;
     }
     
-    //TEST TEST TEST
+    //Made's push
 
 }
