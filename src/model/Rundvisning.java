@@ -21,6 +21,7 @@ public class Rundvisning {
          this.dato = dato;
          this.tid = tid;
          this.antalGaester = gaester;
+         this.betalt = false;
     }
 
    
@@ -133,35 +134,64 @@ public class Rundvisning {
 
    
 
-    public boolean isTilgaengeligt() {
-
+    public boolean isTilgaengeligTid() {
+ 
+    	LocalTime slut = slutTid();
+    	
          if (this.dato.getDayOfWeek().toString().equals("SATURDAY") || this.dato.getDayOfWeek().toString().equals("SUNDAY")) { //Make Pretty
               return false;
          }
 
-         else if (this.dato.getDayOfWeek().toString().equals("FRIDAY") && this.tid.isAfter(LocalTime.of(15, 59))) { //Make Pretty
+         else if (this.dato.getDayOfWeek().toString().equals("FRIDAY") && slut.isAfter(LocalTime.of(15, 00))) { //Make Pretty
               return false;
          }
          return true;
     }
+    
+    public boolean isTilgaengeligtAntalGaester() {
+    	if (slutTid().isAfter(LocalTime.of(16, 00))) {
+    		if (this.antalGaester < 20) {
+    			return false;
+    		}
+    		else {
+    			return true;
+    		}
+    	}
+    	else {
+    		if (this.antalGaester < 15 || this.antalGaester > 75) {
+    			return false;
+    		}
+    		else {
+    			return true;
+    		}
+    	}
+    }
+    
+    public LocalTime slutTid() {
+    	int tid = 90;
+    	if (this.spisning) {
+    		tid += 30;
+    	}
+    	LocalTime slut = this.tid.plusMinutes(tid);
+    	return slut;
+    }
+ 
 
-   
 
     public double beregnPris() {
-         double pris = 0;
-         LocalTime fyraftenNomral = LocalTime.of(16, 00).minusMinutes(1);
-         LocalTime fyraftenFredag = LocalTime.of(16, 00).minusMinutes(1);
-         if ((this.tid.isAfter(fyraftenFredag) && this.dato.getDayOfWeek().toString().equals("FRIDAY")) || this.tid.isAfter(fyraftenNomral)) { //Make Pretty
-              pris += this.antalGaester * 120;
-         }
-        
-         else {
-              pris += this.antalGaester * 100;
-         }
-         if (this.spisning) {
-        	 pris += this.antalSpisende * 130;
-         }
-         return pris;
+    	double pris = 0.0;
+    	if(isTilgaengeligTid() && isTilgaengeligtAntalGaester()) {
+    		if (slutTid().isAfter(LocalTime.of(16, 00))) {
+    			pris += this.antalGaester * 120;
+    		}
+    		else {
+    			pris += this.antalGaester * 100;
+    		}
+    		if (this.spisning) {
+    			pris += this.antalSpisende * 130;
+    		}
+    	}
+    	return pris;
     }
     
     //Made's push
