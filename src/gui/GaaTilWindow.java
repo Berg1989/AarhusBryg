@@ -102,6 +102,7 @@ public class GaaTilWindow extends Stage {
 
         btnLuk = new Button("Luk");
         hboks.getChildren().add(btnLuk);
+        btnLuk.setOnAction(event -> btnLukAction());
 
     }
 
@@ -150,6 +151,10 @@ public class GaaTilWindow extends Stage {
             txfStr.clear();
             txfPris.clear();
         }
+    }
+    
+    private void btnLukAction(){
+    	hide();
     }
 
 }

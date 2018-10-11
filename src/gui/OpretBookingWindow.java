@@ -37,15 +37,19 @@ public class OpretBookingWindow extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        btnRundvisning = new Button("Rundvisning");
-        pane.add(btnRundvisning, 0, 1);
-        btnRundvisning.setOnAction(event -> btnRundvisningAction());
-        btnRundvisning.setPrefSize(200, 100);
+        btnReserver = new Button("Reserver");
+        pane.add(btnReserver, 0, 1);
+//        btnReserver.setOnAction(event -> btnRundvisningAction());
+        btnReserver.setPrefSize(200, 100);
 
-        btnAnlaeg = new Button("Anlæg");
-        pane.add(btnAnlaeg, 0, 2);
-        btnAnlaeg.setOnAction(event -> btnAnlaegAction());
-        btnAnlaeg.setPrefSize(200, 100);
+        btnLuk = new Button("Luk");
+        pane.add(btnLuk, 0, 2);
+        btnLuk.setOnAction(event -> btnLukAction());
+        btnLuk.setPrefSize(200, 100);
 
+    }
+    
+    private void btnLukAction(){
+    	hide();
     }
 }

@@ -48,7 +48,7 @@ public class RedigerProduktWindow extends Stage {
         txfNavn = new TextField();
         pane.add(txfNavn, 1, 0);
 
-        lbStr = new Label("Produktets StÃ¸rrelse:");
+        lbStr = new Label("Produktets Størrelse:");
         pane.add(lbStr, 0, 1);
 
         txfStr = new TextField();
