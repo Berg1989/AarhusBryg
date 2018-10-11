@@ -23,6 +23,7 @@ public class Rundvisning {
          this.antalGaester = gaester;
          this.betalt = false;
          this.spisning = false;
+         this.antalSpisende = 0;
     }
 
    
@@ -69,9 +70,15 @@ public class Rundvisning {
 
    
 
-    public void setSpisning(boolean b) {
-         this.spisning = b;
+    public void tilmeldSpsning() {
+         this.spisning = true;
+         this.antalSpisende = this.antalGaester;
     }
+    
+    public void tilmeldSpsning(int spisende) {
+        this.spisning = true;
+        this.antalSpisende = spisende;
+   }
 
    
 
@@ -151,7 +158,7 @@ public class Rundvisning {
     
     public boolean isTilgaengeligtAntalGaester() {
     	if (slutTid().isAfter(LocalTime.of(16, 00))) {
-    		if (this.antalGaester < 20) {
+    		if (this.antalGaester < 20 || this.antalGaester > 75) {
     			return false;
     		}
     		else {
@@ -188,7 +195,7 @@ public class Rundvisning {
     		else {
     			pris += this.antalGaester * 100;
     		}
-    		if (this.spisning) {
+    		if (this.spisning == true) {
     			pris += this.antalSpisende * 130;
     		}
     	}
