@@ -42,11 +42,11 @@ public class RundvisningWindow extends Stage {
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
 
-		lbGroen = new Label("Gr�nt navn = betalt");
+		lbGroen = new Label("Groent navn = betalt");
 		pane.add(lbGroen, 0, 0);
 		lbGroen.setTextFill(Color.GREEN);
 
-		lbGroen = new Label("R�dt navn = ikke betalt");
+		lbGroen = new Label("Roedt navn = ikke betalt");
 		pane.add(lbGroen, 0, 1);
 		lbGroen.setTextFill(Color.RED);
 

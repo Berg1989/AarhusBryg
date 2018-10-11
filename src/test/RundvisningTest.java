@@ -116,5 +116,76 @@ public class RundvisningTest {
 		rv.tilmeldSpsning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
+	
+	@Test
+	public void testBetal1Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(9, 0), 15);
+		assertEquals(1500.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal2Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(13, 59), 15);
+		assertEquals(1500.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal3Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(13, 59), 15);
+		rv.tilmeldSpsning();
+		assertEquals(3450.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal4Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 00), 15);
+		rv.tilmeldSpsning();
+		assertEquals(0.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal5Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0), 15);
+		assertEquals(0.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal6Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0 ), 20);
+		rv.tilmeldSpsning();
+		assertEquals(5000.0, rv.beregnPris(), 0.001);
+	}
+	@Test
+	public void testBetal7Torsdag() {
+		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0 ), 20);
+		assertEquals(2400.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal1Lordag() {
+		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(9, 0), 20);
+		assertEquals(0.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal2Lordag() {
+		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(14, 59), 20);
+		assertEquals(0.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal3Lordag() {
+		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(14, 59), 20);
+		rv.tilmeldSpsning();
+		assertEquals(0.0, rv.beregnPris(), 0.001);
+	}
+	
+	@Test
+	public void testBetal4Lordag() {
+		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(15, 0), 20);
+		rv.tilmeldSpsning();
+		assertEquals(0.0, rv.beregnPris(), 0.001);
+	}
+	
 
 }

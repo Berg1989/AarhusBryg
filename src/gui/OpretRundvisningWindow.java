@@ -3,6 +3,7 @@ package gui;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Rundvisning;
 import service.Service;
 
 public class OpretRundvisningWindow extends Stage {
@@ -37,6 +39,7 @@ public class OpretRundvisningWindow extends Stage {
 	private CheckBox chbSpisning, chbStuderende;
 	private TextField txfTidspunkt, txfAntalM, txfAntalS, txfTotalPris, txfKundeNavn;
 	private Button btnReserver, btnLuk;
+	Rundvisning rv;
 
 	private void initContent(GridPane pane) {
 		pane.setPadding(new Insets(10));
@@ -53,12 +56,26 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfKundeNavn = new TextField();
 		Hnavn.getChildren().add(txfKundeNavn);
+		txfKundeNavn.focusedProperty().addListener(
+				(obs, oldVal, newVal) -> {  
+					if (checkObject()) {
+						String kunde = txfKundeNavn.getText();
+						if (kunde.length() > 0) {
+							rv.setKunde(kunde);
+						}
+					}
+					else {
+						createObject();
+					}
+				}
+	    );
 
 		lbDatePicker = new Label("Vælg dato");
 		pane.add(lbDatePicker, 0, 1);
 
 		dp = new DatePicker();
 		pane.add(dp, 0, 2);
+		//add listener
 
 		chbStuderende = new CheckBox("Studerende");
 		pane.add(chbStuderende, 0, 3);
@@ -68,6 +85,27 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfTidspunkt = new TextField();
 		pane.add(txfTidspunkt, 0, 6);
+		txfTidspunkt.focusedProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					if (checkObject()) {
+						String t = txfTidspunkt.getText();
+						if (t.length() > 0) {
+							try {
+								
+								LocalTime tid = LocalTime.parse(t);
+								rv.setTime(tid);
+							}
+							catch (Exception e) {
+								System.out.println("tid exception HANDLE ME");
+							}
+						}
+					}
+					else {
+						createObject();
+					}
+				}
+			
+				);
 
 		lbAntal = new Label("Antal");
 		pane.add(lbAntal, 1, 5);
@@ -122,6 +160,34 @@ public class OpretRundvisningWindow extends Stage {
 		if (chbSpisning.isSelected()) {
 			txfAntalS.setDisable(false);
 		}
+	}
+	
+	private boolean checkObject() {
+		if (rv != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private void createObject() {
+		LocalDate dato = dp.getValue();
+		String kunde = txfKundeNavn.getText();
+		String a = txfAntalM.getText();
+		String t = txfTidspunkt.getText();
+		int antal;
+		LocalTime tid;
+		try {
+			antal = Integer.parseInt(a);
+			tid = LocalTime.parse(t);
+			rv = new Rundvisning(kunde, dato, tid, antal);
+		}
+		catch (Exception e){
+			System.out.println("excelptopn HANDLE ME");
+		}
+		
+		
 	}
 
 }
