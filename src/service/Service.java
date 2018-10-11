@@ -64,7 +64,7 @@ public class Service {
 	}
 
 	public static Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
-		Rundvisning r = new Rundvisning(kunde, dato, 0, tid);
+		Rundvisning r = new Rundvisning(kunde, dato, tid, 0);
 		Storage.addRundvisning(r);
 		return r;
 	}
@@ -91,6 +91,5 @@ public class Service {
 		opretKlippeKort("Kort1", 4, 100);
 
 	}
-
 
 }
