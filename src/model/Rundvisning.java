@@ -80,6 +80,9 @@ public class Rundvisning {
         this.antalSpisende = spisende;
    }
 
+    public void frameldSpisning() {
+    	this.spisning = false;
+    }
    
 
     public void setAntalSpisende(int as) {
