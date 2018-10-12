@@ -1,5 +1,9 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +13,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.KlippeKort;
+import model.Produkt;
 import model.ProduktKategori;
+import service.Service;
 import storage.Storage;
 
 public class ProduktkategoriWindow extends Stage {
@@ -58,31 +65,44 @@ public class ProduktkategoriWindow extends Stage {
         pane.add(btnLuk, 1, 4);
         btnLuk.setOnAction(event -> btnLukAction());
 
-        btnGaaTil = new Button("GÃ¥ Til");
+        btnGaaTil = new Button("Gå Til");
         pane.add(btnGaaTil, 0, 4);
         btnGaaTil.setOnAction(event -> btnGaaTilAction());
 
+    }
+    
+    private List<ProduktKategori> initAllProdukter() {
+        List<ProduktKategori> list = new ArrayList<>();
+        for (ProduktKategori pk : Storage.getAllProduktKategorier()) {
+            list.add(pk);
+        }
+        return list;
     }
 
     private void btnOpretAction() {
         OpretKategoriWindow okw = new OpretKategoriWindow();
         okw.showAndWait();
+        lwPKategori.getItems().setAll(initAllProdukter());
 
     }
 
     private void btnRemoveAction() {
-
+    	Service.sletProduktKategori(lwPKategori.getSelectionModel().getSelectedItem());
+    	lwPKategori.getItems().setAll(initAllProdukter());
     }
 
     private void btnGaaTilAction() {
+    	if(lwPKategori.getSelectionModel().getSelectedItem() != null){
         pk = lwPKategori.getSelectionModel().getSelectedItem();
         GaaTilWindow gtw = new GaaTilWindow(pk);
         gtw.showAndWait();
+    	}
     }
 
     private void btnLukAction() {
         hide();
 
     }
+    
 
 }

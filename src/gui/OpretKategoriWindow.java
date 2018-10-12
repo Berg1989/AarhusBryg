@@ -35,7 +35,7 @@ public class OpretKategoriWindow extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        lbKategoriNavn = new Label("Navn pÃ¥ kategori:");
+        lbKategoriNavn = new Label("Navn på kategori:");
         pane.add(lbKategoriNavn, 0, 0);
 
         txfKategoriNavn = new TextField();

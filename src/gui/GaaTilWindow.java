@@ -30,7 +30,7 @@ public class GaaTilWindow extends Stage {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Administrator Window");
+        setTitle("Produkter");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -39,7 +39,7 @@ public class GaaTilWindow extends Stage {
     }
 
     private ListView<Produkt> lwProdukter;
-    private Label lbPiKategori, lbNavn, lbStørrelse, lbPris;
+    private Label lbPiKategori, lbNavn, lbStoerrelse, lbPris;
     private TextField txfNavn, txfStr, txfPris;
     private Button btnOpret, btnSlet, btnRediger, btnLuk;
 
@@ -71,8 +71,8 @@ public class GaaTilWindow extends Stage {
         txfNavn = new TextField();
         vboks.getChildren().add(txfNavn);
 
-        lbStørrelse = new Label("Produktets Størrelse:");
-        vboks.getChildren().add(lbStørrelse);
+        lbStoerrelse = new Label("Produktets St�rrelse:");
+        vboks.getChildren().add(lbStoerrelse);
 
         txfStr = new TextField();
         vboks.getChildren().add(txfStr);
@@ -102,6 +102,7 @@ public class GaaTilWindow extends Stage {
 
         btnLuk = new Button("Luk");
         hboks.getChildren().add(btnLuk);
+        btnLuk.setOnAction(event -> btnLukAction());
 
     }
 
@@ -150,6 +151,10 @@ public class GaaTilWindow extends Stage {
             txfStr.clear();
             txfPris.clear();
         }
+    }
+    
+    private void btnLukAction(){
+    	hide();
     }
 
 }

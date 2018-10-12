@@ -1,77 +1,95 @@
 package service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
+import model.Rundvisning;
 import storage.Storage;
 
 public class Service {
-    private static Service service;
-    private Storage storage;
+	private static Service service;
+	private Storage storage;
 
-    private Service() {
-        storage = new Storage();
-    }
+	private Service() {
+		storage = new Storage();
+	}
 
-    public static Service getService() {
-        if (service == null) {
-            service = new Service();
-        }
-        return service;
-    }
+	public static Service getService() {
+		if (service == null) {
+			service = new Service();
+		}
+		return service;
+	}
 
-    public static Service getTestService() {
-        return new Service();
-    }
+	public static Service getTestService() {
+		return new Service();
+	}
 
-    public static Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
-        Produkt p = pk.createProdukt(navn, pris, str);
-        return p;
-    }
+	public static Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
+		Produkt p = pk.createProdukt(navn, pris, str);
+		return p;
+	}
 
-    public static void sletProdukt(ProduktKategori pk, Produkt p) {
-        pk.sletProdukt(p);
-    }
+	public static void sletProdukt(ProduktKategori pk, Produkt p) {
+		pk.sletProdukt(p);
+	}
 
-    public static void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
-        pk.redigerNavn(p, navn);
-        pk.redigerPris(p, pris);
-        pk.redigerStr(p, str);
-    }
+	public static void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
+		pk.redigerNavn(p, navn);
+		pk.redigerPris(p, pris);
+		pk.redigerStr(p, str);
+	}
 
-    public static ProduktKategori opretProduktKategori(String navn) {
-        ProduktKategori pk = new ProduktKategori(navn);
-        Storage.addProduktKategori(pk);
-        return pk;
-    }
+	public static ProduktKategori opretProduktKategori(String navn) {
+		ProduktKategori pk = new ProduktKategori(navn);
+		Storage.addProduktKategori(pk);
+		return pk;
+	}
 
-    public static KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
-        KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
-        Storage.addKlippeKort(kk);
-        return kk;
-    }
+	public static void sletProduktKategori(ProduktKategori pk) {
+		Storage.removeProduktKategori(pk);
+	}
 
-    public static void sletKlippeKort(KlippeKort kk) {
-        Storage.removeKlippeKort(kk);
-    }
+	public static KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
+		KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
+		Storage.addKlippeKort(kk);
+		return kk;
+	}
 
-    public void initStorage() {
+	public static void sletKlippeKort(KlippeKort kk) {
+		Storage.removeKlippeKort(kk);
+	}
 
-        // Produk Kategorier
-        ProduktKategori pk1 = opretProduktKategori("Kategori1");
-        ProduktKategori pk2 = opretProduktKategori("Kategori2");
-        ProduktKategori pk3 = opretProduktKategori("Kategori3");
+	public static Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
+		Rundvisning r = new Rundvisning(kunde, dato, tid, 0);
+		Storage.addRundvisning(r);
+		return r;
+	}
 
-        // Produkter
-        opretProdukt(pk1, "Øl", 35, "0.33 L");
-        opretProdukt(pk1, "Tis", 22, "0.20 CL");
-        opretProdukt(pk2, "Vodka", 120, "1 L");
-        opretProdukt(pk3, "Single Malt Whisky", 350, "0.66 L");
-        opretProdukt(pk3, "Saftevand", 10, "1.5 L");
+	public static void sletRundvisning(Rundvisning r) {
+		Storage.removeRundvisning(r);
+	}
 
-        // Klippekort
-        opretKlippeKort("Kort1", 4, 100);
+	public void initStorage() {
 
-    }
+		// Produk Kategorier
+		ProduktKategori pk1 = opretProduktKategori("Kategori1");
+		ProduktKategori pk2 = opretProduktKategori("Kategori2");
+		ProduktKategori pk3 = opretProduktKategori("Kategori3");
+
+		// Produkter
+		opretProdukt(pk1, "�l", 35, "0.33 L");
+		opretProdukt(pk1, "Tis", 22, "0.20 CL");
+		opretProdukt(pk2, "Vodka", 120, "1 L");
+		opretProdukt(pk3, "Single Malt Whisky", 350, "0.66 L");
+		opretProdukt(pk3, "Saftevand", 10, "1.5 L");
+
+		// Klippekort
+		opretKlippeKort("Kort1", 4, 100);
+
+	}
 
 }
