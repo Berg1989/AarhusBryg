@@ -85,7 +85,7 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfTidspunkt = new TextField();
 		pane.add(txfTidspunkt, 0, 6);
-		txfTidspunkt.focusedProperty().addListener(
+		txfTidspunkt.focusedProperty().addListener( //Make me a fuction
 				(obs, oldVal, newVal) -> {
 					if (checkObject()) {
 						String t = txfTidspunkt.getText();
@@ -94,6 +94,7 @@ public class OpretRundvisningWindow extends Stage {
 								
 								LocalTime tid = LocalTime.parse(t);
 								rv.setTime(tid);
+								txfTotalPris.setText("" + rv.beregnPris());
 							}
 							catch (Exception e) {
 								System.out.println("tid exception HANDLE ME");
@@ -112,6 +113,27 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfAntalM = new TextField();
 		pane.add(txfAntalM, 1, 6);
+		txfAntalM.focusedProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					if (checkObject()) {
+						String a = txfAntalM.getText();
+						if (a.length() > 0) {
+							try {
+								
+								int antal = Integer.parseInt(a);
+								rv.setAntalGaester(antal);
+								txfTotalPris.setText("" + rv.beregnPris());
+							}
+							catch (Exception e) {
+								System.out.println("tid exception HANDLE ME");
+							}
+						}
+					}
+					else {
+						createObject();
+					}
+					
+				});
 
 		chbSpisning = new CheckBox("Spisning Ønskes - 120 kr.- pr. person");
 		pane.add(chbSpisning, 0, 7);
@@ -182,6 +204,8 @@ public class OpretRundvisningWindow extends Stage {
 			antal = Integer.parseInt(a);
 			tid = LocalTime.parse(t);
 			rv = new Rundvisning(kunde, dato, tid, antal);
+			txfTotalPris.setText("" + rv.beregnPris());
+			System.out.println("Object created");
 		}
 		catch (Exception e){
 			System.out.println("excelptopn HANDLE ME");
