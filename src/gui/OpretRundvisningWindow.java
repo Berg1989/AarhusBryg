@@ -113,7 +113,7 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfAntalM = new TextField();
 		pane.add(txfAntalM, 1, 6);
-		txfAntalM.focusedProperty().addListener(
+		txfAntalM.focusedProperty().addListener( //Change listener med delay?
 				(obs, oldVal, newVal) -> {
 					if (checkObject()) {
 						String a = txfAntalM.getText();
@@ -145,6 +145,26 @@ public class OpretRundvisningWindow extends Stage {
 		txfAntalS = new TextField();
 		pane.add(txfAntalS, 0, 9);
 		txfAntalS.setDisable(true);
+		txfAntalS.focusedProperty().addListener( //Make me a fuction
+				(obs, oldVal, newVal) -> {
+					if (checkObject()) {
+						String a = txfAntalS.getText();
+						if (a.length() > 0) {
+							try {
+								
+								int antal = Integer.parseInt(a);
+								rv.tilmeldSpsning(antal);
+								txfTotalPris.setText("" + rv.beregnPris());
+							}
+							catch (Exception e) {
+								System.out.println("tid exception HANDLE ME");
+							}
+						}
+					}
+					
+				}
+			
+				);
 
 		lbTotalPris = new Label("Total Pris");
 		pane.add(lbTotalPris, 0, 10);
@@ -180,9 +200,21 @@ public class OpretRundvisningWindow extends Stage {
 
 	private void selectedSpisning() {
 		if (chbSpisning.isSelected()) {
-			txfAntalS.setDisable(false);
+			txfAntalS.setDisable(false); //Hvor har Mads lagt enable?
+			rv.tilmeldSpsning();
+			txfTotalPris.setText("" + rv.beregnPris());
+			
+		}
+		else {
+			txfAntalS.setDisable(true); //Made's enable
+			rv.frameldSpisning();
+			txfTotalPris.setText("" + rv.beregnPris());
 		}
 	}
+	
+	//
+	//Methods
+	//
 	
 	private boolean checkObject() {
 		if (rv != null) {
