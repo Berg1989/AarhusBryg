@@ -3,6 +3,7 @@ package service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import model.Bar;
 import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
@@ -73,6 +74,10 @@ public class Service {
 		Storage.removeRundvisning(r);
 	}
 
+	public static void tilfoejKategori(Bar b, ProduktKategori pk) {
+		b.addProduktKategori(pk);
+	}
+
 	public void initStorage() {
 
 		// Produk Kategorier
@@ -81,14 +86,22 @@ public class Service {
 		ProduktKategori pk3 = opretProduktKategori("Kategori3");
 
 		// Produkter
-		opretProdukt(pk1, "�l", 35, "0.33 L");
-		opretProdukt(pk1, "Tis", 22, "0.20 CL");
-		opretProdukt(pk2, "Vodka", 120, "1 L");
-		opretProdukt(pk3, "Single Malt Whisky", 350, "0.66 L");
-		opretProdukt(pk3, "Saftevand", 10, "1.5 L");
+		opretProdukt(pk1, "TestProdukt1", 35, "0.33 L");
+		opretProdukt(pk1, "TestProdukt2", 22, "0.20 CL");
+		opretProdukt(pk2, "TestProdukt3", 120, "1 L");
+		opretProdukt(pk3, "TestProdukt4", 350, "0.66 L");
+		opretProdukt(pk3, "TestProdukt5", 10, "1.5 L");
 
 		// Klippekort
 		opretKlippeKort("Kort1", 4, 100);
+
+		// Bar
+		Bar fredagsBar = new Bar("Fredagsbar");
+		Storage.addBar(fredagsBar, 0);
+		Bar butik = new Bar("Butik");
+		Storage.addBar(butik, 1);
+		Bar bar = new Bar("Bar");
+		Storage.addBar(bar, 2);
 
 	}
 

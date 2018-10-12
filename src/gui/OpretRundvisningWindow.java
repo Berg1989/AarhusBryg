@@ -201,7 +201,7 @@ public class OpretRundvisningWindow extends Stage {
 	private void selectedSpisning() {
 		if (chbSpisning.isSelected()) {
 			txfAntalS.setDisable(false); //Hvor har Mads lagt enable?
-			rv.tilmeldSpsning();
+			rv.tilmeldSpisning();
 			txfTotalPris.setText("" + rv.beregnPris());
 			
 		}

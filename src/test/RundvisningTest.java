@@ -50,14 +50,14 @@ public class RundvisningTest {
 	@Test
 	public void testBetaling1antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), -5);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
 	public void testBetal2antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 0);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -65,7 +65,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal3antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 14);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -73,7 +73,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal4antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 15);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(3450.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -81,7 +81,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal5antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 19);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(4370.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -89,7 +89,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal6antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 45);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(10350.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -97,7 +97,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal7antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 74);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(17020.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -105,7 +105,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal8antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 76);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 		
 	}
@@ -113,7 +113,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal9antalGaester() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 100);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
@@ -132,14 +132,14 @@ public class RundvisningTest {
 	@Test
 	public void testBetal3Torsdag() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(13, 59), 15);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(3450.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
 	public void testBetal4Torsdag() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 00), 15);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
@@ -152,7 +152,7 @@ public class RundvisningTest {
 	@Test
 	public void testBetal6Torsdag() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0 ), 20);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(5000.0, rv.beregnPris(), 0.001);
 	}
 	@Test
@@ -176,14 +176,14 @@ public class RundvisningTest {
 	@Test
 	public void testBetal3Lordag() {
 		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(14, 59), 20);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
 	public void testBetal4Lordag() {
 		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(15, 0), 20);
-		rv.tilmeldSpsning();
+		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
