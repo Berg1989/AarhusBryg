@@ -3,11 +3,11 @@ package service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import model.Bar;
 import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
+import model.SalgSted;
 import model.StedPris;
 import storage.Storage;
 
@@ -75,14 +75,18 @@ public class Service {
 		Storage.removeRundvisning(r);
 	}
 
-	public static void tilfoejKategori(Bar b, ProduktKategori pk) {
-		b.addProduktKategori(pk);
+	public static void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
+		ss.addProduktKategori(pk);
 	}
 
-	public static StedPris opretStedPris(Bar b, Produkt p, double pris) {
-		StedPris sp = new StedPris(b, p, pris);
+	public static StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
+		StedPris sp = new StedPris(ss, p, pris);
 		p.addStedPris(sp);
 		return sp;
+	}
+
+	public static double getStedPris(SalgSted ss, Produkt p) {
+		return p.getStedPris(ss);
 	}
 
 	public void initStorage() {
@@ -93,22 +97,30 @@ public class Service {
 		ProduktKategori pk3 = opretProduktKategori("Kategori3");
 
 		// Produkter
-		opretProdukt(pk1, "TestProdukt1", 35, "0.33 L");
-		opretProdukt(pk1, "TestProdukt2", 22, "0.20 CL");
-		opretProdukt(pk2, "TestProdukt3", 120, "1 L");
-		opretProdukt(pk3, "TestProdukt4", 350, "0.66 L");
-		opretProdukt(pk3, "TestProdukt5", 10, "1.5 L");
+		Produkt p1 = opretProdukt(pk1, "TestProdukt1", 35, "0.33 L");
+		Produkt p2 = opretProdukt(pk1, "TestProdukt2", 22, "0.20 CL");
+		Produkt p3 = opretProdukt(pk2, "TestProdukt3", 120, "1 L");
+		Produkt p4 = opretProdukt(pk3, "TestProdukt4", 350, "0.66 L");
+		Produkt p5 = opretProdukt(pk3, "TestProdukt5", 10, "1.5 L");
 
 		// Klippekort
 		opretKlippeKort("Kort1", 4, 100);
 
 		// Bar
-		Bar fredagsBar = new Bar("Fredagsbar");
-		Storage.addBar(fredagsBar, 0);
-		Bar butik = new Bar("Butik");
-		Storage.addBar(butik, 1);
-		Bar bar = new Bar("Bar");
-		Storage.addBar(bar, 2);
+		SalgSted fredagsBar = new SalgSted("Fredagsbar");
+		SalgSted butik = new SalgSted("Butik");
+		SalgSted bar = new SalgSted("Bar");
+
+		// StedPriser
+		StedPris sp1 = opretStedPris(fredagsBar, p1, 50);
+		StedPris sp2 = opretStedPris(butik, p1, 75);
+		StedPris sp3 = opretStedPris(bar, p1, 150);
+		p1.addStedPris(sp1);
+		p1.addStedPris(sp2);
+		p1.addStedPris(sp3);
+
+		// System.out.println(p1.toStringSted(fredagsBar));
+		// System.out.println(p1.toStringSted(butik));
 
 	}
 

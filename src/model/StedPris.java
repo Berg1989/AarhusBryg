@@ -1,21 +1,21 @@
 package model;
 
 public class StedPris {
-	private Bar sted;
+	private SalgSted sted;
 	private Produkt produkt;
 	private double pris;
 
-	public StedPris(Bar sted, Produkt produkt, double pris) {
+	public StedPris(SalgSted sted, Produkt produkt, double pris) {
 		this.sted = sted;
 		this.produkt = produkt;
 		this.pris = pris;
 	}
 
-	public Bar getSted() {
+	public SalgSted getSted() {
 		return sted;
 	}
 
-	public void setSted(Bar sted) {
+	public void setSted(SalgSted sted) {
 		this.sted = sted;
 	}
 

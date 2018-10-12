@@ -2,17 +2,17 @@ package storage;
 
 import java.util.ArrayList;
 
-import model.Bar;
 import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
+import model.SalgSted;
 
 public class Storage {
 	private static ArrayList<ProduktKategori> produktKategoriList = new ArrayList<>();
 	private static ArrayList<KlippeKort> klippeKortList = new ArrayList<>();
 	private static ArrayList<Rundvisning> rundvisningList = new ArrayList<>();
-	private static Bar[] barArray = new Bar[3];
+	private static ArrayList<SalgSted> salgStedList = new ArrayList<>();
 
 	public static ArrayList<ProduktKategori> getAllProduktKategorier() {
 		return new ArrayList<>(produktKategoriList);
@@ -54,7 +54,8 @@ public class Storage {
 		rundvisningList.remove(r);
 	}
 
-	public static void addBar(Bar b, int i) {
-		barArray[i] = b;
+	public static void addSalgSted(SalgSted b) {
+		salgStedList.add(b);
 	}
+
 }

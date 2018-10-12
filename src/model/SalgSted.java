@@ -2,21 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
-public class Bar {
-	private String barNavn;
+public class SalgSted {
+	private String stedNavn;
 	private ArrayList<ProduktKategori> pkList = new ArrayList<>();
 
-	public Bar(String barNavn) {
+	public SalgSted(String barNavn) {
 		setBarNavn(barNavn);
 
 	}
 
 	public String getBarNavn() {
-		return barNavn;
+		return stedNavn;
 	}
 
 	public void setBarNavn(String barNavn) {
-		this.barNavn = barNavn;
+		this.stedNavn = barNavn;
 	}
 
 	public ArrayList<ProduktKategori> getProduktKategori() {
@@ -29,7 +29,7 @@ public class Bar {
 
 	@Override
 	public String toString() {
-		return barNavn + pkList;
+		return stedNavn + pkList;
 	}
 
 }
