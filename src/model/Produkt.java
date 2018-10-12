@@ -1,15 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Produkt {
 
 	private String navn;
 	private double pris;
 	private String str;
+	private ArrayList<StedPris> stedPriser;
 
 	public Produkt(String navn, double pris, String str) {
 		this.navn = navn;
 		this.pris = pris;
 		this.str = str;
+		stedPriser = new ArrayList<>();
 	}
 
 	public String getNavn() {
@@ -34,6 +38,10 @@ public class Produkt {
 
 	public void setStr(String str) {
 		this.str = str;
+	}
+
+	public void addStedPris(StedPris sp) {
+		stedPriser.add(sp);
 	}
 
 	@Override

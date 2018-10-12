@@ -8,6 +8,7 @@ import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
+import model.StedPris;
 import storage.Storage;
 
 public class Service {
@@ -76,6 +77,12 @@ public class Service {
 
 	public static void tilfoejKategori(Bar b, ProduktKategori pk) {
 		b.addProduktKategori(pk);
+	}
+
+	public static StedPris opretStedPris(Bar b, Produkt p, double pris) {
+		StedPris sp = new StedPris(b, p, pris);
+		p.addStedPris(sp);
+		return sp;
 	}
 
 	public void initStorage() {
