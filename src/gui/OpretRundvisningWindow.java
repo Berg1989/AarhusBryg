@@ -3,6 +3,7 @@ package gui;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import model.Rundvisning;
 import service.Service;
 
@@ -39,6 +41,7 @@ public class OpretRundvisningWindow extends Stage {
 	private CheckBox chbSpisning, chbStuderende;
 	private TextField txfTidspunkt, txfAntalM, txfAntalS, txfTotalPris, txfKundeNavn;
 	private Button btnReserver, btnLuk;
+	private PauseTransition pause = new PauseTransition(Duration.seconds(1));
 	Rundvisning rv;
 
 	private void initContent(GridPane pane) {
@@ -56,26 +59,15 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfKundeNavn = new TextField();
 		Hnavn.getChildren().add(txfKundeNavn);
-		txfKundeNavn.focusedProperty().addListener(
-				(obs, oldVal, newVal) -> {  
-					if (checkObject()) {
-						String kunde = txfKundeNavn.getText();
-						if (kunde.length() > 0) {
-							rv.setKunde(kunde);
-						}
-					}
-					else {
-						createObject();
-					}
-				}
-	    );
+		addListenerKunde();
+
 
 		lbDatePicker = new Label("Vælg dato");
 		pane.add(lbDatePicker, 0, 1);
 
 		dp = new DatePicker();
 		pane.add(dp, 0, 2);
-		//add listener
+		addListenerdp();
 
 		chbStuderende = new CheckBox("Studerende");
 		pane.add(chbStuderende, 0, 3);
@@ -85,55 +77,15 @@ public class OpretRundvisningWindow extends Stage {
 
 		txfTidspunkt = new TextField();
 		pane.add(txfTidspunkt, 0, 6);
-		txfTidspunkt.focusedProperty().addListener( //Make me a fuction
-				(obs, oldVal, newVal) -> {
-					if (checkObject()) {
-						String t = txfTidspunkt.getText();
-						if (t.length() > 0) {
-							try {
-								
-								LocalTime tid = LocalTime.parse(t);
-								rv.setTime(tid);
-								txfTotalPris.setText("" + rv.beregnPris());
-							}
-							catch (Exception e) {
-								System.out.println("tid exception HANDLE ME");
-							}
-						}
-					}
-					else {
-						createObject();
-					}
-				}
-			
-				);
+		addListenerTid();
+		
 
 		lbAntal = new Label("Antal");
 		pane.add(lbAntal, 1, 5);
 
 		txfAntalM = new TextField();
 		pane.add(txfAntalM, 1, 6);
-		txfAntalM.focusedProperty().addListener( //Change listener med delay?
-				(obs, oldVal, newVal) -> {
-					if (checkObject()) {
-						String a = txfAntalM.getText();
-						if (a.length() > 0) {
-							try {
-								
-								int antal = Integer.parseInt(a);
-								rv.setAntalGaester(antal);
-								txfTotalPris.setText("" + rv.beregnPris());
-							}
-							catch (Exception e) {
-								System.out.println("tid exception HANDLE ME");
-							}
-						}
-					}
-					else {
-						createObject();
-					}
-					
-				});
+		addListenerAntalM();
 
 		chbSpisning = new CheckBox("Spisning Ønskes - 120 kr.- pr. person");
 		pane.add(chbSpisning, 0, 7);
@@ -145,26 +97,9 @@ public class OpretRundvisningWindow extends Stage {
 		txfAntalS = new TextField();
 		pane.add(txfAntalS, 0, 9);
 		txfAntalS.setDisable(true);
-		txfAntalS.focusedProperty().addListener( //Make me a fuction
-				(obs, oldVal, newVal) -> {
-					if (checkObject()) {
-						String a = txfAntalS.getText();
-						if (a.length() > 0) {
-							try {
-								
-								int antal = Integer.parseInt(a);
-								rv.tilmeldSpsning(antal);
-								txfTotalPris.setText("" + rv.beregnPris());
-							}
-							catch (Exception e) {
-								System.out.println("tid exception HANDLE ME");
-							}
-						}
-					}
-					
-				}
-			
-				);
+		addListenerAntalS();
+		
+	
 
 		lbTotalPris = new Label("Total Pris");
 		pane.add(lbTotalPris, 0, 10);
@@ -182,6 +117,8 @@ public class OpretRundvisningWindow extends Stage {
 		btnLuk.setOnAction(event -> btnLukAction());
 
 	}
+	
+	//Action methods
 
 	private void btnReserverAction() {
 		String KundeNavn = txfKundeNavn.getText().trim();
@@ -240,10 +177,130 @@ public class OpretRundvisningWindow extends Stage {
 			System.out.println("Object created");
 		}
 		catch (Exception e){
-			System.out.println("excelptopn HANDLE ME");
+			System.out.println("Kelly, can you handle this?");
 		}
 		
 		
+	}
+	
+	//
+	//Add Listener methods;
+	//
+	
+	private void addListenerAntalM() {
+		PauseTransition pause = new PauseTransition(Duration.seconds(1));
+		txfAntalM.textProperty().addListener(
+		    (observable, oldValue, newValue) -> {
+		        pause.setOnFinished(event -> listenerAntalMHelper());
+		        pause.playFromStart();
+		    }
+		);
+	}
+	
+	private void addListenerAntalS() {
+		PauseTransition pause = new PauseTransition(Duration.seconds(1));
+		txfAntalS.textProperty().addListener(
+		    (observable, oldValue, newValue) -> {
+		        pause.setOnFinished(event -> listenerAntalSHelper());
+		        pause.playFromStart();
+		    }
+		);
+	}
+	
+	
+	private void addListenerKunde() {
+		txfKundeNavn.focusedProperty().addListener(
+				(obs, oldVal, newVal) -> {  
+					if (checkObject()) {
+						String kunde = txfKundeNavn.getText();
+						if (kunde.length() > 0) {
+							rv.setKunde(kunde);
+						}
+					}
+					else {
+						createObject();
+					}
+				}
+	    );
+	}
+	
+	private void addListenerTid() {
+		txfTidspunkt.focusedProperty().addListener( 
+				(obs, oldVal, newVal) -> {
+				
+					if (checkObject()) {
+						String t = txfTidspunkt.getText();
+						if (t.length() > 0) {
+							try {
+								
+								LocalTime tid = LocalTime.parse(t);
+								rv.setTime(tid);
+								txfTotalPris.setText("" + rv.beregnPris());
+							}
+							catch (Exception e) {
+								System.out.println("Michelle, can you handle this?");
+							}
+						}
+					}
+					else {
+						createObject();
+					}
+				}
+			
+				);
+	}
+	
+	private void listenerAntalMHelper() {
+		if (checkObject()) {
+			String a = txfAntalM.getText();
+			if (a.length() > 0) {
+				try {
+					
+					int antal = Integer.parseInt(a);
+					rv.setAntalGaester(antal);
+					txfTotalPris.setText("" + rv.beregnPris());
+				}
+				catch (Exception e) {
+					System.out.println("Beyoncé, can you handle this?");
+				}
+			}
+		}
+		else {
+			createObject();
+		}
+		
+	}
+	
+	private void listenerAntalSHelper() {
+	
+					if (checkObject()) {
+						String a = txfAntalS.getText();
+						if (a.length() > 0) {
+							try {
+								
+								int antal = Integer.parseInt(a);
+								rv.tilmeldSpsning(antal);
+								txfTotalPris.setText("" + rv.beregnPris());
+							}
+							catch (Exception e) {
+								System.out.println("I don't think they can handle this!");
+							}
+						}
+					}
+					else {
+						createObject();
+					}
+					
+	}
+	
+	private void addListenerdp() {
+		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
+           if (checkObject()) {
+        	   LocalDate d = dp.getValue();
+        	   rv.setDate(d);
+        	   txfTotalPris.setText("" + rv.beregnPris());
+           }
+        });
 	}
 
 }
