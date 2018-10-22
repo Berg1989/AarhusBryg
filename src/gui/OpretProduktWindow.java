@@ -46,7 +46,7 @@ public class OpretProduktWindow extends Stage {
         txfNavn = new TextField();
         pane.add(txfNavn, 1, 0);
 
-        lbStr = new Label("Produktets Størrelse:");
+        lbStr = new Label("Produktets Stï¿½rrelse:");
         pane.add(lbStr, 0, 1);
 
         txfStr = new TextField();
@@ -72,7 +72,6 @@ public class OpretProduktWindow extends Stage {
         String navn = txfNavn.getText().trim();
         String str = txfStr.getText().trim();
         Double pris = Double.parseDouble(txfPris.getText().trim());
-        Service.getService();
         Service.opretProdukt(pk, navn, pris, str);
         hide();
     }

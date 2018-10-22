@@ -48,7 +48,7 @@ public class RedigerProduktWindow extends Stage {
         txfNavn = new TextField();
         pane.add(txfNavn, 1, 0);
 
-        lbStr = new Label("Produktets Størrelse:");
+        lbStr = new Label("Produktets Stï¿½rrelse:");
         pane.add(lbStr, 0, 1);
 
         txfStr = new TextField();
@@ -74,7 +74,6 @@ public class RedigerProduktWindow extends Stage {
         String navn = txfNavn.getText().trim();
         String str = txfStr.getText().trim();
         Double pris = Double.parseDouble(txfPris.getText().trim());
-        Service.getService();
         Service.RedigerProdukt(pk, p, navn, pris, str);
         hide();
 

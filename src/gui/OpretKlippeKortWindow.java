@@ -68,7 +68,6 @@ public class OpretKlippeKortWindow extends Stage {
         String navn = txfNavn.getText().trim();
         int antal = Integer.parseInt(txfAntalKlip.getText().trim());
         Double pris = Double.parseDouble(txfPris.getText().trim());
-        Service.getService();
         Service.opretKlippeKort(navn, antal, pris);
         hide();
     }

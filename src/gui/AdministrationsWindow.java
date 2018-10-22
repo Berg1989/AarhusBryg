@@ -23,7 +23,7 @@ public class AdministrationsWindow extends Stage {
     }
 
     // Insert Attributes here:
-    private Button btnProduktategori, btnKlippekort, btnBooking;
+    private Button btnProduktategori, btnKlippekort, btnBooking, btnSalgSted;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -46,6 +46,11 @@ public class AdministrationsWindow extends Stage {
         btnBooking.setOnAction(event -> btnBookingAction());
         btnBooking.setPrefSize(200, 100);
 
+        btnSalgSted = new Button("Salgs Steder");
+        pane.add(btnSalgSted, 0, 4);
+        btnSalgSted.setOnAction(event -> btnSalgStedAction());
+        btnSalgSted.setPrefSize(200, 100);
+
     }
 
     private void btnProduktkategoriAction() {
@@ -61,7 +66,14 @@ public class AdministrationsWindow extends Stage {
     }
 
     private void btnBookingAction() {
-    	BookingWindow bw = new BookingWindow();
-    	bw.showAndWait();
+        BookingWindow bw = new BookingWindow();
+        bw.showAndWait();
+    }
+
+    private void btnSalgStedAction() {
+
+        SalgStedWindow ossw = new SalgStedWindow();
+        ossw.showAndWait();
+
     }
 }

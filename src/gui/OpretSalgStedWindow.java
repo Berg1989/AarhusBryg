@@ -11,13 +11,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import service.Service;
 
-public class OpretKategoriWindow extends Stage {
+public class OpretSalgStedWindow extends Stage {
 
-    public OpretKategoriWindow() {
+    public OpretSalgStedWindow() {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Opret Kategori Window");
+        setTitle("Administrator Window");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -25,9 +25,9 @@ public class OpretKategoriWindow extends Stage {
         setScene(scene);
     }
 
-    private Label lbKategoriNavn;
-    private TextField txfKategoriNavn;
-    private Button btnOpret, btnLuk;
+    private Label lbNavn;
+    private TextField txfNavn;
+    private Button btnLuk, btnOpret;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -35,11 +35,11 @@ public class OpretKategoriWindow extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        lbKategoriNavn = new Label("Navn p� kategori:");
-        pane.add(lbKategoriNavn, 0, 0);
+        lbNavn = new Label("Salgssted navn: ");
+        pane.add(lbNavn, 0, 0);
 
-        txfKategoriNavn = new TextField();
-        pane.add(txfKategoriNavn, 0, 1);
+        txfNavn = new TextField();
+        pane.add(txfNavn, 0, 1);
 
         btnOpret = new Button("Opret");
         pane.add(btnOpret, 0, 2);
@@ -48,19 +48,20 @@ public class OpretKategoriWindow extends Stage {
         btnLuk = new Button("Luk");
         pane.add(btnLuk, 1, 2);
         btnLuk.setOnAction(event -> btnLukAction());
+
     }
 
     private void btnOpretAction() {
-        String navn = txfKategoriNavn.getText().trim();
 
-        Service.opretProduktKategori(navn);
+        String navn = txfNavn.getText().trim();
+
+        Service.opretSalgSted(navn);
         hide();
 
     }
 
     private void btnLukAction() {
         hide();
-
     }
 
 }

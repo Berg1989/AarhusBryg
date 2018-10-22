@@ -23,120 +23,122 @@ import storage.Storage;
 
 public class KlippeKortWindow extends Stage {
 
-	public KlippeKortWindow() {
-		initStyle(StageStyle.UTILITY);
-		initModality(Modality.APPLICATION_MODAL);
-		setResizable(false);
-		setTitle("Klippekort");
+    public KlippeKortWindow() {
+        initStyle(StageStyle.UTILITY);
+        initModality(Modality.APPLICATION_MODAL);
+        setResizable(false);
+        setTitle("Klippekort");
 
-		GridPane pane = new GridPane();
-		Scene scene = new Scene(pane);
-		initContent(pane);
-		setScene(scene);
-	}
+        GridPane pane = new GridPane();
+        Scene scene = new Scene(pane);
+        initContent(pane);
+        setScene(scene);
+    }
 
-	private ListView<KlippeKort> lwKlippeKort;
-	private Label lbMuligekort, lbNavn, lbAntalKlip, lbPris;
-	private TextField txfNavn, txfAntalKlip, txfPris;
-	private Button btnOpret, btnLuk, btnSlet;
+    private ListView<KlippeKort> lwKlippeKort;
+    private Label lbMuligekort, lbNavn, lbAntalKlip, lbPris;
+    private TextField txfNavn, txfAntalKlip, txfPris;
+    private Button btnOpret, btnLuk, btnSlet;
 
-	private void initContent(GridPane pane) {
-		pane.setPadding(new Insets(10));
-		pane.setHgap(10);
-		pane.setVgap(10);
-		pane.setGridLinesVisible(false);
+    private void initContent(GridPane pane) {
+        pane.setPadding(new Insets(10));
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.setGridLinesVisible(false);
 
-		lbMuligekort = new Label("Produkter i kategori");
-		pane.add(lbMuligekort, 0, 0);
+        lbMuligekort = new Label("Produkter i kategori");
+        pane.add(lbMuligekort, 0, 0);
 
-		lwKlippeKort = new ListView<>();
-		pane.add(lwKlippeKort, 0, 1);
-		lwKlippeKort.setPrefHeight(250);
-		lwKlippeKort.setPrefWidth(180);
-		lwKlippeKort.getItems().addAll(Storage.getAllKlippeKort());
+        lwKlippeKort = new ListView<>();
+        pane.add(lwKlippeKort, 0, 1);
+        lwKlippeKort.setPrefHeight(250);
+        lwKlippeKort.setPrefWidth(180);
+        lwKlippeKort.getItems().addAll(Storage.getAllKlippeKort());
 
-		ChangeListener<KlippeKort> listener = (op, oldProduct, newProduct) -> updateControls();
-		lwKlippeKort.getSelectionModel().selectedItemProperty().addListener(listener);
+        ChangeListener<KlippeKort> listener = (op, oldProduct, newProduct) -> updateControls();
+        lwKlippeKort.getSelectionModel().selectedItemProperty().addListener(listener);
 
-		VBox vboks = new VBox();
-		pane.add(vboks, 1, 1);
-		vboks.setPadding(new Insets(10, 0, 0, 10));
+        VBox vboks = new VBox();
+        pane.add(vboks, 1, 1);
+        vboks.setPadding(new Insets(10, 0, 0, 10));
 
-		lbNavn = new Label("Klippekort navn: ");
-		vboks.getChildren().add(lbNavn);
+        lbNavn = new Label("Klippekort navn: ");
+        vboks.getChildren().add(lbNavn);
 
-		txfNavn = new TextField();
-		vboks.getChildren().add(txfNavn);
+        txfNavn = new TextField();
+        vboks.getChildren().add(txfNavn);
+        txfNavn.setEditable(false);
 
-		lbAntalKlip = new Label("Antal Klip: ");
-		vboks.getChildren().add(lbAntalKlip);
+        lbAntalKlip = new Label("Antal Klip: ");
+        vboks.getChildren().add(lbAntalKlip);
 
-		txfAntalKlip = new TextField();
-		vboks.getChildren().add(txfAntalKlip);
+        txfAntalKlip = new TextField();
+        vboks.getChildren().add(txfAntalKlip);
+        txfAntalKlip.setEditable(false);
 
-		lbPris = new Label("Pris");
-		vboks.getChildren().add(lbPris);
+        lbPris = new Label("Pris");
+        vboks.getChildren().add(lbPris);
 
-		txfPris = new TextField();
-		vboks.getChildren().add(txfPris);
+        txfPris = new TextField();
+        vboks.getChildren().add(txfPris);
+        txfPris.setEditable(false);
 
-		HBox hboks = new HBox(20);
-		pane.add(hboks, 0, 2);
-		hboks.setPadding(new Insets(0, 0, 0, 10));
-		hboks.setAlignment(Pos.BASELINE_LEFT);
+        HBox hboks = new HBox(20);
+        pane.add(hboks, 0, 2);
+        hboks.setPadding(new Insets(0, 0, 0, 10));
+        hboks.setAlignment(Pos.BASELINE_LEFT);
 
-		btnOpret = new Button("Opret");
-		hboks.getChildren().add(btnOpret);
-		btnOpret.setOnAction(event -> btnOpretAction());
+        btnOpret = new Button("Opret");
+        hboks.getChildren().add(btnOpret);
+        btnOpret.setOnAction(event -> btnOpretAction());
 
-		btnSlet = new Button("Slet");
-		hboks.getChildren().add(btnSlet);
-		btnSlet.setOnAction(event -> btnSletAction());
+        btnSlet = new Button("Slet");
+        hboks.getChildren().add(btnSlet);
+        btnSlet.setOnAction(event -> btnSletAction());
 
-		btnLuk = new Button("Luk");
-		hboks.getChildren().add(btnLuk);
-		btnLuk.setOnAction(event -> btnLukAction());
+        btnLuk = new Button("Luk");
+        hboks.getChildren().add(btnLuk);
+        btnLuk.setOnAction(event -> btnLukAction());
 
-	}
+    }
 
-	private List<KlippeKort> initAllProdukter() {
-		List<KlippeKort> list = new ArrayList<>();
-		for (KlippeKort k : Storage.getAllKlippeKort()) {
-			list.add(k);
-		}
-		return list;
-	}
+    private List<KlippeKort> initAllProdukter() {
+        List<KlippeKort> list = new ArrayList<>();
+        for (KlippeKort k : Storage.getAllKlippeKort()) {
+            list.add(k);
+        }
+        return list;
+    }
 
-	private void btnOpretAction() {
-		OpretKlippeKortWindow opw = new OpretKlippeKortWindow();
-		opw.showAndWait();
-		lwKlippeKort.getItems().setAll(initAllProdukter());
+    private void btnOpretAction() {
+        OpretKlippeKortWindow opw = new OpretKlippeKortWindow();
+        opw.showAndWait();
+        lwKlippeKort.getItems().setAll(initAllProdukter());
 
-	}
+    }
 
-	private void btnSletAction() {
-		KlippeKort k = lwKlippeKort.getSelectionModel().getSelectedItem();
-		Service.getService();
-		Service.sletKlippeKort(k);
-		lwKlippeKort.getItems().setAll(initAllProdukter());
+    private void btnSletAction() {
+        KlippeKort k = lwKlippeKort.getSelectionModel().getSelectedItem();
+        Service.sletKlippeKort(k);
+        lwKlippeKort.getItems().setAll(initAllProdukter());
 
-	}
+    }
 
-	private void btnLukAction() {
-		hide();
-	}
+    private void btnLukAction() {
+        hide();
+    }
 
-	private void updateControls() {
-		KlippeKort k = lwKlippeKort.getSelectionModel().getSelectedItem();
-		if (k != null) {
-			txfNavn.setText(k.getNavn());
-			txfAntalKlip.setText(Integer.toString(k.getAntalKlip()));
-			txfPris.setText(Double.toString(k.getPris()));
+    private void updateControls() {
+        KlippeKort k = lwKlippeKort.getSelectionModel().getSelectedItem();
+        if (k != null) {
+            txfNavn.setText(k.getNavn());
+            txfAntalKlip.setText(Integer.toString(k.getAntalKlip()));
+            txfPris.setText(Double.toString(k.getPris()));
 
-		} else {
-			txfNavn.clear();
-			txfAntalKlip.clear();
-			txfPris.clear();
-		}
-	}
+        } else {
+            txfNavn.clear();
+            txfAntalKlip.clear();
+            txfPris.clear();
+        }
+    }
 }
