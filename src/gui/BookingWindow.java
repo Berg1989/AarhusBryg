@@ -50,7 +50,7 @@ public class BookingWindow extends Stage {
 	}
 
 	public void btnAnlaegAction() {
-		AnleagWindow aw = new AnleagWindow();
+		AnlaegWindow aw = new AnlaegWindow();
 		aw.showAndWait();
 		hide();
 	}

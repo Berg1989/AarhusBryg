@@ -36,9 +36,8 @@ public class SalgStedWindow extends Stage {
 
     private Label lbSalgSteder, lbSalgsPK, lbMuligePK;
     private ListView<SalgSted> lwSalgSteder;
-    private ListView<ProduktKategori> lwSalgsPK;
-    private ListView<ProduktKategori> lwMuligePK;
-    private Button btnLuk, btnOpret, btnPilVenstre, btnPilHojre;
+    private ListView<ProduktKategori> lwSalgsPK, lwMuligePK;
+    private Button btnLuk, btnOpret, btnPilVenstre, btnPilHojre, btnSlet;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -98,6 +97,10 @@ public class SalgStedWindow extends Stage {
         btnOpret = new Button("Opret");
         pane.add(btnOpret, 0, 1);
         btnOpret.setOnAction(event -> btnOpretAction());
+        
+        btnSlet = new Button("Slet");
+        pane.add(btnSlet, 1, 1);
+        btnSlet.setOnAction(event -> btnSletAction());
 
         btnLuk = new Button("Luk");
         pane.add(btnLuk, 3, 1);
@@ -140,6 +143,11 @@ public class SalgStedWindow extends Stage {
 
     private void btnLukAction() {
         hide();
+    }
+    
+    private void btnSletAction(){
+    	Storage.removeSalgSted(lwSalgSteder.getSelectionModel().getSelectedItem());
+    	lwSalgSteder.getItems().setAll(initAllSalgSted());
     }
 
     private void pilVenstreAction() {

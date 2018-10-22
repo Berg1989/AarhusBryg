@@ -8,9 +8,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class AnleagWindow extends Stage {
+public class AnlaegWindow extends Stage {
 
-	public AnleagWindow() {
+	public AnlaegWindow() {
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);

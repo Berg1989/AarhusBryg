@@ -61,5 +61,9 @@ public class Storage {
     public static ArrayList<SalgSted> getAllSalgSted() {
         return new ArrayList<>(salgStedList);
     }
+    
+    public static void removeSalgSted(SalgSted ss){
+    	salgStedList.remove(ss);
+    }
 
 }

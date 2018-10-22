@@ -86,6 +86,10 @@ public class Service {
         return ss;
 
     }
+    
+    public static void sletSalgSted(SalgSted ss){
+    	Storage.removeSalgSted(ss);
+    }
 
     public static StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
         StedPris sp = new StedPris(ss, p, pris);

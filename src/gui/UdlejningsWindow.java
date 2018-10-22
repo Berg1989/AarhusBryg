@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Produkt;
 
 public class UdlejningsWindow extends Stage {
 	public UdlejningsWindow() {
@@ -31,11 +32,11 @@ public class UdlejningsWindow extends Stage {
 
 	// Insert Attributes here:
 	// LISTVIEW SKAL ÆNDRES FRA PRODUKT TIL ANLÆG!
-	private ListView<?> lwAnlag;
+	private ListView<Produkt> lwAnlag;
 
 	// SKal lige kigges igennem
-	private ListView<?> lwPK;
-	private Label lbMuligAnlag, lbUdlej, lbEmail, lbKNavn, lbTlf, lbLejAnlæg, lbFustager, lbFNavn, lbFStr, lbAntalF,
+	private ListView<Produkt> lwPK;
+	private Label lbMuligAnlag, lbUdlej, lbEmail, lbKNavn, lbTlf, lbLejAnlaeg, lbFustager, lbFNavn, lbFStr, lbAntalF,
 			lbSpace;
 	private TextField txfUdlej, txfEmail, txfKNavn, txfTlf, txfFNavn, txfFStr, txfAntalF;
 	private CheckBox chbLevering;
@@ -91,8 +92,8 @@ public class UdlejningsWindow extends Stage {
 		chbLevering = new CheckBox("Levering 800 kr.-");
 		vboks2.getChildren().add(chbLevering);
 
-		lbLejAnlæg = new Label("Leje af anlæg");
-		vboks2.getChildren().add(lbLejAnlæg);
+		lbLejAnlaeg = new Label("Leje af anlæg");
+		vboks2.getChildren().add(lbLejAnlaeg);
 
 		cbbAnlag = new ComboBox<>();
 		vboks2.getChildren().add(cbbAnlag);
