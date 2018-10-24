@@ -8,9 +8,15 @@ import model.Rundvisning;
 import model.SalgSted;
 
 public class Storage {
-	private static ArrayList<ProduktKategori> produktKategoriList = new ArrayList<>();
-	private static ArrayList<Rundvisning> rundvisningList = new ArrayList<>();
-	private static ArrayList<SalgSted> salgStedList = new ArrayList<>();
+	private static ArrayList<ProduktKategori> produktKategoriList;
+	private static ArrayList<Rundvisning> rundvisningList;
+	private static ArrayList<SalgSted> salgStedList;
+
+	public Storage() {
+		produktKategoriList = new ArrayList<>();
+		rundvisningList = new ArrayList<>();
+		salgStedList = new ArrayList<>();
+	}
 
 	public static ArrayList<ProduktKategori> getAllProduktKategorier() {
 		return new ArrayList<>(produktKategoriList);
