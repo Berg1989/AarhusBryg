@@ -69,9 +69,9 @@ public class Produkt {
 	}
 
 	public void removeStedPris(SalgSted sted) {
-		for (StedPris stedPris : stedPriser) {
-			if (stedPris.getSted() == sted) {
-				stedPriser.remove(stedPris);
+		for (int i = 0; i < stedPriser.size(); i++) {
+			if (stedPriser.get(i).getSted() == sted) {
+				stedPriser.remove(i);
 			}
 		}
 	}

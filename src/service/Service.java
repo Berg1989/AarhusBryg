@@ -88,21 +88,13 @@ public class Service {
 	}
 
 	public static void sletSalgSted(SalgSted ss) {
-		// ProduktKategori pk;
-		// Produkt p;
-		// for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
-		// pk = ss.getProduktKategorier().get(i);
-		// for (int j = 0; j < pk.getProdukter().size(); j++) {
-		// p = pk.getProdukter().get(j);
-		// p.removeStedPris(ss);
-		// }
-		//
-		// }
-		// for (ProduktKategori pk : ss.getProduktKategorier()) {
-		// for (Produkt p : pk.getProdukter()) {
-		// p.removeStedPris(ss);
-		// }
-		// }
+		ProduktKategori pk;
+		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
+			pk = ss.getProduktKategorier().get(i);
+			for (int j = 0; j < pk.getProdukter().size(); j++) {
+				pk.getProdukter().get(j).removeStedPris(ss);
+			}
+		}
 		Storage.removeSalgSted(ss);
 	}
 
