@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
@@ -54,16 +53,6 @@ public class Service {
 
 	public static void sletProduktKategori(ProduktKategori pk) {
 		Storage.removeProduktKategori(pk);
-	}
-
-	public static KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
-		KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
-		Storage.addKlippeKort(kk);
-		return kk;
-	}
-
-	public static void sletKlippeKort(KlippeKort kk) {
-		Storage.removeKlippeKort(kk);
 	}
 
 	public static Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
@@ -135,9 +124,6 @@ public class Service {
 		Produkt p3 = opretProdukt(pk2, "TestProdukt3", 120, "1 L");
 		Produkt p4 = opretProdukt(pk3, "TestProdukt4", 350, "0.66 L");
 		Produkt p5 = opretProdukt(pk3, "TestProdukt5", 10, "1.5 L");
-
-		// Klippekort
-		opretKlippeKort("Kort1", 4, 100);
 
 		// Bar
 		SalgSted fredagsBar = opretSalgSted("Fredagsbar");
