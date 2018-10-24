@@ -19,11 +19,12 @@ import javafx.stage.StageStyle;
 import model.ProduktKategori;
 import model.SalgSted;
 import service.Service;
-import storage.Storage;
 
 public class SalgStedWindow extends Stage {
+	private Service service;
 
 	public SalgStedWindow() {
+		service = Service.getService();
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);
@@ -55,7 +56,7 @@ public class SalgStedWindow extends Stage {
 
 		lwSalgSteder = new ListView<>();
 		vboks1.getChildren().add(lwSalgSteder);
-		lwSalgSteder.getItems().addAll(Storage.getAllSalgSted());
+		lwSalgSteder.getItems().addAll(service.getAllSalgSted());
 
 		ChangeListener<SalgSted> listener = (op, oldProduct, newProduct) -> updateControls();
 		lwSalgSteder.getSelectionModel().selectedItemProperty().addListener(listener);
@@ -115,7 +116,7 @@ public class SalgStedWindow extends Stage {
 	// Method that updates updates an specific list.
 	private List<SalgSted> initAllSalgSted() {
 		List<SalgSted> list = new ArrayList<>();
-		for (SalgSted ss : Storage.getAllSalgSted()) {
+		for (SalgSted ss : service.getAllSalgSted()) {
 			list.add(ss);
 		}
 		return list;
@@ -136,7 +137,7 @@ public class SalgStedWindow extends Stage {
 		lwMuligePK.getItems().clear();
 		if (ss != null) {
 			lwSalgsPK.getItems().addAll(lwSalgSteder.getSelectionModel().getSelectedItem().getProduktKategorier());
-			lwMuligePK.getItems().addAll(Service.getMuligeKategorier(ss));
+			lwMuligePK.getItems().addAll(service.getMuligeKategorier(ss));
 		}
 	}
 
@@ -157,7 +158,7 @@ public class SalgStedWindow extends Stage {
 	// SalgSteder List,
 	private void btnSletAction() {
 		if (lwSalgSteder.getSelectionModel().getSelectedItem() != null) {
-			Service.sletSalgSted(lwSalgSteder.getSelectionModel().getSelectedItem());
+			service.sletSalgSted(lwSalgSteder.getSelectionModel().getSelectedItem());
 		}
 		lwSalgSteder.getItems().setAll(initAllSalgSted());
 	}
@@ -166,7 +167,7 @@ public class SalgStedWindow extends Stage {
 	// "salgssted produktkategori"
 	private void pilVenstreAction() {
 		if (lwMuligePK.getSelectionModel().getSelectedItem() != null) {
-			Service.tilfoejKategori(lwSalgSteder.getSelectionModel().getSelectedItem(),
+			service.tilfoejKategori(lwSalgSteder.getSelectionModel().getSelectedItem(),
 					lwMuligePK.getSelectionModel().getSelectedItem());
 			lwSalgsPK.getItems().addAll(initAllSalgsPK());
 			updateControls();

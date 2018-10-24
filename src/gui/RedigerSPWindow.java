@@ -16,82 +16,81 @@ import javafx.stage.StageStyle;
 import model.Produkt;
 import model.SalgSted;
 import service.Service;
-import storage.Storage;
 
 public class RedigerSPWindow extends Stage {
+	private Service service;
+	private Produkt p;
 
-    private Produkt p;
+	public RedigerSPWindow(Produkt p) {
+		service = Service.getService();
+		this.p = p;
 
-    public RedigerSPWindow(Produkt p) {
+		initStyle(StageStyle.UTILITY);
+		initModality(Modality.APPLICATION_MODAL);
+		setResizable(false);
+		setTitle("Special Pris");
 
-        this.p = p;
+		GridPane pane = new GridPane();
+		Scene scene = new Scene(pane);
+		initContent(pane);
+		setScene(scene);
+	}
 
-        initStyle(StageStyle.UTILITY);
-        initModality(Modality.APPLICATION_MODAL);
-        setResizable(false);
-        setTitle("Special Pris");
+	private Label lbNyP, lbSalgsSted;
+	private TextField txfNyP;
+	private Button btnRedigere, btnLuk;
+	private ComboBox<SalgSted> cbSalgsSted;
 
-        GridPane pane = new GridPane();
-        Scene scene = new Scene(pane);
-        initContent(pane);
-        setScene(scene);
-    }
+	private void initContent(GridPane pane) {
+		pane.setPadding(new Insets(10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setGridLinesVisible(false);
 
-    private Label lbGammelP, lbNyP, lbSalgsSted;
-    private TextField txfNyP, txfGammelP;
-    private Button btnRedigere, btnLuk;
-    private ComboBox<SalgSted> cbSalgsSted;
+		VBox vboks = new VBox();
+		pane.add(vboks, 0, 0);
 
-    private void initContent(GridPane pane) {
-        pane.setPadding(new Insets(10));
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setGridLinesVisible(false);
+		lbSalgsSted = new Label("Salgs sted");
+		vboks.getChildren().add(lbSalgsSted);
 
-        VBox vboks = new VBox();
-        pane.add(vboks, 0, 0);
+		cbSalgsSted = new ComboBox<>();
+		vboks.getChildren().add(cbSalgsSted);
+		cbSalgsSted.getItems().addAll(service.getAllSalgSted());
 
-        lbSalgsSted = new Label("Salgs sted");
-        vboks.getChildren().add(lbSalgsSted);
+		lbNyP = new Label("Ny Pris");
+		vboks.getChildren().add(lbNyP);
 
-        cbSalgsSted = new ComboBox<>();
-        vboks.getChildren().add(cbSalgsSted);
-        cbSalgsSted.getItems().addAll(Storage.getAllSalgSted());
+		txfNyP = new TextField();
+		vboks.getChildren().add(txfNyP);
 
-        lbNyP = new Label("Ny Pris");
-        vboks.getChildren().add(lbNyP);
+		HBox hboks = new HBox(20);
+		pane.add(hboks, 0, 2);
+		hboks.setPadding(new Insets(0, 0, 0, 10));
+		hboks.setAlignment(Pos.BASELINE_LEFT);
 
-        txfNyP = new TextField();
-        vboks.getChildren().add(txfNyP);
+		btnRedigere = new Button("Rediger");
+		hboks.getChildren().add(btnRedigere);
+		btnRedigere.setOnAction(event -> btnRedigerAction());
 
-        HBox hboks = new HBox(20);
-        pane.add(hboks, 0, 2);
-        hboks.setPadding(new Insets(0, 0, 0, 10));
-        hboks.setAlignment(Pos.BASELINE_LEFT);
+		btnLuk = new Button("Luk");
+		hboks.getChildren().add(btnLuk);
+		btnLuk.setOnAction(event -> btnLukAction());
 
-        btnRedigere = new Button("Rediger");
-        hboks.getChildren().add(btnRedigere);
-        btnRedigere.setOnAction(event -> btnRedigerAction());
+	}
 
-        btnLuk = new Button("Luk");
-        hboks.getChildren().add(btnLuk);
-        btnLuk.setOnAction(event -> btnLukAction());
+	private void btnRedigerAction() {
+		if (p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem()) == null) {
+			service.opretStedPris(cbSalgsSted.getSelectionModel().getSelectedItem(), p,
+					Double.parseDouble(txfNyP.getText().trim()));
+		} else {
+			p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem())
+					.setPris(Double.parseDouble(txfNyP.getText().trim()));
+		}
 
-    }
+		hide();
+	}
 
-    private void btnRedigerAction() {
-        if (p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem()) == null) {
-            Service.opretStedPris(cbSalgsSted.getSelectionModel().getSelectedItem(), p,
-                    Double.parseDouble(txfNyP.getText().trim()));
-        } else {
-            p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem())
-                    .setPris(Double.parseDouble(txfNyP.getText().trim()));
-        }
-
-        hide();
-    }
-
-    private void btnLukAction() {
-        hide();
-    }
+	private void btnLukAction() {
+		hide();
+	}
 }

@@ -14,11 +14,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.ProduktKategori;
 import service.Service;
-import storage.Storage;
 
 public class ProduktkategoriWindow extends Stage {
+	private Service service;
 
 	public ProduktkategoriWindow() {
+		service = Service.getService();
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);
@@ -48,7 +49,7 @@ public class ProduktkategoriWindow extends Stage {
 		pane.add(lwPKategori, 0, 1, 1, 3);
 		lwPKategori.setPrefHeight(250);
 		lwPKategori.setPrefWidth(180);
-		lwPKategori.getItems().addAll(Storage.getAllProduktKategorier());
+		lwPKategori.getItems().addAll(service.getAllProduktKategorier());
 
 		btnOpret = new Button("Opret Kategori");
 		pane.add(btnOpret, 1, 1);
@@ -70,7 +71,7 @@ public class ProduktkategoriWindow extends Stage {
 
 	private List<ProduktKategori> initAllProdukter() {
 		List<ProduktKategori> list = new ArrayList<>();
-		for (ProduktKategori pk : Storage.getAllProduktKategorier()) {
+		for (ProduktKategori pk : service.getAllProduktKategorier()) {
 			list.add(pk);
 		}
 		return list;
@@ -84,7 +85,7 @@ public class ProduktkategoriWindow extends Stage {
 	}
 
 	private void btnRemoveAction() {
-		Service.sletProduktKategori(lwPKategori.getSelectionModel().getSelectedItem());
+		service.sletProduktKategori(lwPKategori.getSelectionModel().getSelectedItem());
 		lwPKategori.getItems().setAll(initAllProdukter());
 	}
 

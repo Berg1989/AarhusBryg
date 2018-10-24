@@ -1,6 +1,7 @@
 package storage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Produkt;
 import model.ProduktKategori;
@@ -8,9 +9,9 @@ import model.Rundvisning;
 import model.SalgSted;
 
 public class Storage {
-	private static ArrayList<ProduktKategori> produktKategoriList;
-	private static ArrayList<Rundvisning> rundvisningList;
-	private static ArrayList<SalgSted> salgStedList;
+	private List<ProduktKategori> produktKategoriList;
+	private List<Rundvisning> rundvisningList;
+	private List<SalgSted> salgStedList;
 
 	public Storage() {
 		produktKategoriList = new ArrayList<>();
@@ -18,43 +19,43 @@ public class Storage {
 		salgStedList = new ArrayList<>();
 	}
 
-	public static ArrayList<ProduktKategori> getAllProduktKategorier() {
+	public ArrayList<ProduktKategori> getAllProduktKategorier() {
 		return new ArrayList<>(produktKategoriList);
 	}
 
-	public static void addProduktKategori(ProduktKategori pk) {
+	public void addProduktKategori(ProduktKategori pk) {
 		produktKategoriList.add(pk);
 	}
 
-	public static void removeProduktKategori(ProduktKategori pk) {
+	public void removeProduktKategori(ProduktKategori pk) {
 		produktKategoriList.remove(pk);
 	}
 
-	public static void addProdukt(ProduktKategori pk, Produkt p) {
+	public void addProdukt(ProduktKategori pk, Produkt p) {
 		pk.addProdukt(p);
 	}
 
-	public static ArrayList<Rundvisning> getAllRundvisninger() {
+	public ArrayList<Rundvisning> getAllRundvisninger() {
 		return new ArrayList<>(rundvisningList);
 	}
 
-	public static void addRundvisning(Rundvisning r) {
+	public void addRundvisning(Rundvisning r) {
 		rundvisningList.add(r);
 	}
 
-	public static void removeRundvisning(Rundvisning r) {
+	public void removeRundvisning(Rundvisning r) {
 		rundvisningList.remove(r);
 	}
 
-	public static void addSalgSted(SalgSted b) {
+	public void addSalgSted(SalgSted b) {
 		salgStedList.add(b);
 	}
 
-	public static ArrayList<SalgSted> getAllSalgSted() {
+	public ArrayList<SalgSted> getAllSalgSted() {
 		return new ArrayList<>(salgStedList);
 	}
 
-	public static void removeSalgSted(SalgSted ss) {
+	public void removeSalgSted(SalgSted ss) {
 		salgStedList.remove(ss);
 	}
 

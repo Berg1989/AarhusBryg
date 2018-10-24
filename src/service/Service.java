@@ -3,6 +3,7 @@ package service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Produkt;
 import model.ProduktKategori;
@@ -30,53 +31,57 @@ public class Service {
 		return new Service();
 	}
 
-	public static Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
+	public Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
 		Produkt p = pk.createProdukt(navn, pris, str);
 		return p;
 	}
 
-	public static void sletProdukt(ProduktKategori pk, Produkt p) {
+	public void sletProdukt(ProduktKategori pk, Produkt p) {
 		pk.sletProdukt(p);
 	}
 
-	public static void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
+	public void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
 		pk.redigerNavn(p, navn);
 		pk.redigerPris(p, pris);
 		pk.redigerStr(p, str);
 	}
 
-	public static ProduktKategori opretProduktKategori(String navn) {
+	public ProduktKategori opretProduktKategori(String navn) {
 		ProduktKategori pk = new ProduktKategori(navn);
-		Storage.addProduktKategori(pk);
+		storage.addProduktKategori(pk);
 		return pk;
 	}
 
-	public static void sletProduktKategori(ProduktKategori pk) {
-		Storage.removeProduktKategori(pk);
+	public void sletProduktKategori(ProduktKategori pk) {
+		storage.removeProduktKategori(pk);
 	}
 
-	public static Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
+	public Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
 		Rundvisning r = new Rundvisning(kunde, dato, tid, 0);
-		Storage.addRundvisning(r);
+		storage.addRundvisning(r);
 		return r;
 	}
 
-	public static void sletRundvisning(Rundvisning r) {
-		Storage.removeRundvisning(r);
+	public List<ProduktKategori> getAllProduktKategorier() {
+		return storage.getAllProduktKategorier();
 	}
 
-	public static void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
+	public void sletRundvisning(Rundvisning r) {
+		storage.removeRundvisning(r);
+	}
+
+	public void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
 		ss.addProduktKategori(pk);
 	}
 
-	public static SalgSted opretSalgSted(String navn) {
+	public SalgSted opretSalgSted(String navn) {
 		SalgSted ss = new SalgSted(navn);
-		Storage.addSalgSted(ss);
+		storage.addSalgSted(ss);
 		return ss;
 
 	}
 
-	public static void sletSalgSted(SalgSted ss) {
+	public void sletSalgSted(SalgSted ss) {
 		ProduktKategori pk;
 		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
 			pk = ss.getProduktKategorier().get(i);
@@ -84,31 +89,39 @@ public class Service {
 				pk.getProdukter().get(j).removeStedPris(ss);
 			}
 		}
-		Storage.removeSalgSted(ss);
+		storage.removeSalgSted(ss);
 	}
 
-	public static StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
+	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
 		StedPris sp = new StedPris(ss, p, pris);
 		p.addStedPris(sp);
 		return sp;
 	}
 
-	public static double getStedPris(SalgSted ss, Produkt p) {
+	public double getStedPris(SalgSted ss, Produkt p) {
 		return p.getStedPrisPris(ss);
 	}
 
-	public static ArrayList<ProduktKategori> getMuligeKategorier(SalgSted ss) {
-		ArrayList<ProduktKategori> pkList = Storage.getAllProduktKategorier();
+	public ArrayList<ProduktKategori> getMuligeKategorier(SalgSted ss) {
+		ArrayList<ProduktKategori> pkList = storage.getAllProduktKategorier();
 		ProduktKategori pk;
 		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
 			pk = ss.getProduktKategorier().get(i);
-			for (int j = 0; j < Storage.getAllProduktKategorier().size(); j++) {
+			for (int j = 0; j < storage.getAllProduktKategorier().size(); j++) {
 				if (pkList.contains(pk)) {
 					pkList.remove(pk);
 				}
 			}
 		}
 		return pkList;
+	}
+
+	public List<SalgSted> getAllSalgSted() {
+		return storage.getAllSalgSted();
+	}
+
+	public List<Rundvisning> getAllRundvisninger() {
+		return storage.getAllRundvisninger();
 	}
 
 	public void initStorage() {

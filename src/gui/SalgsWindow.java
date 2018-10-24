@@ -15,143 +15,145 @@ import javafx.stage.StageStyle;
 import model.Produkt;
 import model.ProduktKategori;
 import model.SalgSted;
-import storage.Storage;
+import service.Service;
 
 public class SalgsWindow extends Stage {
+	private Service service;
 
-    public SalgsWindow() {
+	public SalgsWindow() {
+		service = Service.getService();
 
-        initStyle(StageStyle.UTILITY);
-        initModality(Modality.APPLICATION_MODAL);
-        setResizable(false);
-        setTitle("Administrator Window");
+		initStyle(StageStyle.UTILITY);
+		initModality(Modality.APPLICATION_MODAL);
+		setResizable(false);
+		setTitle("Administrator Window");
 
-        GridPane pane = new GridPane();
-        Scene scene = new Scene(pane);
-        initContent(pane);
-        setScene(scene);
+		GridPane pane = new GridPane();
+		Scene scene = new Scene(pane);
+		initContent(pane);
+		setScene(scene);
 
-    }
+	}
 
-    private Label lbSS, lbPK, lbP, lbAntal, lbTP, lbTilfojet;
-    private TextField txfAntal, txfTP;
-    private ListView<SalgSted> lwSS;
-    private ListView<ProduktKategori> lwPK;
-    private ListView<Produkt> lwP;
-    private ListView<?> lwTiltojet;
-    private Button btnPilVenstre, btnPilHojre, btnLuk, btnVidere;
+	private Label lbSS, lbPK, lbP, lbAntal, lbTP, lbTilfojet;
+	private TextField txfAntal, txfTP;
+	private ListView<SalgSted> lwSS;
+	private ListView<ProduktKategori> lwPK;
+	private ListView<Produkt> lwP;
+	private ListView<?> lwTiltojet;
+	private Button btnPilVenstre, btnPilHojre, btnLuk, btnVidere;
 
-    private void initContent(GridPane pane) {
-        pane.setPadding(new Insets(10));
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setGridLinesVisible(false);
+	private void initContent(GridPane pane) {
+		pane.setPadding(new Insets(10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setGridLinesVisible(false);
 
-        // ---------- VBox 1 ----------------
+		// ---------- VBox 1 ----------------
 
-        VBox vboks1 = new VBox();
-        pane.add(vboks1, 0, 0);
+		VBox vboks1 = new VBox();
+		pane.add(vboks1, 0, 0);
 
-        lbSS = new Label("Produktkategorier: ");
-        vboks1.getChildren().add(lbSS);
+		lbSS = new Label("Produktkategorier: ");
+		vboks1.getChildren().add(lbSS);
 
-        lwSS = new ListView<>();
-        vboks1.getChildren().add(lwSS);
-        lwSS.setMaxWidth(100);
-        lwSS.getItems().addAll(Storage.getAllSalgSted());
+		lwSS = new ListView<>();
+		vboks1.getChildren().add(lwSS);
+		lwSS.setMaxWidth(100);
+		lwSS.getItems().addAll(service.getAllSalgSted());
 
-        ChangeListener<SalgSted> listener = (op, oldProduct, newProduct) -> updateControls();
-        lwSS.getSelectionModel().selectedItemProperty().addListener(listener);
+		ChangeListener<SalgSted> listener = (op, oldProduct, newProduct) -> updateControls();
+		lwSS.getSelectionModel().selectedItemProperty().addListener(listener);
 
-        // ---------- VBox 2 ----------------
+		// ---------- VBox 2 ----------------
 
-        VBox vboks2 = new VBox();
-        pane.add(vboks2, 1, 0);
+		VBox vboks2 = new VBox();
+		pane.add(vboks2, 1, 0);
 
-        lbPK = new Label("Produktkategorier");
-        vboks2.getChildren().add(lbPK);
+		lbPK = new Label("Produktkategorier");
+		vboks2.getChildren().add(lbPK);
 
-        lwPK = new ListView<>();
-        vboks2.getChildren().add(lwPK);
-        lwPK.setMaxWidth(150);
+		lwPK = new ListView<>();
+		vboks2.getChildren().add(lwPK);
+		lwPK.setMaxWidth(150);
 
-        ChangeListener<ProduktKategori> listener1 = (op, oldProduct, newProduct) -> updateControlsTwo();
-        lwPK.getSelectionModel().selectedItemProperty().addListener(listener1);
+		ChangeListener<ProduktKategori> listener1 = (op, oldProduct, newProduct) -> updateControlsTwo();
+		lwPK.getSelectionModel().selectedItemProperty().addListener(listener1);
 
-        // ---------- VBox 3 ----------------
+		// ---------- VBox 3 ----------------
 
-        VBox vboks3 = new VBox();
-        pane.add(vboks3, 2, 0);
+		VBox vboks3 = new VBox();
+		pane.add(vboks3, 2, 0);
 
-        lbP = new Label("Produkter");
-        vboks3.getChildren().add(lbP);
+		lbP = new Label("Produkter");
+		vboks3.getChildren().add(lbP);
 
-        lwP = new ListView<>();
-        vboks3.getChildren().add(lwP);
-        lwP.setMaxWidth(220);
+		lwP = new ListView<>();
+		vboks3.getChildren().add(lwP);
+		lwP.setMaxWidth(220);
 
-        // ---------- VBox 4 ----------------
+		// ---------- VBox 4 ----------------
 
-        VBox vboks4 = new VBox(10);
-        pane.add(vboks4, 3, 0);
+		VBox vboks4 = new VBox(10);
+		pane.add(vboks4, 3, 0);
 
-        lbAntal = new Label("Antal");
-        vboks4.getChildren().add(lbAntal);
+		lbAntal = new Label("Antal");
+		vboks4.getChildren().add(lbAntal);
 
-        txfAntal = new TextField();
-        vboks4.getChildren().add(txfAntal);
-        txfAntal.setMaxWidth(50);
+		txfAntal = new TextField();
+		vboks4.getChildren().add(txfAntal);
+		txfAntal.setMaxWidth(50);
 
-        btnPilHojre = new Button("--->");
-        vboks4.getChildren().add(btnPilHojre);
+		btnPilHojre = new Button("--->");
+		vboks4.getChildren().add(btnPilHojre);
 
-        btnPilVenstre = new Button("<---");
-        vboks4.getChildren().add(btnPilVenstre);
+		btnPilVenstre = new Button("<---");
+		vboks4.getChildren().add(btnPilVenstre);
 
-        // ---------- VBox 5 ----------------
+		// ---------- VBox 5 ----------------
 
-        VBox vboks5 = new VBox(10);
-        pane.add(vboks5, 4, 0);
+		VBox vboks5 = new VBox(10);
+		pane.add(vboks5, 4, 0);
 
-        lbTilfojet = new Label("Tilføjet til køblist");
-        vboks5.getChildren().add(lbTilfojet);
+		lbTilfojet = new Label("Tilføjet til køblist");
+		vboks5.getChildren().add(lbTilfojet);
 
-        lwTiltojet = new ListView<>();
-        vboks5.getChildren().add(lwTiltojet);
+		lwTiltojet = new ListView<>();
+		vboks5.getChildren().add(lwTiltojet);
 
-        lbTP = new Label("Total Pris");
-        vboks5.getChildren().add(lbTP);
+		lbTP = new Label("Total Pris");
+		vboks5.getChildren().add(lbTP);
 
-        txfTP = new TextField();
-        vboks5.getChildren().add(txfTP);
-        txfTP.setEditable(false);
+		txfTP = new TextField();
+		vboks5.getChildren().add(txfTP);
+		txfTP.setEditable(false);
 
-        // ---------- HBox 1 ----------------
+		// ---------- HBox 1 ----------------
 
-        btnLuk = new Button("Luk");
-        pane.add(btnLuk, 0, 1);
+		btnLuk = new Button("Luk");
+		pane.add(btnLuk, 0, 1);
 
-        // ---------- HBox 2 ----------------
+		// ---------- HBox 2 ----------------
 
-        btnVidere = new Button("Videre");
-        pane.add(btnVidere, 4, 1);
+		btnVidere = new Button("Videre");
+		pane.add(btnVidere, 4, 1);
 
-    }
+	}
 
-    private void updateControls() {
-        SalgSted ss = lwSS.getSelectionModel().getSelectedItem();
-        lwPK.getItems().clear();
-        if (ss != null) {
-            lwPK.getItems().addAll(ss.getProduktKategorier());
-        }
-    }
+	private void updateControls() {
+		SalgSted ss = lwSS.getSelectionModel().getSelectedItem();
+		lwPK.getItems().clear();
+		if (ss != null) {
+			lwPK.getItems().addAll(ss.getProduktKategorier());
+		}
+	}
 
-    private void updateControlsTwo() {
-        ProduktKategori pk = lwPK.getSelectionModel().getSelectedItem();
-        lwP.getItems().clear();
-        if (pk != null) {
-            lwP.getItems().addAll(pk.getProdukter());
-        }
-    }
+	private void updateControlsTwo() {
+		ProduktKategori pk = lwPK.getSelectionModel().getSelectedItem();
+		lwP.getItems().clear();
+		if (pk != null) {
+			lwP.getItems().addAll(pk.getProdukter());
+		}
+	}
 
 }
