@@ -153,10 +153,12 @@ public class SalgStedWindow extends Stage {
 		hide();
 	}
 
-	// This buttom deletes the current salgsalg that you have clicked on from the
+	// This buttom deletes the current salg that you have clicked on from the
 	// SalgSteder List,
 	private void btnSletAction() {
-		Storage.removeSalgSted(lwSalgSteder.getSelectionModel().getSelectedItem());
+		if (lwSalgSteder.getSelectionModel().getSelectedItem() != null) {
+			Service.sletSalgSted(lwSalgSteder.getSelectionModel().getSelectedItem());
+		}
 		lwSalgSteder.getItems().setAll(initAllSalgSted());
 	}
 
