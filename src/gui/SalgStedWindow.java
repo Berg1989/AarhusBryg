@@ -163,20 +163,23 @@ public class SalgStedWindow extends Stage {
 	// This method adds a produktkategori from the "mulige produktkategori" list to
 	// "salgssted produktkategori"
 	private void pilVenstreAction() {
-
-		Service.tilfoejKategori(lwSalgSteder.getSelectionModel().getSelectedItem(),
-				lwMuligePK.getSelectionModel().getSelectedItem());
-		lwSalgsPK.getItems().addAll(initAllSalgsPK());
-		updateControls();
+		if (lwMuligePK.getSelectionModel().getSelectedItem() != null) {
+			Service.tilfoejKategori(lwSalgSteder.getSelectionModel().getSelectedItem(),
+					lwMuligePK.getSelectionModel().getSelectedItem());
+			lwSalgsPK.getItems().addAll(initAllSalgsPK());
+			updateControls();
+		}
 
 	}
 
 	// This method removes a produktkategori from the "salgssted produktkategori".
 	private void pilHojreAction() {
-		lwSalgSteder.getSelectionModel().getSelectedItem()
-				.removeProduktKategori(lwSalgsPK.getSelectionModel().getSelectedItem());
-		lwSalgsPK.getItems().addAll(initAllSalgsPK());
-		updateControls();
+		if (lwSalgSteder.getSelectionModel().getSelectedItem() != null) {
+			lwSalgSteder.getSelectionModel().getSelectedItem()
+					.removeProduktKategori(lwSalgsPK.getSelectionModel().getSelectedItem());
+			lwSalgsPK.getItems().addAll(initAllSalgsPK());
+			updateControls();
+		}
 	}
 
 }
