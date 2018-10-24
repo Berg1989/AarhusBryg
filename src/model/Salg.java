@@ -2,12 +2,13 @@ package model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class Salg {
-	private Map<Integer, Produkt> produkter;
+	private ArrayList<SalgsLinie> produkter;
 	private Betalingsmetode betalingmetode;
 	private LocalDate dato;
 	private LocalTime tid;
@@ -16,9 +17,15 @@ public class Salg {
 	private int id;
 	
 	public Salg() {
-		produkter = new HashMap<Integer, Produkt>();
+		produkter = new ArrayList<>();
 		counter ++;
 		id  = counter;
+		
+	}
+	
+	public void opretSalgslinie(int antal, Produkt produkt) {
+		SalgsLinie linie = new SalgsLinie(antal, produkt);
+		produkter.add(linie);
 		
 	}
 	
