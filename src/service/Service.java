@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import model.KlippeKort;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
@@ -56,16 +55,6 @@ public class Service {
 		Storage.removeProduktKategori(pk);
 	}
 
-	public static KlippeKort opretKlippeKort(String navn, int antalKlip, double pris) {
-		KlippeKort kk = new KlippeKort(navn, antalKlip, pris);
-		Storage.addKlippeKort(kk);
-		return kk;
-	}
-
-	public static void sletKlippeKort(KlippeKort kk) {
-		Storage.removeKlippeKort(kk);
-	}
-
 	public static Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
 		Rundvisning r = new Rundvisning(kunde, dato, tid, 0);
 		Storage.addRundvisning(r);
@@ -88,21 +77,13 @@ public class Service {
 	}
 
 	public static void sletSalgSted(SalgSted ss) {
-		// ProduktKategori pk;
-		// Produkt p;
-		// for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
-		// pk = ss.getProduktKategorier().get(i);
-		// for (int j = 0; j < pk.getProdukter().size(); j++) {
-		// p = pk.getProdukter().get(j);
-		// p.removeStedPris(ss);
-		// }
-		//
-		// }
-		// for (ProduktKategori pk : ss.getProduktKategorier()) {
-		// for (Produkt p : pk.getProdukter()) {
-		// p.removeStedPris(ss);
-		// }
-		// }
+		ProduktKategori pk;
+		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
+			pk = ss.getProduktKategorier().get(i);
+			for (int j = 0; j < pk.getProdukter().size(); j++) {
+				pk.getProdukter().get(j).removeStedPris(ss);
+			}
+		}
 		Storage.removeSalgSted(ss);
 	}
 
@@ -143,9 +124,6 @@ public class Service {
 		Produkt p3 = opretProdukt(pk2, "TestProdukt3", 120, "1 L");
 		Produkt p4 = opretProdukt(pk3, "TestProdukt4", 350, "0.66 L");
 		Produkt p5 = opretProdukt(pk3, "TestProdukt5", 10, "1.5 L");
-
-		// Klippekort
-		opretKlippeKort("Kort1", 4, 100);
 
 		// Bar
 		SalgSted fredagsBar = opretSalgSted("Fredagsbar");
