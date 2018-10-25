@@ -162,5 +162,10 @@ public class Rundvisning {
 		}
 		return pris;
 	}
+	
+	@Override
+	public String toString() {
+		return "" + this.getDato().toString() + "kl " + this.tid.toString() + "(" + this.kundeNavn + ")";
+	}
 
 }

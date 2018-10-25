@@ -89,6 +89,7 @@ public class RundvisningWindow extends Stage {
 	private void btnOpretAction() {
 		OpretRundvisningWindow orw = new OpretRundvisningWindow();
 		orw.showAndWait();
+		hide();
 	}
 
 	private void btnLukAction() {

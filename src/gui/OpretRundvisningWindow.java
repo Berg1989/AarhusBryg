@@ -7,6 +7,7 @@ import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -118,12 +119,18 @@ public class OpretRundvisningWindow extends Stage {
 	// Action methods
 
 	private void btnReserverAction() {
-		String KundeNavn = txfKundeNavn.getText().trim();
-		int Antal = Integer.parseInt(txfAntalM.getText().trim());
-		LocalDate dato = dp.getValue();
-		LocalTime startTime = LocalTime.parse(txfTidspunkt.getText());
-		service.opretRundvisning(KundeNavn, dato, Antal, startTime);
-		hide();
+		if (rv != null && rv.beregnPris() != 0.0) {
+			service.gemRundvisnign(rv);
+			RundvisningWindow rvw = new RundvisningWindow();
+			rvw.showAndWait();
+			hide();
+		}
+		else {
+			Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Ikke tilgaengelig");
+            a.showAndWait();
+		}
+	
 
 	}
 
