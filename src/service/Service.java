@@ -33,6 +33,7 @@ public class Service {
 		return new Service();
 	}
 
+	// PRODUKT METODER
 	public Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
 		Produkt p = pk.createProdukt(navn, pris, str);
 		return p;
@@ -48,6 +49,7 @@ public class Service {
 		pk.redigerStr(p, str);
 	}
 
+	//PRODUKTKATEGORI METODER
 	public ProduktKategori opretProduktKategori(String navn) {
 		ProduktKategori pk = new ProduktKategori(navn);
 		storage.addProduktKategori(pk);
@@ -58,23 +60,46 @@ public class Service {
 		storage.removeProduktKategori(pk);
 	}
 
+	public List<ProduktKategori> getAllProduktKategorier() {
+		return storage.getAllProduktKategorier();
+	}
+	
+	public void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
+		ss.addProduktKategori(pk);
+	}
+	
+	public ArrayList<ProduktKategori> getMuligeKategorier(SalgSted ss) {
+		ArrayList<ProduktKategori> pkList = storage.getAllProduktKategorier();
+		ProduktKategori pk;
+		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
+			pk = ss.getProduktKategorier().get(i);
+			for (int j = 0; j < storage.getAllProduktKategorier().size(); j++) {
+				if (pkList.contains(pk)) {
+					pkList.remove(pk);
+				}
+			}
+		}
+		return pkList;
+	}
+	
+	//RUNDVISNING METODER
 	public Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
 		Rundvisning r = new Rundvisning(kunde, dato, tid, 0);
 		storage.addRundvisning(r);
 		return r;
 	}
 
-	public List<ProduktKategori> getAllProduktKategorier() {
-		return storage.getAllProduktKategorier();
-	}
-
+	
 	public void sletRundvisning(Rundvisning r) {
 		storage.removeRundvisning(r);
 	}
-
-	public void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
-		ss.addProduktKategori(pk);
+	
+	public List<Rundvisning> getAllRundvisninger() {
+		return storage.getAllRundvisninger();
 	}
+
+	
+	//SALGS METODER
 
 	public List<SalgsLinie> getAllSalgsLinier(Salg s) {
 		return s.getProdukter();
@@ -102,6 +127,8 @@ public class Service {
 		}
 		storage.removeSalgSted(ss);
 	}
+	
+	//SALGSTED METODER
 
 	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
 		StedPris sp = new StedPris(ss, p, pris);
@@ -113,20 +140,7 @@ public class Service {
 		return p.getStedPrisPris(ss);
 	}
 
-	public ArrayList<ProduktKategori> getMuligeKategorier(SalgSted ss) {
-		ArrayList<ProduktKategori> pkList = storage.getAllProduktKategorier();
-		ProduktKategori pk;
-		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
-			pk = ss.getProduktKategorier().get(i);
-			for (int j = 0; j < storage.getAllProduktKategorier().size(); j++) {
-				if (pkList.contains(pk)) {
-					pkList.remove(pk);
-				}
-			}
-		}
-		return pkList;
-	}
-
+	
 	public Salg createSalg(SalgSted sted) {
 		return new Salg(sted);
 	}
@@ -139,9 +153,8 @@ public class Service {
 		return storage.getAllSalgSted();
 	}
 
-	public List<Rundvisning> getAllRundvisninger() {
-		return storage.getAllRundvisninger();
-	}
+
+	// INITIAL STUFF
 
 	public void initStorage() {
 
