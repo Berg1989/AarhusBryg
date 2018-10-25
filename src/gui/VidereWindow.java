@@ -77,8 +77,8 @@ public class VidereWindow extends Stage {
 
 		txfTP = new TextField();
 		vboks2.getChildren().add(txfTP);
+		txfTP.setEditable(false);
 		txfTP.setText(Double.toString(s.getTotalPris()));
-
 		cbBP = new CheckBox("Bestemt pris");
 		vboks2.getChildren().add(cbBP);
 		cbBP.setOnAction(event -> cbBPIsSelected());
@@ -104,7 +104,7 @@ public class VidereWindow extends Stage {
 		btnLuk = new Button("Luk");
 		pane.add(btnLuk, 0, 1);
 
-		btnGTB = new Button("Gå til Betaling");
+		btnGTB = new Button("Betal");
 		pane.add(btnGTB, 1, 1);
 
 		lbBetalling = new Label("----------Betalling---------");
@@ -130,6 +130,8 @@ public class VidereWindow extends Stage {
 	private void cbBPIsSelected() {
 		if (cbBP.isSelected()) {
 			txfBP.setDisable(false);
+		} else {
+			txfBP.setDisable(true);
 		}
 
 	}
@@ -137,6 +139,8 @@ public class VidereWindow extends Stage {
 	private void cbPDIsSelected() {
 		if (cbPD.isSelected()) {
 			txfPD.setDisable(false);
+		} else {
+			txfPD.setDisable(true);
 		}
 
 	}
@@ -144,6 +148,8 @@ public class VidereWindow extends Stage {
 	private void cbKlippekortSelected() {
 		if (cbKlippekort.isSelected()) {
 			txfKlippekort.setDisable(false);
+		} else {
+			txfKlippekort.setDisable(true);
 		}
 	}
 
