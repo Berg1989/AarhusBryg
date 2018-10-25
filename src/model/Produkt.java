@@ -76,12 +76,7 @@ public class Produkt {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return navn + ", " + str + ", " + pris + "kr.";
-	}
-
-	public String toString(SalgSted sted) {
+	public String toStringSted(SalgSted sted) {
 		double stedPris = 0;
 		for (int i = 0; i < stedPriser.size(); i++) {
 			if (stedPriser.get(i).getSted() == sted) {
@@ -89,6 +84,11 @@ public class Produkt {
 			}
 		}
 		return navn + ", " + str + ", " + Double.toString(stedPris) + "kr.";
+	}
+
+	@Override
+	public String toString() {
+		return navn + ", " + str + ".";
 	}
 
 }
