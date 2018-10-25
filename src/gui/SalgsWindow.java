@@ -171,11 +171,12 @@ public class SalgsWindow extends Stage {
 	private void initAllSalgsPK() {
 		lwTilfojet.getItems().clear();
 		lwTilfojet.getItems().addAll(s.getProdukter());
+		txfTP.setText(Double.toString(s.getTotalPris()));
 	}
 
 	private void pilHojreAction() {
 		if (s == null && lwP.getSelectionModel().getSelectedItem() != null) {
-			s = new Salg(lwSS.getSelectionModel().getSelectedItem());
+			s = service.createSalg(lwSS.getSelectionModel().getSelectedItem());
 			if (lwP.getSelectionModel().getSelectedItem() != null) {
 				int antal = Integer.parseInt(txfAntal.getText().trim());
 				Produkt p = lwP.getSelectionModel().getSelectedItem();
@@ -192,7 +193,10 @@ public class SalgsWindow extends Stage {
 	}
 
 	private void pilVenstreAction() {
-
+		if (lwTilfojet.getSelectionModel().getSelectedItem() != null) {
+			s.getProdukter().remove(lwTilfojet.getSelectionModel().getSelectedItem());
+			initAllSalgsPK();
+		}
 	}
 
 }

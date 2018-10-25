@@ -29,6 +29,10 @@ public class Salg {
 
 	}
 
+	public void sletSalgsLinie(SalgsLinie sl) {
+		produkter.remove(sl);
+	}
+
 	public ArrayList<SalgsLinie> getProdukter() {
 		return produkter;
 	}
@@ -36,7 +40,7 @@ public class Salg {
 	public double getTotalPris() {
 		double p = 0;
 		for (SalgsLinie s : this.produkter) {
-			pris += s.getPris();
+			p += s.getPris();
 		}
 		p -= this.rabat;
 		this.pris = p;

@@ -127,6 +127,14 @@ public class Service {
 		return pkList;
 	}
 
+	public Salg createSalg(SalgSted sted) {
+		return new Salg(sted);
+	}
+
+	public void completeSalg(Salg salg) {
+		storage.addSalg(salg);
+	}
+
 	public List<SalgSted> getAllSalgSted() {
 		return storage.getAllSalgSted();
 	}
