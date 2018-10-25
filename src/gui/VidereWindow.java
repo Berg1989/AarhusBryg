@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Salg;
+import model.SalgsLinie;
 import service.Service;
 
 public class VidereWindow extends Stage {
@@ -22,6 +23,7 @@ public class VidereWindow extends Stage {
 
     public VidereWindow(Salg s) {
         service = Service.getService();
+        this.s = s;
 
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
@@ -35,12 +37,12 @@ public class VidereWindow extends Stage {
 
     }
 
-    private ListView<?> lwTilFojet;
-    private Label lbTF, lbTP, lbPD, lbTPNy;
-    private TextField txfTP, txfTPNy;
-    private CheckBox cbBP;
-    private ComboBox<?> cbbPD;
+    private ListView<SalgsLinie> lwTilFojet;
+    private Label lbTF, lbTP, lbTPNy, lbBetalling, lbKredit;
+    private TextField txfTP, txfTPNy, txfBP, txfPD, txfKlippekort;
+    private CheckBox cbBP, cbPD, cbKlippekort;
     private Button btnLuk, btnGTB;
+    private ComboBox<?> cbbKredit;
 
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
@@ -58,10 +60,11 @@ public class VidereWindow extends Stage {
 
         lwTilFojet = new ListView<>();
         vboks1.getChildren().add(lwTilFojet);
+        lwTilFojet.getItems().addAll(s.getProdukter());
 
         // ---------- VBox 2 ----------------
 
-        VBox vboks2 = new VBox();
+        VBox vboks2 = new VBox(10);
         pane.add(vboks2, 1, 0);
 
         lbTP = new Label("Total pris");
@@ -69,15 +72,23 @@ public class VidereWindow extends Stage {
 
         txfTP = new TextField();
         vboks2.getChildren().add(txfTP);
+        txfTP.setText(Double.toString(s.getTotalPris()));
 
         cbBP = new CheckBox("Bestemt pris");
         vboks2.getChildren().add(cbBP);
+        cbBP.setOnAction(event -> cbBPIsSelected());
 
-        lbPD = new Label("Procent discount");
-        vboks2.getChildren().add(lbPD);
+        txfBP = new TextField();
+        vboks2.getChildren().add(txfBP);
+        txfBP.setDisable(true);
 
-        cbbPD = new ComboBox<>();
-        vboks2.getChildren().add(cbbPD);
+        cbPD = new CheckBox("Procent Discount");
+        vboks2.getChildren().add(cbPD);
+        cbPD.setOnAction(event -> cbPDIsSelected());
+
+        txfPD = new TextField();
+        vboks2.getChildren().add(txfPD);
+        txfPD.setDisable(true);
 
         lbTPNy = new Label("Ny total pris");
         vboks2.getChildren().add(lbTPNy);
@@ -91,6 +102,43 @@ public class VidereWindow extends Stage {
         btnGTB = new Button("Gå til Betaling");
         pane.add(btnGTB, 1, 1);
 
+        lbBetalling = new Label("----------Betalling---------");
+        vboks2.getChildren().add(lbBetalling);
+
+        lbKredit = new Label("Kredit kort");
+        vboks2.getChildren().add(lbKredit);
+
+        cbbKredit = new ComboBox();
+        vboks2.getChildren().add(cbbKredit);
+
+        cbKlippekort = new CheckBox("Klippekort");
+        vboks2.getChildren().add(cbKlippekort);
+        cbKlippekort.setOnAction(event -> cbKlippekortSelected());
+
+        txfKlippekort = new TextField();
+        vboks2.getChildren().add(txfKlippekort);
+        txfKlippekort.setDisable(true);
+
+    }
+
+    private void cbBPIsSelected() {
+        if (cbBP.isSelected()) {
+            txfBP.setDisable(false);
+        }
+
+    }
+
+    private void cbPDIsSelected() {
+        if (cbPD.isSelected()) {
+            txfPD.setDisable(false);
+        }
+
+    }
+
+    private void cbKlippekortSelected() {
+        if (cbKlippekort.isSelected()) {
+            txfKlippekort.setDisable(false);
+        }
     }
 
 }
