@@ -83,10 +83,14 @@ public class Service {
 	}
 	
 	//RUNDVISNING METODER
+	
 	public Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
-		Rundvisning r = new Rundvisning(kunde, dato, tid, 0);
-		storage.addRundvisning(r);
+		Rundvisning r = new Rundvisning(kunde, dato, tid, antal);
 		return r;
+	}
+	
+	public void gemRundvisnign(Rundvisning r) {
+		storage.addRundvisning(r);
 	}
 
 	

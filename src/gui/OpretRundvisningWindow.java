@@ -166,7 +166,10 @@ public class OpretRundvisningWindow extends Stage {
 		try {
 			antal = Integer.parseInt(a);
 			tid = LocalTime.parse(t);
-			rv = new Rundvisning(kunde, dato, tid, antal);
+			rv = service.opretRundvisning(kunde, dato, antal, tid);
+			System.out.println(rv.getKunde()); //DELETE ME
+			System.out.println(rv.beregnPris());
+			
 			txfTotalPris.setText("" + rv.beregnPris());
 			System.out.println("Object created");
 		} catch (Exception e) {
