@@ -160,7 +160,7 @@ public class VidereWindow extends Stage {
 		if (cbBP.isSelected() && txfBP.getText() != null){
 			s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
 	} else if (cbPD.isSelected() && txfPD.getText() != null) {
-		s.setPris(Double.parseDouble(txfTP.getText().trim()) + (Double.parseDouble(txfTPNy.getText().trim())/100));
+		s.setPris(Double.parseDouble(txfTP.getText().trim()) * (Double.parseDouble(txfPD.getText().trim())/100));
 	} else{
 		s.setPris(Double.parseDouble(txfTP.getText().trim()));
 	}
