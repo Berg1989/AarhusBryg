@@ -163,14 +163,14 @@ public class VidereWindow extends Stage {
 	
 	private void updateNyPris(){
 		Double nyPris;
-		if (cbBP.isSelected() && txfBP.getText() != null){
+		if (cbBP.isSelected() && !txfBP.getText().isEmpty()){
 			txfTPNy.setText(txfBP.getText().trim());
-			if (cbBP.isSelected() && txfBP.getText() != null && cbPD.isSelected() && txfPD.getText() != null){
+			if (cbBP.isSelected() && !txfBP.getText().isEmpty() && cbPD.isSelected() && !txfPD.getText().isEmpty()){
 				nyPris = (Double.parseDouble(txfBP.getText().trim()) * ((Double.parseDouble(txfPD.getText().trim())/100)));
 				txfTPNy.setText(Double.toString(nyPris));
 			}
 		}
-		else if (cbPD.isSelected() && txfPD.getText() != null) {
+		else if (cbPD.isSelected() && !txfPD.getText().isEmpty()) {
 		nyPris = (Double.parseDouble(txfTP.getText().trim()) * ((Double.parseDouble(txfPD.getText().trim())/100)));
 		txfTPNy.setText(Double.toString(nyPris));
 	} else {
@@ -179,7 +179,7 @@ public class VidereWindow extends Stage {
 		}
 	
 	private void btnBetalAction(){
-		if (txfTPNy.getText() != null){
+		if (!txfTPNy.getText().isEmpty()){
 		s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
 	} else {
 		s.setPris(Double.parseDouble(txfTP.getText().trim()));
