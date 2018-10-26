@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.EnumSet;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,132 +15,142 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Betalingsmetode;
 import model.Salg;
 import model.SalgsLinie;
 import service.Service;
 
 public class VidereWindow extends Stage {
-    private Service service;
-    private Salg s;
+	private Service service;
+	private Salg s;
 
-    public VidereWindow(Salg s) {
-        service = Service.getService();
-        this.s = s;
+	public VidereWindow(Salg s) {
+		service = Service.getService();
+		this.s = s;
 
-        initStyle(StageStyle.UTILITY);
-        initModality(Modality.APPLICATION_MODAL);
-        setResizable(false);
-        setTitle("Salgslinie Window");
+		initStyle(StageStyle.UTILITY);
+		initModality(Modality.APPLICATION_MODAL);
+		setResizable(false);
+		setTitle("Salgslinie Window");
 
-        GridPane pane = new GridPane();
-        Scene scene = new Scene(pane);
-        initContent(pane);
-        setScene(scene);
+		GridPane pane = new GridPane();
+		Scene scene = new Scene(pane);
+		initContent(pane);
+		setScene(scene);
 
-    }
+	}
 
-    private ListView<SalgsLinie> lwTilFojet;
-    private Label lbTF, lbTP, lbTPNy, lbBetalling, lbKredit;
-    private TextField txfTP, txfTPNy, txfBP, txfPD, txfKlippekort;
-    private CheckBox cbBP, cbPD, cbKlippekort;
-    private Button btnLuk, btnGTB;
-    private ComboBox<?> cbbKredit;
+	private ListView<SalgsLinie> lwTilFojet;
+	private Label lbTF, lbTP, lbTPNy, lbBetalling, lbKredit;
+	private TextField txfTP, txfTPNy, txfBP, txfPD, txfKlippekort;
+	private CheckBox cbBP, cbPD, cbKlippekort;
+	private Button btnLuk, btnGTB;
+	private ComboBox<Betalingsmetode> cbbKredit;
+	private EnumSet<Betalingsmetode> enumBetaling = EnumSet.allOf(Betalingsmetode.class);
 
-    private void initContent(GridPane pane) {
-        pane.setPadding(new Insets(10));
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setGridLinesVisible(false);
+	private void initContent(GridPane pane) {
+		pane.setPadding(new Insets(10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setGridLinesVisible(false);
 
-        // ---------- VBox 1 ----------------
+		// ---------- VBox 1 ----------------
 
-        VBox vboks1 = new VBox();
-        pane.add(vboks1, 0, 0);
+		VBox vboks1 = new VBox();
+		pane.add(vboks1, 0, 0);
 
-        lbTF = new Label("Tilføjet produkter");
-        vboks1.getChildren().add(lbTF);
+		lbTF = new Label("Tilføjet produkter");
+		vboks1.getChildren().add(lbTF);
 
-        lwTilFojet = new ListView<>();
-        vboks1.getChildren().add(lwTilFojet);
-        lwTilFojet.getItems().addAll(s.getProdukter());
+		lwTilFojet = new ListView<>();
+		vboks1.getChildren().add(lwTilFojet);
+		lwTilFojet.getItems().addAll(s.getProdukter());
+		lwTilFojet.setDisable(true);
 
-        // ---------- VBox 2 ----------------
+		// ---------- VBox 2 ----------------
 
-        VBox vboks2 = new VBox(10);
-        pane.add(vboks2, 1, 0);
+		VBox vboks2 = new VBox(10);
+		pane.add(vboks2, 1, 0);
 
-        lbTP = new Label("Total pris");
-        vboks2.getChildren().add(lbTP);
+		lbTP = new Label("Total pris");
+		vboks2.getChildren().add(lbTP);
 
-        txfTP = new TextField();
-        vboks2.getChildren().add(txfTP);
-        txfTP.setText(Double.toString(s.getTotalPris()));
+		txfTP = new TextField();
+		vboks2.getChildren().add(txfTP);
+		txfTP.setEditable(false);
+		txfTP.setText(Double.toString(s.getTotalPris()));
+		cbBP = new CheckBox("Bestemt pris");
+		vboks2.getChildren().add(cbBP);
+		cbBP.setOnAction(event -> cbBPIsSelected());
 
-        cbBP = new CheckBox("Bestemt pris");
-        vboks2.getChildren().add(cbBP);
-        cbBP.setOnAction(event -> cbBPIsSelected());
+		txfBP = new TextField();
+		vboks2.getChildren().add(txfBP);
+		txfBP.setDisable(true);
 
-        txfBP = new TextField();
-        vboks2.getChildren().add(txfBP);
-        txfBP.setDisable(true);
+		cbPD = new CheckBox("Procent Discount");
+		vboks2.getChildren().add(cbPD);
+		cbPD.setOnAction(event -> cbPDIsSelected());
 
-        cbPD = new CheckBox("Procent Discount");
-        vboks2.getChildren().add(cbPD);
-        cbPD.setOnAction(event -> cbPDIsSelected());
+		txfPD = new TextField();
+		vboks2.getChildren().add(txfPD);
+		txfPD.setDisable(true);
 
-        txfPD = new TextField();
-        vboks2.getChildren().add(txfPD);
-        txfPD.setDisable(true);
+		lbTPNy = new Label("Ny total pris");
+		vboks2.getChildren().add(lbTPNy);
 
-        lbTPNy = new Label("Ny total pris");
-        vboks2.getChildren().add(lbTPNy);
+		txfTPNy = new TextField();
+		vboks2.getChildren().add(txfTPNy);
 
-        txfTPNy = new TextField();
-        vboks2.getChildren().add(txfTPNy);
+		btnLuk = new Button("Luk");
+		pane.add(btnLuk, 0, 1);
 
-        btnLuk = new Button("Luk");
-        pane.add(btnLuk, 0, 1);
+		btnGTB = new Button("Betal");
+		pane.add(btnGTB, 1, 1);
 
-        btnGTB = new Button("Gå til Betaling");
-        pane.add(btnGTB, 1, 1);
+		lbBetalling = new Label("----------Betalling---------");
+		vboks2.getChildren().add(lbBetalling);
 
-        lbBetalling = new Label("----------Betalling---------");
-        vboks2.getChildren().add(lbBetalling);
+		lbKredit = new Label("Kredit kort");
+		vboks2.getChildren().add(lbKredit);
 
-        lbKredit = new Label("Kredit kort");
-        vboks2.getChildren().add(lbKredit);
+		cbbKredit = new ComboBox<>();
+		vboks2.getChildren().add(cbbKredit);
+		cbbKredit.getItems().addAll(enumBetaling);
 
-        cbbKredit = new ComboBox();
-        vboks2.getChildren().add(cbbKredit);
+		cbKlippekort = new CheckBox("Klippekort");
+		vboks2.getChildren().add(cbKlippekort);
+		cbKlippekort.setOnAction(event -> cbKlippekortSelected());
 
-        cbKlippekort = new CheckBox("Klippekort");
-        vboks2.getChildren().add(cbKlippekort);
-        cbKlippekort.setOnAction(event -> cbKlippekortSelected());
+		txfKlippekort = new TextField();
+		vboks2.getChildren().add(txfKlippekort);
+		txfKlippekort.setDisable(true);
 
-        txfKlippekort = new TextField();
-        vboks2.getChildren().add(txfKlippekort);
-        txfKlippekort.setDisable(true);
+	}
 
-    }
+	private void cbBPIsSelected() {
+		if (cbBP.isSelected()) {
+			txfBP.setDisable(false);
+		} else {
+			txfBP.setDisable(true);
+		}
 
-    private void cbBPIsSelected() {
-        if (cbBP.isSelected()) {
-            txfBP.setDisable(false);
-        }
+	}
 
-    }
+	private void cbPDIsSelected() {
+		if (cbPD.isSelected()) {
+			txfPD.setDisable(false);
+		} else {
+			txfPD.setDisable(true);
+		}
 
-    private void cbPDIsSelected() {
-        if (cbPD.isSelected()) {
-            txfPD.setDisable(false);
-        }
+	}
 
-    }
-
-    private void cbKlippekortSelected() {
-        if (cbKlippekort.isSelected()) {
-            txfKlippekort.setDisable(false);
-        }
-    }
+	private void cbKlippekortSelected() {
+		if (cbKlippekort.isSelected()) {
+			txfKlippekort.setDisable(false);
+		} else {
+			txfKlippekort.setDisable(true);
+		}
+	}
 
 }
