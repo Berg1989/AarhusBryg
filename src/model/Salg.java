@@ -36,6 +36,16 @@ public class Salg {
 	public ArrayList<SalgsLinie> getProdukter() {
 		return produkter;
 	}
+	
+	
+
+	public void setTid(LocalTime tid) {
+		this.tid = tid;
+	}
+
+	public void setDato(LocalDate dato) {
+		this.dato = dato;
+	}
 
 	public double getTotalPris() {
 		double p = 0;
@@ -45,6 +55,14 @@ public class Salg {
 		p -= this.rabat;
 		this.pris = p;
 		return p;
+	}
+
+	public void setProdukter(ArrayList<SalgsLinie> produkter) {
+		this.produkter = produkter;
+	}
+
+	public void setPris(double pris) {
+		this.pris = pris;
 	}
 
 	public void givStudieRabat() {

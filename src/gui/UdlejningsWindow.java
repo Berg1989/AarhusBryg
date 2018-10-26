@@ -154,7 +154,13 @@ public class UdlejningsWindow extends Stage {
 
 		btnLuk = new Button("Luk");
 		hboks2.getChildren().add(btnLuk);
+		btnLuk.setOnAction(event -> btnLukAction());
 
+	}
+	
+	
+	public void btnLukAction(){
+		hide();
 	}
 
 }
