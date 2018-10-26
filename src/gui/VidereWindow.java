@@ -1,5 +1,7 @@
 package gui;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.EnumSet;
 
 import javafx.geometry.Insets;
@@ -44,7 +46,7 @@ public class VidereWindow extends Stage {
 	private Label lbTF, lbTP, lbTPNy, lbBetalling, lbKredit;
 	private TextField txfTP, txfTPNy, txfBP, txfPD, txfKlippekort;
 	private CheckBox cbBP, cbPD, cbKlippekort;
-	private Button btnLuk, btnGTB;
+	private Button btnLuk, btnBetal;
 	private ComboBox<Betalingsmetode> cbbKredit;
 	private EnumSet<Betalingsmetode> enumBetaling = EnumSet.allOf(Betalingsmetode.class);
 
@@ -104,13 +106,14 @@ public class VidereWindow extends Stage {
 		btnLuk = new Button("Luk");
 		pane.add(btnLuk, 0, 1);
 
-		btnGTB = new Button("Betal");
-		pane.add(btnGTB, 1, 1);
+		btnBetal = new Button("Betal");
+		pane.add(btnBetal, 1, 1);
+		btnBetal.setOnAction(event -> btnBetalAction());
 
 		lbBetalling = new Label("----------Betalling---------");
 		vboks2.getChildren().add(lbBetalling);
 
-		lbKredit = new Label("Kredit kort");
+		lbKredit = new Label("Betalingstype");
 		vboks2.getChildren().add(lbKredit);
 
 		cbbKredit = new ComboBox<>();
@@ -152,5 +155,18 @@ public class VidereWindow extends Stage {
 			txfKlippekort.setDisable(true);
 		}
 	}
-
+	
+	private void btnBetalAction(){
+		if (cbBP.isSelected() && txfBP.getText() != null){
+			s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
+	} else if (cbPD.isSelected() && txfPD.getText() != null) {
+		s.setPris(Double.parseDouble(txfTP.getText().trim()) + (Double.parseDouble(txfTPNy.getText().trim())/100));
+	} else{
+		s.setPris(Double.parseDouble(txfTP.getText().trim()));
+	}
+		s.setBetalingsMetode(cbbKredit.getSelectionModel().getSelectedItem());
+		s.setDato(LocalDate.now());
+		s.setTid(LocalTime.now());
+		service.completeSalg(s);
+	}
 }
