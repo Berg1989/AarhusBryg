@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.EnumSet;
 
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Betalingsmetode;
+import model.Produkt;
 import model.Salg;
 import model.SalgsLinie;
 import service.Service;
@@ -39,6 +41,7 @@ public class VidereWindow extends Stage {
 		Scene scene = new Scene(pane);
 		initContent(pane);
 		setScene(scene);
+		
 
 	}
 
@@ -105,6 +108,7 @@ public class VidereWindow extends Stage {
 
 		btnLuk = new Button("Luk");
 		pane.add(btnLuk, 0, 1);
+		btnLuk.setOnAction(event -> btnLukAction());
 
 		btnBetal = new Button("Betal");
 		pane.add(btnBetal, 1, 1);
@@ -119,6 +123,7 @@ public class VidereWindow extends Stage {
 		cbbKredit = new ComboBox<>();
 		vboks2.getChildren().add(cbbKredit);
 		cbbKredit.getItems().addAll(enumBetaling);
+		cbbKredit.setOnAction(event -> updateNyPris());
 
 		cbKlippekort = new CheckBox("Klippekort");
 		vboks2.getChildren().add(cbKlippekort);
@@ -156,17 +161,36 @@ public class VidereWindow extends Stage {
 		}
 	}
 	
+	private void updateNyPris(){
+		Double nyPris;
+		if (cbBP.isSelected() && !txfBP.getText().isEmpty()){
+			txfTPNy.setText(txfBP.getText().trim());
+			if (cbBP.isSelected() && !txfBP.getText().isEmpty() && cbPD.isSelected() && !txfPD.getText().isEmpty()){
+				nyPris = (Double.parseDouble(txfBP.getText().trim()) * ((Double.parseDouble(txfPD.getText().trim())/100)));
+				txfTPNy.setText(Double.toString(nyPris));
+			}
+		}
+		else if (cbPD.isSelected() && !txfPD.getText().isEmpty()) {
+		nyPris = (Double.parseDouble(txfTP.getText().trim()) * ((Double.parseDouble(txfPD.getText().trim())/100)));
+		txfTPNy.setText(Double.toString(nyPris));
+	} else {
+		txfTPNy.setText(txfTP.getText());
+	}
+		}
+	
 	private void btnBetalAction(){
-		if (cbBP.isSelected() && txfBP.getText() != null){
-			s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
-	} else if (cbPD.isSelected() && txfPD.getText() != null) {
-		s.setPris(Double.parseDouble(txfTP.getText().trim()) * (Double.parseDouble(txfPD.getText().trim())/100));
-	} else{
+		if (!txfTPNy.getText().isEmpty()){
+		s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
+	} else {
 		s.setPris(Double.parseDouble(txfTP.getText().trim()));
 	}
 		s.setBetalingsMetode(cbbKredit.getSelectionModel().getSelectedItem());
 		s.setDato(LocalDate.now());
 		s.setTid(LocalTime.now());
 		service.completeSalg(s);
+	}
+	
+	private void btnLukAction(){
+		hide();
 	}
 }
