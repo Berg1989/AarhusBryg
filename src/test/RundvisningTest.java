@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.KlippeKort;
+
 import model.Rundvisning;
 
 public class RundvisningTest {

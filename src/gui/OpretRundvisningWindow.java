@@ -126,9 +126,9 @@ public class OpretRundvisningWindow extends Stage {
 			hide();
 		}
 		else {
-			//Alert a = new Alert(Alert.AlertType.ERROR);
-            //a.setContentText("Ikke tilgaengelig");
-            //a.showAndWait();
+			Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Ikke tilgaengelig");
+            a.showAndWait();
 		}
 	
 

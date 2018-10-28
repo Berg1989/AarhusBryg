@@ -59,6 +59,7 @@ public class RundvisningWindow extends Stage {
 		lwRundvisning.setPrefHeight(250);
 		lwRundvisning.setPrefWidth(180);
 		lwRundvisning.getItems().addAll(service.getAllRundvisninger());
+	
 
 		btnOpret = new Button("Opret Rundvisning");
 		pane.add(btnOpret, 1, 2);

@@ -24,8 +24,11 @@ public class Salg {
 	}
 
 	public void opretSalgslinie(int antal, Produkt produkt) {
-		SalgsLinie linie = new SalgsLinie(antal, produkt, this.sted);
-		produkter.add(linie);
+		if (antal > 0) {
+			SalgsLinie linie = new SalgsLinie(antal, produkt, this.sted);
+			produkter.add(linie);
+		}
+
 
 	}
 
@@ -71,8 +74,8 @@ public class Salg {
 	}
 
 	public void fjernRabat() {
-		// TODO
-		// opdatere pris
+		this.rabat =0;
+		getTotalPris();
 	}
 
 	public void givRabatAbsolut(double inputRabat) {
