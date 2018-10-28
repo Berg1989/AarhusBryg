@@ -122,9 +122,8 @@ public class Service {
 	}
 
 	public void sletSalgSted(SalgSted ss) {
-		ProduktKategori pk;
 		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
-			pk = ss.getProduktKategorier().get(i);
+			ProduktKategori pk = ss.getProduktKategorier().get(i);
 			for (int j = 0; j < pk.getProdukter().size(); j++) {
 				pk.getProdukter().get(j).removeStedPris(ss);
 			}
@@ -135,6 +134,7 @@ public class Service {
 	//SALGSTED METODER
 
 	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
+		//Tjek saa produktkategorien findes paa salgssstedet
 		StedPris sp = new StedPris(ss, p, pris);
 		p.addStedPris(sp);
 		return sp;

@@ -26,6 +26,7 @@ public class ServiceTest {
 		p1 = pk.createProdukt("Gin and Tonic", 50.00, "stor");
 		p2 = pk.createProdukt("Dark And Stormy", 30.0, "lille");
 		ss = new SalgSted("The Flying Swan");
+		ss.addProduktKategori(pk);
 		s.opretStedPris(ss, p1, 40.0);
 		s.opretStedPris(ss, p2, 20.0);
 		
@@ -34,10 +35,20 @@ public class ServiceTest {
 	//Stedpriserne ligger paa produktet
 
 	@Test
-	public void test() {
-		assertEquals(2, pk.getProdukter().size());
+	public void test1() {
+		assertTrue(1==p1.getStedPriser().size());
+		
 	}
 	
+	
+	
+	
+	@Test
+	public void test2() {
+		s.sletSalgSted(ss);
+		assertTrue(0==p1.getStedPriser().size());
+		
+	}
 
 
 }
