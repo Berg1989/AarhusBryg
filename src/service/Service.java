@@ -49,7 +49,7 @@ public class Service {
 		pk.redigerStr(p, str);
 	}
 
-	//PRODUKTKATEGORI METODER
+	// PRODUKTKATEGORI METODER
 	public ProduktKategori opretProduktKategori(String navn) {
 		ProduktKategori pk = new ProduktKategori(navn);
 		storage.addProduktKategori(pk);
@@ -63,11 +63,11 @@ public class Service {
 	public List<ProduktKategori> getAllProduktKategorier() {
 		return storage.getAllProduktKategorier();
 	}
-	
+
 	public void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
 		ss.addProduktKategori(pk);
 	}
-	
+
 	public ArrayList<ProduktKategori> getMuligeKategorier(SalgSted ss) {
 		ArrayList<ProduktKategori> pkList = storage.getAllProduktKategorier();
 		ProduktKategori pk;
@@ -81,29 +81,27 @@ public class Service {
 		}
 		return pkList;
 	}
-	
-	//RUNDVISNING METODER
-	
+
+	// RUNDVISNING METODER
+
 	public Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
 		Rundvisning r = new Rundvisning(kunde, dato, tid, antal);
 		return r;
 	}
-	
+
 	public void gemRundvisnign(Rundvisning r) {
 		storage.addRundvisning(r);
 	}
 
-	
 	public void sletRundvisning(Rundvisning r) {
 		storage.removeRundvisning(r);
 	}
-	
+
 	public List<Rundvisning> getAllRundvisninger() {
 		return storage.getAllRundvisninger();
 	}
 
-	
-	//SALGS METODER
+	// SALGS METODER
 
 	public List<SalgsLinie> getAllSalgsLinier(Salg s) {
 		return s.getProdukter();
@@ -130,11 +128,11 @@ public class Service {
 		}
 		storage.removeSalgSted(ss);
 	}
-	
-	//SALGSTED METODER
+
+	// SALGSTED METODER
 
 	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
-		//Tjek saa produktkategorien findes paa salgssstedet
+		// Tjek saa produktkategorien findes paa salgssstedet
 		StedPris sp = new StedPris(ss, p, pris);
 		p.addStedPris(sp);
 		return sp;
@@ -144,7 +142,6 @@ public class Service {
 		return p.getStedPrisPris(ss);
 	}
 
-	
 	public Salg createSalg(SalgSted sted) {
 		return new Salg(sted);
 	}
@@ -157,6 +154,9 @@ public class Service {
 		return storage.getAllSalgSted();
 	}
 
+	public List<Salg> getAllSalg() {
+		return storage.getAllSalg();
+	}
 
 	// INITIAL STUFF
 

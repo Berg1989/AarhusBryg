@@ -34,7 +34,7 @@ public class MainWindow extends Application {
 
 	}
 
-	private Button btnBar, btnAdministration;
+	private Button btnBar, btnAdministration, btnListeOverSalg;
 
 	private void initContent(GridPane pane) {
 		pane.setPadding(new Insets(10));
@@ -52,6 +52,11 @@ public class MainWindow extends Application {
 		btnAdministration.setOnAction(event -> administrationBtnAction());
 		btnAdministration.setPrefSize(200, 100);
 
+		btnListeOverSalg = new Button("List over Salg");
+		pane.add(btnListeOverSalg, 0, 2);
+		btnListeOverSalg.setOnAction(event -> listeOverSalgBtnAction());
+		btnListeOverSalg.setPrefSize(200, 100);
+
 	}
 
 	private void barBtnAction() {
@@ -63,6 +68,11 @@ public class MainWindow extends Application {
 	private void administrationBtnAction() {
 		AdministrationsWindow aw = new AdministrationsWindow();
 		aw.showAndWait();
+	}
+
+	private void listeOverSalgBtnAction() {
+		ListeoversalgWindow losw = new ListeoversalgWindow();
+		losw.showAndWait();
 	}
 
 }

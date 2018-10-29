@@ -29,7 +29,6 @@ public class Salg {
 			produkter.add(linie);
 		}
 
-
 	}
 
 	public void sletSalgsLinie(SalgsLinie sl) {
@@ -39,11 +38,14 @@ public class Salg {
 	public ArrayList<SalgsLinie> getProdukter() {
 		return produkter;
 	}
-	
-	
 
 	public void setTid(LocalTime tid) {
 		this.tid = tid;
+	}
+
+	public LocalDate getDato() {
+		return dato;
+
 	}
 
 	public void setDato(LocalDate dato) {
@@ -74,7 +76,7 @@ public class Salg {
 	}
 
 	public void fjernRabat() {
-		this.rabat =0;
+		this.rabat = 0;
 		getTotalPris();
 	}
 

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.EnumSet;
 
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,7 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Betalingsmetode;
-import model.Produkt;
 import model.Salg;
 import model.SalgsLinie;
 import service.Service;
@@ -41,7 +39,6 @@ public class VidereWindow extends Stage {
 		Scene scene = new Scene(pane);
 		initContent(pane);
 		setScene(scene);
-		
 
 	}
 
@@ -70,7 +67,7 @@ public class VidereWindow extends Stage {
 		lwTilFojet = new ListView<>();
 		vboks1.getChildren().add(lwTilFojet);
 		lwTilFojet.getItems().addAll(s.getProdukter());
-		lwTilFojet.setDisable(true);
+		lwTilFojet.setDisable(false);
 
 		// ---------- VBox 2 ----------------
 
@@ -84,6 +81,7 @@ public class VidereWindow extends Stage {
 		vboks2.getChildren().add(txfTP);
 		txfTP.setEditable(false);
 		txfTP.setText(Double.toString(s.getTotalPris()));
+
 		cbBP = new CheckBox("Bestemt pris");
 		vboks2.getChildren().add(cbBP);
 		cbBP.setOnAction(event -> cbBPIsSelected());
@@ -91,20 +89,24 @@ public class VidereWindow extends Stage {
 		txfBP = new TextField();
 		vboks2.getChildren().add(txfBP);
 		txfBP.setDisable(true);
+		txfBP.setOnMouseExited(event -> updateNyPris());
 
-		cbPD = new CheckBox("Procent Discount");
+		cbPD = new CheckBox("Procent Discount %");
 		vboks2.getChildren().add(cbPD);
 		cbPD.setOnAction(event -> cbPDIsSelected());
 
 		txfPD = new TextField();
 		vboks2.getChildren().add(txfPD);
 		txfPD.setDisable(true);
+		txfPD.setOnMouseExited(event -> updateNyPris());
 
 		lbTPNy = new Label("Ny total pris");
 		vboks2.getChildren().add(lbTPNy);
 
 		txfTPNy = new TextField();
 		vboks2.getChildren().add(txfTPNy);
+		txfTPNy.setEditable(false);
+		txfTPNy.setText(txfTP.getText().trim());
 
 		btnLuk = new Button("Luk");
 		pane.add(btnLuk, 0, 1);
@@ -123,7 +125,7 @@ public class VidereWindow extends Stage {
 		cbbKredit = new ComboBox<>();
 		vboks2.getChildren().add(cbbKredit);
 		cbbKredit.getItems().addAll(enumBetaling);
-		cbbKredit.setOnAction(event -> updateNyPris());
+		// cbbKredit.setOnAction(event -> updateNyPris());
 
 		cbKlippekort = new CheckBox("Klippekort");
 		vboks2.getChildren().add(cbKlippekort);
@@ -138,8 +140,11 @@ public class VidereWindow extends Stage {
 	private void cbBPIsSelected() {
 		if (cbBP.isSelected()) {
 			txfBP.setDisable(false);
+			cbPD.setDisable(true);
+			txfPD.clear();
 		} else {
 			txfBP.setDisable(true);
+			cbPD.setDisable(false);
 		}
 
 	}
@@ -147,8 +152,11 @@ public class VidereWindow extends Stage {
 	private void cbPDIsSelected() {
 		if (cbPD.isSelected()) {
 			txfPD.setDisable(false);
+			cbBP.setDisable(true);
+			txfBP.clear();
 		} else {
 			txfPD.setDisable(true);
+			cbBP.setDisable(false);
 		}
 
 	}
@@ -160,37 +168,48 @@ public class VidereWindow extends Stage {
 			txfKlippekort.setDisable(true);
 		}
 	}
-	
-	private void updateNyPris(){
+
+	private void updateNyPris() {
 		Double nyPris;
-		if (cbBP.isSelected() && !txfBP.getText().isEmpty()){
-			txfTPNy.setText(txfBP.getText().trim());
-			if (cbBP.isSelected() && !txfBP.getText().isEmpty() && cbPD.isSelected() && !txfPD.getText().isEmpty()){
-				nyPris = (Double.parseDouble(txfBP.getText().trim()) * ((Double.parseDouble(txfPD.getText().trim())/100)));
-				txfTPNy.setText(Double.toString(nyPris));
-			}
+		Double nyPris1;
+		if (cbBP.isSelected() && !txfBP.getText().isEmpty()) {
+			nyPris = Double.parseDouble(txfBP.getText().trim());
+			txfTPNy.setText(Double.toString(nyPris));
+
+			// if (cbBP.isSelected() && !txfBP.getText().isEmpty() && cbPD.isSelected() &&
+			// !txfPD.getText().isEmpty()) {
+			// nyPris = (Double.parseDouble(txfBP.getText().trim())
+			// * ((Double.parseDouble(txfPD.getText().trim()) / 100)));
+			// txfTPNy.setText(Double.toString(nyPris));
+			// }
+		} else if (cbPD.isSelected() && !txfPD.getText().isEmpty()) {
+			nyPris = (Double.parseDouble(txfTP.getText().trim())
+					* ((Double.parseDouble(txfPD.getText().trim()) / 100)));
+			nyPris1 = (Double.parseDouble(txfTP.getText().trim()) - nyPris);
+			txfTPNy.setText(Double.toString(nyPris1));
+		} else {
+			nyPris = Double.parseDouble(txfTP.getText().trim());
+			txfTPNy.setText(Double.toString(nyPris));
 		}
-		else if (cbPD.isSelected() && !txfPD.getText().isEmpty()) {
-		nyPris = (Double.parseDouble(txfTP.getText().trim()) * ((Double.parseDouble(txfPD.getText().trim())/100)));
-		txfTPNy.setText(Double.toString(nyPris));
-	} else {
-		txfTPNy.setText(txfTP.getText());
 	}
+
+	// Mangler nogle Alerts!
+	private void btnBetalAction() {
+
+		if (!txfTPNy.getText().isEmpty()) {
+			s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
+		} else {
+			s.setPris(Double.parseDouble(txfTP.getText().trim()));
 		}
-	
-	private void btnBetalAction(){
-		if (!txfTPNy.getText().isEmpty()){
-		s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
-	} else {
-		s.setPris(Double.parseDouble(txfTP.getText().trim()));
-	}
 		s.setBetalingsMetode(cbbKredit.getSelectionModel().getSelectedItem());
 		s.setDato(LocalDate.now());
 		s.setTid(LocalTime.now());
 		service.completeSalg(s);
+		System.out.println("Et Salg er blevet lavet");
+		hide();
 	}
-	
-	private void btnLukAction(){
+
+	private void btnLukAction() {
 		hide();
 	}
 }
