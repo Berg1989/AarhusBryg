@@ -43,7 +43,7 @@ public class OpretRundvisningWindow extends Stage {
 	private CheckBox chbSpisning, chbStuderende;
 	private TextField txfTidspunkt, txfAntalM, txfAntalS, txfTotalPris, txfKundeNavn;
 	private Button btnReserver, btnLuk;
-	private PauseTransition pause = new PauseTransition(Duration.seconds(1));
+	private PauseTransition pause = new PauseTransition(Duration.seconds(1)); //NOT IN USE?
 	Rundvisning rv;
 
 	private void initContent(GridPane pane) {

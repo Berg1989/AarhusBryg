@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Rundvisning;
 import service.Service;
+import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 
 public class RundvisningWindow extends Stage {
 	private Service service;
@@ -30,12 +32,15 @@ public class RundvisningWindow extends Stage {
 		Scene scene = new Scene(pane);
 		initContent(pane);
 		setScene(scene);
+		pane.setGridLinesVisible(true);
 	}
 
 	private ListView<Rundvisning> lwRundvisning;
 	private Button btnOpret, btnSlet, btnLuk, btnBetal;
-	private Label lbGroen, lbRoed, lbBookings;
+	private Label lbBookings, lblName, lblDato, lblAntal, lblAntalS, lblTid;
 	private Rundvisning rv;
+	private TextField txfName, txfDato, txfAntal, txfAntalS, txfTid;
+	private CheckBox cbxSpisende, cbxStuderende;
 
 	private void initContent(GridPane pane) {
 		pane.setPadding(new Insets(10));
@@ -43,39 +48,80 @@ public class RundvisningWindow extends Stage {
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
 
-		lbGroen = new Label("Groent navn = betalt");
-		pane.add(lbGroen, 0, 0);
-		lbGroen.setTextFill(Color.GREEN);
-
-		lbGroen = new Label("Roedt navn = ikke betalt");
-		pane.add(lbGroen, 0, 1);
-		lbGroen.setTextFill(Color.RED);
-
 		lbBookings = new Label("Rundvisninger:");
-		pane.add(lbBookings, 0, 2);
+		pane.add(lbBookings, 0, 0);
 
 		lwRundvisning = new ListView<>();
-		pane.add(lwRundvisning, 0, 2, 1, 4);
+		pane.add(lwRundvisning, 0, 1, 1, 6);
 		lwRundvisning.setPrefHeight(250);
 		lwRundvisning.setPrefWidth(180);
 		lwRundvisning.getItems().addAll(service.getAllRundvisninger());
+		lwRundvisning.setOnMouseClicked(event -> {
+			rv = lwRundvisning.getSelectionModel().getSelectedItem();
+			if (rv == null) {
+				//do nothing
+			}
+			else {
+				//do something
+				txfName.setText(rv.getKunde());
+				txfDato.setText(rv.getDato().toString());
+				txfAntal.setText("" + rv.getAntalGaester());
+				txfTid.setText(rv.getTid().toString());
+				
+			}
+		});
 	
-
 		btnOpret = new Button("Opret Rundvisning");
-		pane.add(btnOpret, 1, 2);
+		pane.add(btnOpret, 0, 7);
 		btnOpret.setOnAction(event -> btnOpretAction());
 
 		btnSlet = new Button("Slet Rundvisning");
-		pane.add(btnSlet, 1, 3);
+		pane.add(btnSlet, 0, 8);
 		btnSlet.setOnAction(event -> btnSletAction());
 
 		btnBetal = new Button("Betal");
-		pane.add(btnBetal, 1, 4);
+		pane.add(btnBetal, 1, 8);
 		// btnBetal.setOnAction(event -> btnBetalAction());
 
 		btnLuk = new Button("Luk");
-		pane.add(btnLuk, 2, 6);
+		pane.add(btnLuk, 3, 8);
 		btnLuk.setOnAction(event -> btnLukAction());
+		
+		//NEW
+		lblName = new Label("Kunde");
+		pane.add(lblName, 1, 2);
+		
+		txfName = new TextField();
+		pane.add(txfName, 2, 2);
+		
+		lblDato = new Label("Dato");
+		pane.add(lblDato, 1, 3);
+		
+		txfDato = new TextField();
+		pane.add(txfDato, 2, 3);
+		
+		lblTid = new Label("Tid");
+		pane.add(lblTid, 1, 4);
+		
+		lblAntal = new Label("Antal");
+		pane.add(lblAntal, 1, 5);
+		
+		txfAntal = new TextField();
+		pane.add(txfAntal, 2, 5);
+		
+		cbxSpisende = new CheckBox();
+		pane.add(cbxSpisende, 2, 6);
+		
+		cbxStuderende = new CheckBox();
+		pane.add(cbxStuderende, 3, 6);
+		
+		lblAntalS = new Label("Spisende");
+		pane.add(lblAntalS, 1, 7);
+		
+		txfAntalS = new TextField();
+		pane.add(txfAntalS, 2, 7);
+		
+		
 
 	}
 
