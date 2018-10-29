@@ -37,7 +37,7 @@ public class RundvisningWindow extends Stage {
 
 	private ListView<Rundvisning> lwRundvisning;
 	private Button btnOpret, btnSlet, btnLuk, btnBetal;
-	private Label lbBookings, lblName, lblDato, lblAntal, lblAntalS, lblTid;
+	private Label lbBookings, lblName, lblDato, lblAntal, lblAntalS, lblTid, lblStuderende, lblSpisende;
 	private Rundvisning rv;
 	private TextField txfName, txfDato, txfAntal, txfAntalS, txfTid;
 	private CheckBox cbxSpisende, cbxStuderende;
@@ -53,8 +53,11 @@ public class RundvisningWindow extends Stage {
 
 		lwRundvisning = new ListView<>();
 		pane.add(lwRundvisning, 0, 1, 1, 6);
-		lwRundvisning.setPrefHeight(250);
-		lwRundvisning.setPrefWidth(180);
+		lwRundvisning.setPrefHeight(50);
+		//lwRundvisning.setMinHeight(250);
+		//lwRundvisning.setPrefWidth(180);
+		//lwRundvisning.setMinWidth(480);
+		//lwRundvisning.setMaxHeight(100);
 		lwRundvisning.getItems().addAll(service.getAllRundvisninger());
 		lwRundvisning.setOnMouseClicked(event -> {
 			rv = lwRundvisning.getSelectionModel().getSelectedItem();
@@ -67,7 +70,22 @@ public class RundvisningWindow extends Stage {
 				txfDato.setText(rv.getDato().toString());
 				txfAntal.setText("" + rv.getAntalGaester());
 				txfTid.setText(rv.getTid().toString());
-				
+				if (rv.hasSpisning()) {
+					cbxSpisende.setSelected(true);
+					txfAntalS.setText("" + rv.antalSpisende());
+					txfAntalS.setEditable(true);
+				}
+				else {
+					cbxSpisende.setSelected(true);
+					txfAntalS.setText("");
+					txfAntalS.setEditable(false);
+				}
+				if (rv.isStuderende()) {
+					cbxStuderende.setSelected(true);
+				}
+				else {
+					cbxStuderende.setSelected(false);
+				}
 			}
 		});
 	
@@ -80,46 +98,55 @@ public class RundvisningWindow extends Stage {
 		btnSlet.setOnAction(event -> btnSletAction());
 
 		btnBetal = new Button("Betal");
-		pane.add(btnBetal, 1, 8);
+		pane.add(btnBetal, 3, 8);
 		// btnBetal.setOnAction(event -> btnBetalAction());
 
 		btnLuk = new Button("Luk");
-		pane.add(btnLuk, 3, 8);
+		pane.add(btnLuk, 5, 8);
 		btnLuk.setOnAction(event -> btnLukAction());
 		
 		//NEW
 		lblName = new Label("Kunde");
-		pane.add(lblName, 1, 2);
+		pane.add(lblName, 1, 1);
 		
 		txfName = new TextField();
-		pane.add(txfName, 2, 2);
+		pane.add(txfName, 2, 1, 1, 1);
 		
 		lblDato = new Label("Dato");
-		pane.add(lblDato, 1, 3);
+		pane.add(lblDato, 1, 2);
 		
 		txfDato = new TextField();
-		pane.add(txfDato, 2, 3);
+		pane.add(txfDato, 2, 2, 1,1);
 		
 		lblTid = new Label("Tid");
-		pane.add(lblTid, 1, 4);
+		pane.add(lblTid, 1, 3);
+		
+		txfTid = new TextField();
+		pane.add(txfTid, 2, 3, 1,1);
 		
 		lblAntal = new Label("Antal");
-		pane.add(lblAntal, 1, 5);
+		pane.add(lblAntal, 1, 4);
 		
 		txfAntal = new TextField();
-		pane.add(txfAntal, 2, 5);
+		pane.add(txfAntal, 2, 4, 1, 1);
 		
 		cbxSpisende = new CheckBox();
-		pane.add(cbxSpisende, 2, 6);
+		pane.add(cbxSpisende, 2, 5);
+		
+		lblSpisende = new Label("Spisende");
+		pane.add(lblSpisende, 3, 5);
 		
 		cbxStuderende = new CheckBox();
-		pane.add(cbxStuderende, 3, 6);
+		pane.add(cbxStuderende, 4, 5);
+		
+		lblStuderende = new Label("Studerende");
+		pane.add(lblStuderende, 5, 5);
 		
 		lblAntalS = new Label("Spisende");
-		pane.add(lblAntalS, 1, 7);
+		pane.add(lblAntalS, 1, 6);
 		
 		txfAntalS = new TextField();
-		pane.add(txfAntalS, 2, 7);
+		pane.add(txfAntalS, 2, 6, 4, 1);
 		
 		
 

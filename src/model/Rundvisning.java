@@ -14,6 +14,7 @@ public class Rundvisning {
 	private String rundviser;
 	private boolean spisning;
 	private int antalSpisende;
+	private boolean studerende;
 
 	public Rundvisning(String kunde, LocalDate dato, LocalTime tid, int gaester) {
 		this.kundeNavn = kunde;
@@ -23,6 +24,7 @@ public class Rundvisning {
 		this.betalt = false;
 		this.spisning = false;
 		this.antalSpisende = 0;
+		this.studerende = false;
 	}
 
 	public void setKunde(String s) {
@@ -56,6 +58,10 @@ public class Rundvisning {
 	public void tilmeldSpisning() {
 		this.spisning = true;
 		this.antalSpisende = this.antalGaester;
+	}
+	
+	public void setStuderende(boolean b) {
+		this.studerende = b;
 	}
 
 	public void tilmeldSpsning(int spisende) {
@@ -105,6 +111,10 @@ public class Rundvisning {
 
 	public int antalSpisende() {
 		return this.antalSpisende;
+	}
+	
+	public boolean isStuderende() {
+		return this.studerende;
 	}
 
 	public boolean isTilgaengeligTid() {
