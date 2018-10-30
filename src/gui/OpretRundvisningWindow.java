@@ -72,6 +72,7 @@ public class OpretRundvisningWindow extends Stage {
 
 		chbStuderende = new CheckBox("Studerende");
 		pane.add(chbStuderende, 0, 3);
+		chbStuderende.setOnAction(event -> selectedStuderende());
 
 		lbTidspunkt = new Label("Tidspunkt");
 		pane.add(lbTidspunkt, 0, 5);
@@ -138,18 +139,6 @@ public class OpretRundvisningWindow extends Stage {
 		hide();
 	}
 
-	private void selectedSpisning() {
-		if (chbSpisning.isSelected()) {
-			txfAntalS.setDisable(false); // Hvor har Mads lagt enable?
-			rv.tilmeldSpisning();
-			txfTotalPris.setText("" + rv.beregnPris());
-
-		} else {
-			txfAntalS.setDisable(true); // Made's enable
-			rv.frameldSpisning();
-			txfTotalPris.setText("" + rv.beregnPris());
-		}
-	}
 
 	//
 	// Methods
@@ -176,7 +165,26 @@ public class OpretRundvisningWindow extends Stage {
 			rv = service.opretRundvisning(kunde, dato, antal, tid);
 			System.out.println(rv.getKunde()); //DELETE ME
 			System.out.println(rv.beregnPris());
-			
+			if (chbStuderende.isSelected()) {
+				rv.setStuderende(true);
+			}
+			if (chbSpisning.isSelected()) {
+				if (txfAntalS.getText().length() > 0) {
+					String antalS = txfAntalS.getText();
+					try{
+						int aS = Integer.parseInt(antalS);
+						rv.tilmeldSpsning(aS);
+					}
+					catch (Exception w) {
+						rv.tilmeldSpisning();
+						txfAntalS.setText("" +rv.getAntalGaester());
+					}
+				}
+				else {
+					rv.tilmeldSpisning();
+					txfAntalS.setText("" +rv.getAntalGaester());
+				}
+			}
 			txfTotalPris.setText("" + rv.beregnPris());
 			System.out.println("Object created");
 		} catch (Exception e) {
@@ -289,5 +297,50 @@ public class OpretRundvisningWindow extends Stage {
 			}
 		});
 	}
+	
+	//
+	//CHECK BOX EVENTS
+	//
+	
+	private void selectedSpisning() {
+		if (chbSpisning.isSelected()) {
+			txfAntalS.setEditable(true);
+		}
+		else {
+			txfAntalS.setEditable(false);
+		}
+		if (!(txfAntalS.getText().length() > 0) && chbSpisning.isSelected()) {
+			txfAntalS.setText(txfAntalM.getText());
+		}
+		if (checkObject()) {
+			if (chbSpisning.isSelected()) {
+				txfAntalS.setDisable(false);
+				rv.tilmeldSpisning();
+				txfTotalPris.setText("" + rv.beregnPris());
+
+			} else {
+				txfAntalS.setDisable(true);
+				rv.frameldSpisning();
+				txfTotalPris.setText("" + rv.beregnPris());
+			}
+			txfTotalPris.setText("" + rv.beregnPris());
+		}
+		
+	
+		
+	}
+	
+	private void selectedStuderende() {
+		if (checkObject()) {
+			if (chbStuderende.isSelected()) {
+				rv.setStuderende(true);
+			}
+			else {
+				rv.setStuderende(false);
+			}
+		}
+	}
+	
+	
 
 }
