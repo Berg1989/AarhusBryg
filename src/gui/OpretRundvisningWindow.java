@@ -304,10 +304,12 @@ public class OpretRundvisningWindow extends Stage {
 	
 	private void selectedSpisning() {
 		if (chbSpisning.isSelected()) {
-			txfAntalS.setEditable(true);
+			//txfAntalS.setEditable(true);
+			txfAntalS.setDisable(false);
+			System.out.println(txfAntalS.isEditable());
 		}
 		else {
-			txfAntalS.setEditable(false);
+			txfAntalS.setDisable(true);
 		}
 		if (!(txfAntalS.getText().length() > 0) && chbSpisning.isSelected()) {
 			txfAntalS.setText(txfAntalM.getText());

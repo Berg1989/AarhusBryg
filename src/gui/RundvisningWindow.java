@@ -1,5 +1,7 @@
 package gui;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +113,7 @@ public class RundvisningWindow extends Stage {
 		
 		btnUpdate = new Button("Opdater");
 		pane.add(btnUpdate, 1, 8);
+		btnUpdate.setOnAction(event -> btnUpdateAction());
 		
 		//NEW
 		lblName = new Label("Kunde");
@@ -139,6 +142,7 @@ public class RundvisningWindow extends Stage {
 		
 		cbxSpisende = new CheckBox();
 		pane.add(cbxSpisende, 2, 5);
+		cbxSpisende.setOnAction(event -> selectedSpisning());
 		
 		lblSpisende = new Label("Spisende");
 		pane.add(lblSpisende, 3, 5);
@@ -179,10 +183,88 @@ public class RundvisningWindow extends Stage {
 
 	private void btnSletAction() {
 		Rundvisning r = lwRundvisning.getSelectionModel().getSelectedItem();
-
 		service.sletRundvisning(r);
 		lwRundvisning.getItems().setAll(initAllProdukter());
 
+	}
+	
+	private void btnUpdateAction() {
+		if (!(rv == null)) {
+			String navn = txfName.getText().trim();
+			String tid = txfTid.getText();
+			String dato = txfDato.getText();
+			String antal = txfAntal.getText();
+			String antalS = txfAntalS.getText();
+			
+			if (!(navn.equals(rv.getKunde()))) {
+				rv.setKunde(navn);
+			}
+			if (!(tid.equals(rv.getTid().toString()))) {
+				try {
+					LocalTime t = LocalTime.parse(tid);
+					rv.setTime(t);
+				}
+				catch (Exception e){
+					System.out.println("You shall not parse");
+				}
+			}
+			if (!(dato.equals(rv.getDato().toString()))) {
+				try {
+					LocalDate d = LocalDate.parse(dato);
+					rv.setDate(d);
+				}
+				catch (Exception e){
+					System.out.println("You shall not parse");
+				}
+			}
+			if (!(antal.equals(rv.getAntalGaester() +""))) {
+				try {
+					int a = Integer.parseInt(antal);
+					rv.setAntalGaester(a);
+				}
+				catch (Exception e){
+					System.out.println("I am a servant of the Secret Fire, wielder of the Flame of Anor");
+				}
+			}
+			
+			if (cbxSpisende.isSelected()) {
+				if (txfAntalS.getText().length() > 0) {
+					try {
+						int aS = Integer.parseInt(antalS);
+						rv.tilmeldSpsning(aS);
+					}
+					catch (Exception e) {
+						System.out.println("Fly, you fools");
+					}
+				}
+				else {
+					rv.tilmeldSpisning();
+				}
+			}
+			else {
+				rv.frameldSpisning();
+				txfAntalS.setText("" + rv.getAntalGaester());
+			}
+			
+			if(cbxStuderende.isSelected()) {
+				rv.setStuderende(true);
+			}
+			else {
+				rv.setStuderende(false);
+			}
+			
+			
+			
+		}
+	}
+	
+	private void selectedSpisning() {
+		if (cbxSpisende.isSelected()) {
+			txfAntalS.setEditable(true);
+		}
+		else {
+			txfAntalS.setEditable(false);
+		}
 	}
 
 }
