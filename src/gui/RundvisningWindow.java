@@ -32,11 +32,11 @@ public class RundvisningWindow extends Stage {
 		Scene scene = new Scene(pane);
 		initContent(pane);
 		setScene(scene);
-		pane.setGridLinesVisible(true);
+		pane.setGridLinesVisible(false);
 	}
 
 	private ListView<Rundvisning> lwRundvisning;
-	private Button btnOpret, btnSlet, btnLuk, btnBetal;
+	private Button btnOpret, btnSlet, btnLuk, btnBetal, btnUpdate;
 	private Label lbBookings, lblName, lblDato, lblAntal, lblAntalS, lblTid, lblStuderende, lblSpisende;
 	private Rundvisning rv;
 	private TextField txfName, txfDato, txfAntal, txfAntalS, txfTid;
@@ -46,7 +46,6 @@ public class RundvisningWindow extends Stage {
 		pane.setPadding(new Insets(10));
 		pane.setHgap(10);
 		pane.setVgap(10);
-		pane.setGridLinesVisible(false);
 
 		lbBookings = new Label("Rundvisninger:");
 		pane.add(lbBookings, 0, 0);
@@ -86,6 +85,11 @@ public class RundvisningWindow extends Stage {
 				else {
 					cbxStuderende.setSelected(false);
 				}
+				if (!rv.isBetalt()) {
+					Label l = new Label("IKKE BETALT");
+					l.setTextFill(Color.RED);
+					pane.add(l,	2, 7, 4, 1);
+				}
 			}
 		});
 	
@@ -105,30 +109,33 @@ public class RundvisningWindow extends Stage {
 		pane.add(btnLuk, 5, 8);
 		btnLuk.setOnAction(event -> btnLukAction());
 		
+		btnUpdate = new Button("Opdater");
+		pane.add(btnUpdate, 1, 8);
+		
 		//NEW
 		lblName = new Label("Kunde");
 		pane.add(lblName, 1, 1);
 		
 		txfName = new TextField();
-		pane.add(txfName, 2, 1, 1, 1);
+		pane.add(txfName, 2, 1, 4, 1);
 		
 		lblDato = new Label("Dato");
 		pane.add(lblDato, 1, 2);
 		
 		txfDato = new TextField();
-		pane.add(txfDato, 2, 2, 1,1);
+		pane.add(txfDato, 2, 2, 4,1);
 		
 		lblTid = new Label("Tid");
 		pane.add(lblTid, 1, 3);
 		
 		txfTid = new TextField();
-		pane.add(txfTid, 2, 3, 1,1);
+		pane.add(txfTid, 2, 3, 4,1);
 		
 		lblAntal = new Label("Antal");
 		pane.add(lblAntal, 1, 4);
 		
 		txfAntal = new TextField();
-		pane.add(txfAntal, 2, 4, 1, 1);
+		pane.add(txfAntal, 2, 4, 4, 1);
 		
 		cbxSpisende = new CheckBox();
 		pane.add(cbxSpisende, 2, 5);
