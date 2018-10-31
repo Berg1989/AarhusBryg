@@ -31,6 +31,7 @@ public class Udlejning {
 		this.fustager = new ArrayList<>();
 		this.glas = 0;
 		double leveringspris = 800.0;
+		this.fustagepant = 200.0;
 	}
 	
 	public void setKundeNavn(String navn) {
