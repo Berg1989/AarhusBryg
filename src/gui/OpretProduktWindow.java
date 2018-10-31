@@ -2,6 +2,8 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -70,11 +72,47 @@ public class OpretProduktWindow extends Stage {
 	}
 
 	private void btnOpretAction() {
-		String navn = txfNavn.getText().trim();
-		String str = txfStr.getText().trim();
-		Double pris = Double.parseDouble(txfPris.getText().trim());
-		service.opretProdukt(pk, navn, pris, str);
-		hide();
+
+		try {
+			String navn = txfNavn.getText().trim();
+			String str = txfStr.getText().trim();
+			String prisString = txfPris.getText().trim();
+			Double pris = Double.parseDouble(txfPris.getText().trim());
+
+			if (navn.isEmpty()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Mangler");
+				alert.setHeaderText("Produkt navn");
+				alert.setContentText("Du mangler at give produktet et navn!");
+				alert.showAndWait();
+
+			}
+			if (str.isEmpty()) {
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setTitle("Information Mangler");
+				alert1.setHeaderText("Produkt størrelse");
+				alert1.setContentText("Du mangler at give produktet en størrelse!");
+
+				alert1.showAndWait();
+
+			}
+			if (prisString.isEmpty()) {
+				Alert alert2 = new Alert(AlertType.INFORMATION);
+				alert2.setTitle("Information Mangler");
+				alert2.setHeaderText("Produkt Pris");
+				alert2.setContentText("Du mangler at give produktet en pris!");
+
+				alert2.showAndWait();
+
+			} else {
+				service.opretProdukt(pk, navn, pris, str);
+				hide();
+			}
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Hello");
+		}
+
 	}
 
 	private void btnLukAction() {

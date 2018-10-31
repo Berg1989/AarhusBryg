@@ -93,6 +93,7 @@ public class ListeoversalgWindow extends Stage {
 				System.out.println("Salg over List er blevet lavet");
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
+
 			}
 		}
 	}

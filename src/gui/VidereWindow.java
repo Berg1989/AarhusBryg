@@ -6,6 +6,8 @@ import java.util.EnumSet;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -175,13 +177,6 @@ public class VidereWindow extends Stage {
 		if (cbBP.isSelected() && !txfBP.getText().isEmpty()) {
 			nyPris = Double.parseDouble(txfBP.getText().trim());
 			txfTPNy.setText(Double.toString(nyPris));
-
-			// if (cbBP.isSelected() && !txfBP.getText().isEmpty() && cbPD.isSelected() &&
-			// !txfPD.getText().isEmpty()) {
-			// nyPris = (Double.parseDouble(txfBP.getText().trim())
-			// * ((Double.parseDouble(txfPD.getText().trim()) / 100)));
-			// txfTPNy.setText(Double.toString(nyPris));
-			// }
 		} else if (cbPD.isSelected() && !txfPD.getText().isEmpty()) {
 			nyPris = (Double.parseDouble(txfTP.getText().trim())
 					* ((Double.parseDouble(txfPD.getText().trim()) / 100)));
@@ -195,18 +190,28 @@ public class VidereWindow extends Stage {
 
 	// Mangler nogle Alerts!
 	private void btnBetalAction() {
-
 		if (!txfTPNy.getText().isEmpty()) {
 			s.setPris(Double.parseDouble(txfTPNy.getText().trim()));
 		} else {
 			s.setPris(Double.parseDouble(txfTP.getText().trim()));
 		}
-		s.setBetalingsMetode(cbbKredit.getSelectionModel().getSelectedItem());
-		s.setDato(LocalDate.now());
-		s.setTid(LocalTime.now());
-		service.completeSalg(s);
-		System.out.println("Et Salg er blevet lavet");
-		hide();
+
+		if (cbbKredit.getSelectionModel().getSelectedItem() == null) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information mangler");
+			alert.setHeaderText("Mangler betaling");
+			alert.setContentText("Mangler at vælge betalingsmulighed!");
+
+			alert.showAndWait();
+		} else {
+			s.setBetalingsMetode(cbbKredit.getSelectionModel().getSelectedItem());
+			s.setDato(LocalDate.now());
+			s.setTid(LocalTime.now());
+			service.completeSalg(s);
+			System.out.println("Et Salg er blevet lavet");
+			hide();
+		}
+
 	}
 
 	private void btnLukAction() {
