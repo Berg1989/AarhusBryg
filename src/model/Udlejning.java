@@ -15,12 +15,13 @@ public class Udlejning {
 	private LocalDate dato;
 	//private int glas; ligger nu som produkt
 	private String kommentar;
-	//private double pris;
-	private double pant;
 	private boolean levering;
 	private double leveringspris;
 	private ArrayList<Kulsyre> kulsyre;
 	private double kulsyrepant;
+	private boolean betalt;
+	private double betaltBeloeb;
+	private double pantLagt;
 	
 	public Udlejning(String navn, String tlf, String email, LocalDate dato) {
 		this.kundeNavn = navn;
@@ -29,9 +30,11 @@ public class Udlejning {
 		this.dato = dato;
 		this.anlaeg = new ArrayList<>();
 		this.fustager = new ArrayList<>();
-		double leveringspris = 800.0;
+		this.leveringspris = 800.0;
 		this.fustagepant = 200.0;
 		this.kulsyrepant = 1000.0;
+		this.betalt = false;
+		this.betaltBeloeb = 0.0;
 	}
 
 	public void setKundeNavn(String navn) {
@@ -82,14 +85,18 @@ public class Udlejning {
 		this.anlaeg.add(a);
 	}
 	
-	public double getPris() {
-		// TODO
-		return 0.0;
-	}
 
 	public double getPant() {
-		// TODO
-		return 0.0;
+		double p = 0.0;
+		//Kulsyrepant
+		p += this.kulsyre.size() * this.kulsyrepant;
+		//alaegspant
+		for (Anlaeg a : this.anlaeg) {
+			p += a.getPant();
+		}
+		//fustagepant
+		p += this.fustager.size() * this.fustagepant;
+		return p;
 	}
 	
 	public void setLeveringsPris(double pris) {
@@ -108,14 +115,39 @@ public class Udlejning {
 	
 	public double getSamletPris() {
 		double p = 0.0;
+		//leverings
 		p += this.getLeveringsPris();
+		//kulsyrepris
+		for (Kulsyre k : this.kulsyre) {
+			p += k.getPris();
+		}
+		//anlaegspris
+		for (Anlaeg a : this.anlaeg) {
+			p += a.getPris();
+		}
+		//fustagepris
+		for (Fustage f : this.fustager) {
+			p += f.getPris();
+		}
 	
-		return 0.0;
+		return p;
 	}
 	
 	public double getSamletPrisMedPant() {
-		//TODO
+		double p = 0.0;
+		p += this.getLeveringsPris();
+		p += this.getSamletPris();
+		p += this.getPant();
 		return 0.0;
+	}
+	
+	public void betal(double beloeb) {
+		this.betalt = true;
+		this.betaltBeloeb = beloeb;
+	}
+	
+	public double getBetaltPris() {
+		return this.betaltBeloeb;
 	}
 
 }
