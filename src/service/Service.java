@@ -12,6 +12,7 @@ import model.Salg;
 import model.SalgSted;
 import model.SalgsLinie;
 import model.StedPris;
+import model.Udlejning;
 import storage.Storage;
 
 public class Service {
@@ -156,6 +157,13 @@ public class Service {
 
 	public List<Salg> getAllSalg() {
 		return storage.getAllSalg();
+	}
+	
+	//Udlejnings metoder
+	public Udlejning opretUdlejning(String navn, String tlf, String email, LocalDate dato) {
+		Udlejning u = new Udlejning(navn, tlf, email, dato);
+		storage.addUdlejning(u);
+		return u;
 	}
 
 	// INITIAL STUFF

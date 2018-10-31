@@ -8,18 +8,22 @@ import model.ProduktKategori;
 import model.Rundvisning;
 import model.Salg;
 import model.SalgSted;
+import model.Udlejning;
 
 public class Storage {
+	//SKAL IKKE STORAGE VAERE STATIUC ELLER IHVERTG FALD SINGLETON?
 	private List<ProduktKategori> produktKategoriList;
 	private List<Rundvisning> rundvisningList;
 	private List<SalgSted> salgStedList;
 	private List<Salg> salgListe;
+	private List<Udlejning> udlejninger;
 
 	public Storage() {
 		produktKategoriList = new ArrayList<>();
 		rundvisningList = new ArrayList<>();
 		salgStedList = new ArrayList<>();
 		salgListe = new ArrayList<>();
+		udlejninger = new ArrayList<>();
 	}
 
 	public ArrayList<Salg> getAllSalg() {
@@ -72,6 +76,18 @@ public class Storage {
 
 	public void removeSalgSted(SalgSted ss) {
 		salgStedList.remove(ss);
+	}
+	
+	public void addUdlejning(Udlejning u) {
+		udlejninger.add(u);
+	}
+	
+	public void removeUdlejning(Udlejning u) {
+		udlejninger.remove(u);
+	}
+	
+	public ArrayList<Udlejning> getAllUdlejninger() {
+		return new ArrayList<>(udlejninger);
 	}
 
 }
