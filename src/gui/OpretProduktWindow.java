@@ -72,13 +72,11 @@ public class OpretProduktWindow extends Stage {
 	}
 
 	private void btnOpretAction() {
+		String navn = txfNavn.getText().trim();
+		String str = txfStr.getText().trim();
+		String prisString = txfPris.getText().trim();
 
 		try {
-			String navn = txfNavn.getText().trim();
-			String str = txfStr.getText().trim();
-			String prisString = txfPris.getText().trim();
-			Double pris = Double.parseDouble(txfPris.getText().trim());
-
 			if (navn.isEmpty()) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Mangler");
@@ -104,13 +102,16 @@ public class OpretProduktWindow extends Stage {
 
 				alert2.showAndWait();
 
-			} else {
+			}
+			if (!prisString.isEmpty() && !navn.isEmpty() && !str.isEmpty()) {
+				Double pris = Double.parseDouble(txfPris.getText().trim());
 				service.opretProdukt(pk, navn, pris, str);
 				hide();
 			}
+
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Hello");
+
 		}
 
 	}
