@@ -72,6 +72,7 @@ public class OpretProduktWindow extends Stage {
 	}
 
 	private void btnOpretAction() {
+
 		try {
 			String navn = txfNavn.getText().trim();
 			String str = txfStr.getText().trim();
@@ -83,7 +84,6 @@ public class OpretProduktWindow extends Stage {
 				alert.setTitle("Information Mangler");
 				alert.setHeaderText("Produkt navn");
 				alert.setContentText("Du mangler at give produktet et navn!");
-
 				alert.showAndWait();
 
 			}
