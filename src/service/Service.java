@@ -332,6 +332,9 @@ public class Service {
 		opretFustage("20 Liter", "Julebryg", 775);
 		opretFustage("20 Liter", "Imperial Stout", 775);
 		
+		//Glass
+		
+		
 		
 		
 		

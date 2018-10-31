@@ -13,13 +13,13 @@ public class Udlejning {
 	private double fustagepant;
 	private ArrayList<Anlaeg> anlaeg;
 	private LocalDate dato;
-	private int glas;
+	//private int glas; ligger nu som produkt
 	private String kommentar;
 	//private double pris;
 	private double pant;
 	private boolean levering;
 	private double leveringspris;
-	private int kulsyre;
+	private ArrayList<Kulsyre> kulsyre;
 	private double kulsyrepant;
 	
 	public Udlejning(String navn, String tlf, String email, LocalDate dato) {
@@ -29,7 +29,6 @@ public class Udlejning {
 		this.dato = dato;
 		this.anlaeg = new ArrayList<>();
 		this.fustager = new ArrayList<>();
-		this.glas = 0;
 		double leveringspris = 800.0;
 		this.fustagepant = 200.0;
 		this.kulsyrepant = 1000.0;
@@ -108,7 +107,9 @@ public class Udlejning {
 	}
 	
 	public double getSamletPris() {
-		//TODO
+		double p = 0.0;
+		p += this.getLeveringsPris();
+	
 		return 0.0;
 	}
 	
