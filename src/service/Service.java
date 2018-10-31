@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Fustage;
+import model.Kulsyre;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
@@ -173,6 +174,13 @@ public class Service {
 		storage.addFustage(f);
 		return f;
 	}
+	
+	//Kulsure metoder
+	public Kulsyre opretKulsure(double stoerrelse, double pris) {
+		Kulsyre k = new Kulsyre(stoerrelse, pris);
+		storage.addKulsyre(k);
+		return k;
+	}
 
 	// INITIAL STUFF
 
@@ -206,6 +214,10 @@ public class Service {
 		tilfoejKategori(fredagsBar, pk2);
 		
 		//Rundvisninger
+		
+		
+		//kulsyre
+		
 		
 		
 		//
@@ -291,7 +303,7 @@ public class Service {
 		ProduktKategori snacks = opretProduktKategori("Snacks");
 		Produkt chips = opretProdukt(snacks, "Chips", 10.0, "pose");
 		opretStedPris(fredagsBar, chips, 10.0);
-		Produkt nuts = opretProdukt(snacks, "Peanuts", 10.0, "skål");
+		Produkt nuts = opretProdukt(snacks, "Peanuts", 10.0, "skï¿½l");
 		opretStedPris(fredagsBar, nuts, 10.0);
 		
 		//Spiritus

@@ -15,7 +15,7 @@ public class Udlejning {
 	private LocalDate dato;
 	private int glas;
 	private String kommentar;
-	private double pris;
+	//private double pris;
 	private double pant;
 	private boolean levering;
 	private double leveringspris;
@@ -32,6 +32,7 @@ public class Udlejning {
 		this.glas = 0;
 		double leveringspris = 800.0;
 		this.fustagepant = 200.0;
+		this.kulsyrepant = 1000.0;
 	}
 
 	public void setKundeNavn(String navn) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Fustage;
+import model.Kulsyre;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Rundvisning;
@@ -12,13 +13,13 @@ import model.SalgSted;
 import model.Udlejning;
 
 public class Storage {
-	//SKAL IKKE STORAGE VAERE STATIUC ELLER IHVERTG FALD SINGLETON?
 	private List<ProduktKategori> produktKategoriList;
 	private List<Rundvisning> rundvisningList;
 	private List<SalgSted> salgStedList;
 	private List<Salg> salgListe;
 	private List<Udlejning> udlejninger;
 	private List<Fustage> fustager;
+	private List<Kulsyre> kulsyre;
 
 	public Storage() {
 		produktKategoriList = new ArrayList<>();
@@ -27,6 +28,7 @@ public class Storage {
 		salgListe = new ArrayList<>();
 		udlejninger = new ArrayList<>();
 		fustager = new ArrayList<>();
+		kulsyre = new ArrayList<>();
 	}
 
 	public ArrayList<Salg> getAllSalg() {
@@ -103,6 +105,18 @@ public class Storage {
 	
 	public ArrayList<Fustage> getAllFustager() {
 		return new ArrayList<>(fustager);
+	}
+	
+	public void addKulsyre(Kulsyre k) {
+		kulsyre.add(k);
+	}
+	
+	public void removeKuilsyre(Kulsyre k) {
+		kulsyre.remove(k);
+	}
+	
+	public ArrayList<Kulsyre> getAllKulsyre() {
+		return new ArrayList<Kulsyre>(kulsyre);
 	}
 
 }
