@@ -3,6 +3,7 @@ package storage;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Anlaeg;
 import model.Fustage;
 import model.Kulsyre;
 import model.Produkt;
@@ -20,6 +21,7 @@ public class Storage {
 	private List<Udlejning> udlejninger;
 	private List<Fustage> fustager;
 	private List<Kulsyre> kulsyre;
+	private List<Anlaeg> anlaeg;
 
 	public Storage() {
 		produktKategoriList = new ArrayList<>();
@@ -29,6 +31,7 @@ public class Storage {
 		udlejninger = new ArrayList<>();
 		fustager = new ArrayList<>();
 		kulsyre = new ArrayList<>();
+		anlaeg = new ArrayList<>();
 	}
 
 	public ArrayList<Salg> getAllSalg() {
@@ -118,5 +121,16 @@ public class Storage {
 	public ArrayList<Kulsyre> getAllKulsyre() {
 		return new ArrayList<Kulsyre>(kulsyre);
 	}
+	
+	public void addAnlaeg(Anlaeg a) {
+		anlaeg.add(a);
+	}
 
+	public void removeAnlaeg(Anlaeg a) {
+		anlaeg.remove(a);
+	}
+	
+	public ArrayList<Anlaeg> getAllAnlaeg() {
+		return new ArrayList<>(anlaeg);
+	}
 }

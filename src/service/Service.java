@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Anlaeg;
 import model.Fustage;
 import model.Kulsyre;
 import model.Produkt;
@@ -176,11 +177,19 @@ public class Service {
 	}
 	
 	//Kulsure metoder
-	public Kulsyre opretKulsure(double stoerrelse, double pris) {
+	public Kulsyre opretKulsyre(double stoerrelse, double pris) {
 		Kulsyre k = new Kulsyre(stoerrelse, pris);
 		storage.addKulsyre(k);
 		return k;
 	}
+	
+	//anlaeg metoder
+	public Anlaeg opretAnlaeg(String type, double pris, double pant) {
+		Anlaeg a = new Anlaeg(type, pris, pant);
+		storage.addAnlaeg(a);
+		return a;
+	}
+
 
 	// INITIAL STUFF
 
@@ -214,11 +223,16 @@ public class Service {
 		tilfoejKategori(fredagsBar, pk2);
 		
 		//Rundvisninger
+		Rundvisning r1 = opretRundvisning("Madeleine", LocalDate.of(2018, 6, 26), 42, LocalTime.of(13, 37));
+		r1.isStuderende();
+		r1.tilmeldSpsning(21);
+		r1.setBetalt();
 		
+		Rundvisning r2 = opretRundvisning("Mads", LocalDate.of(2018, 5, 4), 20, LocalTime.of(10,00));
+		r2.tilmeldSpisning();
 		
-		//kulsyre
-		
-		
+		Rundvisning r3 = opretRundvisning("Daniel", LocalDate.of(2018, 3, 14), 65, LocalTime.of(9, 30));
+		r3.setBetalt();
 		
 		//
 		//Fra opgaven
@@ -322,20 +336,51 @@ public class Service {
 		opretStedPris(butik, loa, 175.0);
 		
 		//fustage
-		opretFustage("20 Liter", "Klosterbryg", 775);
-		opretFustage("25 Liter", "Jazz Classic", 625);
-		opretFustage("25 Liter", "Extra Pilsner", 575);
-		opretFustage("20 Liter", "Celebration", 775);
-		opretFustage("25 Liter", "Blondie", 700);
-		opretFustage("20 Liter", "Foraarsbryg", 775);
-		opretFustage("20 Liter", "India Pale Ale", 775);
-		opretFustage("20 Liter", "Julebryg", 775);
-		opretFustage("20 Liter", "Imperial Stout", 775);
+		opretFustage("20 Liter", "Klosterbryg", 775.0);
+		opretFustage("25 Liter", "Jazz Classic", 625.0);
+		opretFustage("25 Liter", "Extra Pilsner", 575.0);
+		opretFustage("20 Liter", "Celebration", 775.0);
+		opretFustage("25 Liter", "Blondie", 700.0);
+		opretFustage("20 Liter", "Foraarsbryg", 775.0);
+		opretFustage("20 Liter", "India Pale Ale", 775.0);
+		opretFustage("20 Liter", "Julebryg", 775.0);
+		opretFustage("20 Liter", "Imperial Stout", 775.0);
 		
 		//Glass
+		ProduktKategori glas = opretProduktKategori("Glas");
+		opretProdukt(glas, "Stort Glas", 15.0, "50cL");
+		opretProdukt(glas, "Lille Glas", 15.0, "30cL");
+		opretProdukt(glas, "Krus", 60.0, "Krus-stoerrelse");
 		
+		//kulsyre
+		opretKulsyre(6, 400.0);
+		opretKulsyre(4, 400.0);
+		opretKulsyre(10, 400.0);
 		
+		//Malt
+		ProduktKategori bryg = opretProduktKategori("Brygtilbehoer");
+		opretProdukt(bryg, "Malt", 300.0, "25 kg sæk");
 		
+		//Toej
+		ProduktKategori toej = opretProduktKategori("Beklaedning");
+		Produkt tshirt = opretProdukt(toej, "T-shirt", 70.0, "XS - XL");
+		opretStedPris(fredagsBar, tshirt, 70.0);
+		opretStedPris(butik, tshirt, 70.0);
+		Produkt polo = opretProdukt(toej, "Polo", 100.0, "S - L");
+		opretStedPris(fredagsBar, polo, 100.0);
+		opretStedPris(butik, polo, 100.0);
+		Produkt cap = opretProdukt(toej, "Cap", 30.0, "One size fits all");
+		opretStedPris(fredagsBar, cap, 30.0);
+		opretStedPris(butik, cap, 30.0);
+		
+		//Anlaeg
+		opretAnlaeg("1-hane", 250.0, 0.0);
+		opretAnlaeg("2-haner", 400.0, 0.0);
+		opretAnlaeg("Bar med flere haner", 500.0, 0.0);
+		
+		//Gavepakker
+		ProduktKategori gave = opretProduktKategori("Gaveaeske");
+		Produkt g1 = opretProdukt(gave, "2 oel, 2 glas", 100.0, "aeske");
 		
 		
 		
