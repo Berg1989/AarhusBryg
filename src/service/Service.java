@@ -188,6 +188,16 @@ public class Service {
 
 		tilfoejKategori(fredagsBar, pk1);
 		tilfoejKategori(fredagsBar, pk2);
+		
+		//
+		//Fra opgaven
+		//
+		ProduktKategori flaske = opretProduktKategori("Flaskeoel");
+		Produkt kloster = opretProdukt(flaske, "Klosterbryg", 36.0, "60cL");
+		Produkt georgie = opretProdukt(flaske, "Sweet Georgie Brown", 36.0, "60cL");
+		Produkt epils = opretProdukt(flaske, "Extra Pilsener", 36.0, "60cL");
+		Produkt celebration = opretProdukt(flaske, "Celebration", 36.0, "60cL");
+		//NOT DONE
 	}
 
 }
