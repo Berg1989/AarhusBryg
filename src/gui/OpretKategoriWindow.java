@@ -2,6 +2,8 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -54,9 +56,17 @@ public class OpretKategoriWindow extends Stage {
 
 	private void btnOpretAction() {
 		String navn = txfKategoriNavn.getText().trim();
+		if (navn.isEmpty()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information Mangler");
+			alert.setHeaderText("Kategori navn");
+			alert.setContentText("Du mangler at give kategorien et navn!");
 
-		service.opretProduktKategori(navn);
-		hide();
+			alert.showAndWait();
+		} else {
+			service.opretProduktKategori(navn);
+			hide();
+		}
 
 	}
 

@@ -2,6 +2,8 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -54,11 +56,19 @@ public class OpretSalgStedWindow extends Stage {
 	}
 
 	private void btnOpretAction() {
-
 		String navn = txfNavn.getText().trim();
+		if (navn.isEmpty()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information Mangler");
+			alert.setHeaderText("Salgssted navn");
+			alert.setContentText("Du mangler at give salgssted et navn!");
 
-		service.opretSalgSted(navn);
-		hide();
+			alert.showAndWait();
+
+		} else {
+			service.opretSalgSted(navn);
+			hide();
+		}
 
 	}
 
