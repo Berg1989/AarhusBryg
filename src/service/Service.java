@@ -389,12 +389,18 @@ public class Service {
 
 		// Tilføjelse af PK til salgsted
 
-		tilfoejKategori(fredagsBar, pk1);
-		tilfoejKategori(fredagsBar, pk2);
 		tilfoejKategori(butik, flaske);
 		tilfoejKategori(butik, fad);
 		tilfoejKategori(butik, spiritus);
 		tilfoejKategori(butik, glas);
+		tilfoejKategori(butik, bryg);
+		tilfoejKategori(butik, toej);
+		tilfoejKategori(butik, gave);
+		tilfoejKategori(fredagsBar, flaske);
+		tilfoejKategori(fredagsBar, fad);
+		tilfoejKategori(fredagsBar, spiritus);
+		tilfoejKategori(fredagsBar, toej);
+		tilfoejKategori(fredagsBar, gave);
 
 	}
 
