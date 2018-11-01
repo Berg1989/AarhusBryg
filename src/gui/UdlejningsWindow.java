@@ -21,7 +21,9 @@ import javafx.stage.StageStyle;
 import model.Anlaeg;
 import model.Fustage;
 import model.Kulsyre;
+import model.Rentable;
 import model.Udlejning;
+import model.UdlejningsLinje;
 import service.Service;
 
 public class UdlejningsWindow extends Stage {
@@ -47,7 +49,7 @@ public class UdlejningsWindow extends Stage {
 	private ListView<Anlaeg> lwAnlag;
 	private ListView<Kulsyre> lwKulsyre;
 	private ListView<Fustage> lwFustager;
-	private ListView<Object> lwValgt;
+	private ListView<UdlejningsLinje> lwValgt;
 	private Label lblAnlag, lblDato, lblEmail, lblNavn, lblTlf, lbFustager, lblKulsyre, lblValgt, lblPris, lblPant, lblTotalPris;
 	private TextField txfEmail, txfNavn, txfTlf, txfPris, txfPant, txfTotal, txfAntalF, txfAntalA, txfAntalK;
 	private CheckBox chbLevering;
@@ -112,6 +114,7 @@ public class UdlejningsWindow extends Stage {
 		
 		lwAnlag = new ListView<>();
 		vboks2.getChildren().add(1, lwAnlag);
+		lwAnlag.getItems().addAll(service.getAllAnleag());
 		
 		HBox hboks2= new HBox();
 		vboks2.getChildren().add(2, hboks2);
@@ -147,7 +150,7 @@ public class UdlejningsWindow extends Stage {
 		
 		btnFustage = new Button("->");
 		hboks3.getChildren().add(1, btnFustage);
-		btnFustage.setOnAction(event -> btnFustageActino());
+		btnFustage.setOnAction(event -> btnFustageAction());
 		
 		
 
@@ -257,33 +260,77 @@ public class UdlejningsWindow extends Stage {
 	public void btnAnlagAction() {
 		Anlaeg a = lwAnlag.getSelectionModel().getSelectedItem();
 		if (a != null) {
-			String antal = txfAntalA.getText().trim();
 			try {
-				int ant = Integer.parseInt(antal);
+				String s = txfAntalA.getText().trim();
+				int i = Integer.parseInt(s);
+				UdlejningsLinje ul = new UdlejningsLinje(a, i);// Lav mig i service
+				u.addOrdre(ul);
+				lwValgt.getItems().add(ul);
+				setPriser();
 			}
 			catch (Exception e) {
 				System.out.println("I've been expecting you ;)");
 			}
+			txfAntalA.setText("1");
+			
 		}
 	}
 	
-	public void btnFustageActino() {
-		
+	public void btnFustageAction() {
+		Fustage f = lwFustager.getSelectionModel().getSelectedItem();
+		if (f != null) {
+			try {
+				String s = txfAntalF.getText().trim();
+				int i = Integer.parseInt(s);
+				UdlejningsLinje ul = new UdlejningsLinje(f, i);// Lav mig i service
+				u.addOrdre(ul);
+				lwValgt.getItems().add(ul);
+				setPriser();
+			}
+			catch (Exception e) {
+				System.out.println("I've been expecting you ;)");
+			}
+			txfAntalF.setText("1");
+			
+		}
 	}
 	
 	public void btnKulsyreAction() {
-		
+		Kulsyre k = lwKulsyre.getSelectionModel().getSelectedItem();
+		if (k != null) {
+			try {
+				String s = txfAntalK.getText().trim();
+				int i = Integer.parseInt(s);
+				UdlejningsLinje ul = new UdlejningsLinje(k, i);// Lav mig i service
+				u.addOrdre(ul);
+				lwValgt.getItems().add(ul);
+				setPriser();
+			}
+			catch (Exception e) {
+				System.out.println("I've been expecting you ;)");
+			}
+			txfAntalK.setText("1");
+			
+		}
 	}
 	
 	public void btnFjernAction() {
-		
+		UdlejningsLinje ul = lwValgt.getSelectionModel().getSelectedItem();
+		u.removeOrdre(ul);
+		lwValgt.getItems().remove(ul);
+		setPriser();
 	}
 
 	public void btnOpretAction() {
-		//check all fiels
-		//Make alert
-		service.gemUdlejning(u);
-		hide();
+		if (txfNavn.getText().trim().length() > 0 && txfEmail.getText().trim().length() > 0 && txfTlf.getText().trim().length() > 0 && dp.getValue() != null) {
+			service.gemUdlejning(u);
+			hide();
+			//Make alert with info about booking
+		}
+		else {
+			//Make alert about fiels missing
+		}
+	
 
 	}
 
@@ -295,7 +342,11 @@ public class UdlejningsWindow extends Stage {
 	// Methods
 	//
 	
-	
+	public void setPriser() {
+		txfPris.setText("" + u.getSamletPris());
+		txfPant.setText("" + u.getPant());
+		txfTotal.setText("" + u.getSamletPrisMedPant());
+	}
 	
 	
 	//
@@ -345,6 +396,7 @@ public class UdlejningsWindow extends Stage {
 			b = false;
 		}
 		u.setLevering(b);
+		setPriser();
 	}
 	
 

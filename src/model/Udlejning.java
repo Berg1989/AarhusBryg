@@ -9,22 +9,18 @@ public class Udlejning {
 	private String kundeNavn;
 	private String kundeTlf;
 	private String kundeEmail;
-	private ArrayList<Rentable> fustager;
-	private static double fustagepant = 200.0;
-	private ArrayList<Anlaeg> anlaeg;
+	private ArrayList<UdlejningsLinje> ordre;
 	private LocalDate dato;
 	private String kommentar;
 	private boolean levering;
-	private static double leveringspris = 800.0;
+	private static double leveringspris = 800.0; //FACT CHECK
 	private ArrayList<Kulsyre> kulsyre;
-	private static double kulsyrepant = 1000.0;
 	private boolean betalt;
 	private double betaltBeloeb;
 	private double pantLagt;
 	
 	public Udlejning() {
-		this.anlaeg = new ArrayList<>();
-		this.fustager = new ArrayList<>();
+		this.ordre = new ArrayList<>();
 		this.betalt = false;
 		this.betaltBeloeb = 0.0;
 	}
@@ -61,76 +57,40 @@ public class Udlejning {
 		return this.kundeTlf;
 	}
 
-	public ArrayList<Fustage> getFustager() {
-		return new ArrayList<>(this.fustager);
-	}
-
-	public void addFustge(Fustage f) {
-		this.fustager.add(f);
+	public double getLeveringspris() {
+		return leveringspris;
 	}
 	
-	public ArrayList<Anlaeg> getAnlaeg() {
-		return new ArrayList<>(this.anlaeg);
+	public void setLeveringspris(double pris) {
+		leveringspris = pris;
 	}
-	
-	public void addAnlaeg(Anlaeg a) {
-		this.anlaeg.add(a);
-	}
-	
 
 	public double getPant() {
 		double p = 0.0;
-		//Kulsyrepant
-		p += this.kulsyre.size() * this.kulsyrepant;
-		//alaegspant
-		for (Anlaeg a : this.anlaeg) {
-			p += a.getPant();
+		for (UdlejningsLinje ul : this.ordre) {
+			p += ul.getPant();
 		}
-		//fustagepant
-		p += this.fustager.size() * this.fustagepant;
 		return p;
 	}
 	
-	public void setLeveringsPris(double pris) {
-		this.leveringspris = pris;
-	}
-	
-	public double getLeveringsPris() {
-		if (this.levering) {
-			return this.leveringspris;
-		}
-		else {
-			return 0.0;
-		}
-	
-	}
+
 	
 	public double getSamletPris() {
 		double p = 0.0;
-		//leverings
-		p += this.getLeveringsPris();
-		//kulsyrepris
-		for (Kulsyre k : this.kulsyre) {
-			p += k.getPris();
+		for (UdlejningsLinje ul : this.ordre) {
+			p += ul.getPris();
 		}
-		//anlaegspris
-		for (Anlaeg a : this.anlaeg) {
-			p += a.getPris();
-		}
-		//fustagepris
-		for (Fustage f : this.fustager) {
-			p += f.getPris();
-		}
-	
 		return p;
 	}
 	
 	public double getSamletPrisMedPant() {
 		double p = 0.0;
-		p += this.getLeveringsPris();
-		p += this.getSamletPris();
-		p += this.getPant();
-		return 0.0;
+		for (UdlejningsLinje ul : this.ordre) {
+			p += ul.getPris();
+			p += ul.getPant();
+		}
+		p+= leveringspris;
+		return p;
 	}
 	
 	public void betal(double beloeb) {
@@ -149,5 +109,19 @@ public class Udlejning {
 	public boolean getLevering() {
 		return this.levering;
 	}
+	
+	public void addOrdre(UdlejningsLinje ul) {
+		this.ordre.add(ul);
+	}
+	
+	public void removeOrdre(UdlejningsLinje ul) {
+		this.ordre.remove(ul);
+	}
+	
+	public ArrayList<UdlejningsLinje> getFullOrdre() {
+		return new ArrayList<>(this.ordre);
+	}
+	
+	
 
 }

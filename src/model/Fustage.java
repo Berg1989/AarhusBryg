@@ -3,6 +3,7 @@ package model;
 public class Fustage implements Rentable {
 	private String stoerrelse;
 	private String oeltype;
+	private static double pant = 200.0;
 	private double pris;
 	
 	public Fustage(String stoerrelse, String oeltype, double pris) {
@@ -31,8 +32,16 @@ public class Fustage implements Rentable {
 		return this.oeltype;
 	}
 	
+	public double getPant() {
+		return pant;
+	}
+	
 	public double getPris() {
 		return this.pris;
+	}
+	
+	public double getTotal() {
+		return pant + this.pris;
 	}
 	
 	@Override

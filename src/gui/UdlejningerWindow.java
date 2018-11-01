@@ -16,6 +16,7 @@ import javafx.stage.StageStyle;
 import model.Anlaeg;
 import model.Fustage;
 import model.Kulsyre;
+import model.Rentable;
 import model.Udlejning;
 import service.Service;
 
@@ -40,7 +41,7 @@ public class UdlejningerWindow extends Stage {
 	
 	private ListView<Udlejning> lwUdlejning;
 	private Label lblUdlejninger, lblNavn, lblEmail, lblTlf, lblKvittering;
-	private ListView<Object> kvittering;
+	private ListView<Rentable> kvittering;
 	private TextField txfNavn, txfEmail, txfTlf;
 	private CheckBox chbLevering;
 	private Button btnFjern, btnLuk;
