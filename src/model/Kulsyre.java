@@ -1,6 +1,6 @@
 package model;
 
-public class Kulsyre {
+public class Kulsyre implements Rentable {
 	private double stoerrelseKG;
 	private double pris;
 	

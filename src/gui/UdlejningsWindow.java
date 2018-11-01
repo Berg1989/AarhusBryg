@@ -256,7 +256,15 @@ public class UdlejningsWindow extends Stage {
 
 	public void btnAnlagAction() {
 		Anlaeg a = lwAnlag.getSelectionModel().getSelectedItem();
-		//if (a != null) 
+		if (a != null) {
+			String antal = txfAntalA.getText().trim();
+			try {
+				int ant = Integer.parseInt(antal);
+			}
+			catch (Exception e) {
+				System.out.println("I've been expecting you ;)");
+			}
+		}
 	}
 	
 	public void btnFustageActino() {
