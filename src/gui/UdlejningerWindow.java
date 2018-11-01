@@ -40,7 +40,7 @@ public class UdlejningerWindow extends Stage {
 	
 	private ListView<Udlejning> lwUdlejning;
 	private Label lblUdlejninger, lblNavn, lblEmail, lblTlf, lblKvittering;
-	//Listview til super
+	private ListView<Object> kvittering;
 	private TextField txfNavn, txfEmail, txfTlf;
 	private CheckBox chbLevering;
 	private Button btnFjern, btnLuk;
