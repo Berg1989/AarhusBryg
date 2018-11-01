@@ -9,7 +9,7 @@ public class Udlejning {
 	private String kundeNavn;
 	private String kundeTlf;
 	private String kundeEmail;
-	private ArrayList<Fustage> fustager;
+	private ArrayList<Rentable> fustager;
 	private static double fustagepant = 200.0;
 	private ArrayList<Anlaeg> anlaeg;
 	private LocalDate dato;

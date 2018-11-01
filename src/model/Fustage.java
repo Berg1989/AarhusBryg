@@ -1,6 +1,6 @@
 package model;
 
-public class Fustage {
+public class Fustage implements Rentable {
 	private String stoerrelse;
 	private String oeltype;
 	private double pris;

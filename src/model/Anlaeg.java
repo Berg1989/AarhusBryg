@@ -1,6 +1,6 @@
 package model;
 
-public class Anlaeg {
+public class Anlaeg implements Rentable{
 	private String type;
 	private double pris;
 	private double pant;
@@ -33,6 +33,10 @@ public class Anlaeg {
 	
 	public double getPant() {
 		return this.pant;
+	}
+	
+	public double getTotal() {
+		return this.pant + this.pris;
 	}
 	
 	@Override
