@@ -161,35 +161,42 @@ public class Service {
 	public List<Salg> getAllSalg() {
 		return storage.getAllSalg();
 	}
-	
-	//Udlejnings metoder
+
+	// Udlejnings metoder
 	public Udlejning opretUdlejning(String navn, String tlf, String email, LocalDate dato) {
 		Udlejning u = new Udlejning(navn, tlf, email, dato);
 		storage.addUdlejning(u);
 		return u;
 	}
-	
-	//Fustage metoder
+
+	// Fustage metoder
 	public Fustage opretFustage(String stoerrelse, String oeltype, double pris) {
 		Fustage f = new Fustage(stoerrelse, oeltype, pris);
 		storage.addFustage(f);
 		return f;
 	}
-	
-	//Kulsure metoder
+
+	// Kulsure metoder
 	public Kulsyre opretKulsyre(double stoerrelse, double pris) {
 		Kulsyre k = new Kulsyre(stoerrelse, pris);
 		storage.addKulsyre(k);
 		return k;
 	}
-	
-	//anlaeg metoder
+
+	// anlaeg metoder
 	public Anlaeg opretAnlaeg(String type, double pris, double pant) {
 		Anlaeg a = new Anlaeg(type, pris, pant);
 		storage.addAnlaeg(a);
 		return a;
 	}
 
+	public List<Anlaeg> getAllAnleag() {
+		return storage.getAllAnlaeg();
+	}
+
+	public List<Fustage> getAllFustager() {
+		return storage.getAllFustager();
+	}
 
 	// INITIAL STUFF
 
@@ -208,8 +215,8 @@ public class Service {
 		Produkt p5 = opretProdukt(pk3, "TestProdukt5", 10, "1.5 L");
 
 		// Bar
-		SalgSted fredagsBar = opretSalgSted("Fredagsbar"); //Slet ikke
-		SalgSted butik = opretSalgSted("Butik"); //Slet ikke
+		SalgSted fredagsBar = opretSalgSted("Fredagsbar"); // Slet ikke
+		SalgSted butik = opretSalgSted("Butik"); // Slet ikke
 		SalgSted bar = opretSalgSted("Bar");
 
 		// StedPriser
@@ -219,26 +226,26 @@ public class Service {
 
 		// Tilføjelse af PK til salgsted
 
-		tilfoejKategori(fredagsBar, pk1); 
+		tilfoejKategori(fredagsBar, pk1);
 		tilfoejKategori(fredagsBar, pk2);
-		
-		//Rundvisninger
+
+		// Rundvisninger
 		Rundvisning r1 = opretRundvisning("Madeleine", LocalDate.of(2018, 6, 26), 42, LocalTime.of(13, 37));
 		r1.isStuderende();
 		r1.tilmeldSpsning(21);
 		r1.setBetalt();
-		
-		Rundvisning r2 = opretRundvisning("Mads", LocalDate.of(2018, 5, 4), 20, LocalTime.of(10,00));
+
+		Rundvisning r2 = opretRundvisning("Mads", LocalDate.of(2018, 5, 4), 20, LocalTime.of(10, 00));
 		r2.tilmeldSpisning();
-		
+
 		Rundvisning r3 = opretRundvisning("Daniel", LocalDate.of(2018, 3, 14), 65, LocalTime.of(9, 30));
 		r3.setBetalt();
-		
+
 		//
-		//Fra opgaven
+		// Fra opgaven
 		//
 		ArrayList<Produkt> tempList = new ArrayList<>();
-		//flaske Oel
+		// flaske Oel
 		ProduktKategori flaske = opretProduktKategori("Flaskeoel");
 		Produkt kloster = opretProdukt(flaske, "Klosterbryg", 36.0, "60cL");
 		tempList.add(kloster);
@@ -248,7 +255,7 @@ public class Service {
 		tempList.add(epils);
 		Produkt celebration = opretProdukt(flaske, "Celebration", 36.0, "60cL");
 		tempList.add(celebration);
-		Produkt blondie =opretProdukt(flaske, "Blonie", 36.0, "60cL");
+		Produkt blondie = opretProdukt(flaske, "Blonie", 36.0, "60cL");
 		tempList.add(blondie);
 		Produkt foraars = opretProdukt(flaske, "Foraarsbryg", 36.0, "60cL");
 		tempList.add(foraars);
@@ -271,11 +278,11 @@ public class Service {
 			opretStedPris(butik, p, 36.0);
 		}
 		tempList.clear();
-		Produkt monster = opretProdukt(flaske, "Black Monster", 50.0 , "60.0cL");
+		Produkt monster = opretProdukt(flaske, "Black Monster", 50.0, "60.0cL");
 		opretStedPris(fredagsBar, monster, 50.0);
 		opretStedPris(butik, monster, 50.0);
-		
-		//Fadoel
+
+		// Fadoel
 		ProduktKategori fad = opretProduktKategori("Fadoel");
 		Produkt klosterF = opretProdukt(fad, "Klosterbryg", 30.0, "40cL");
 		tempList.add(klosterF);
@@ -319,12 +326,12 @@ public class Service {
 		opretStedPris(fredagsBar, chips, 10.0);
 		Produkt nuts = opretProdukt(snacks, "Peanuts", 10.0, "sk�l");
 		opretStedPris(fredagsBar, nuts, 10.0);
-		
-		//Spiritus
+
+		// Spiritus
 		ProduktKategori spiritus = opretProduktKategori("Spiritus");
 		Produkt soa = opretProdukt(spiritus, "Spirit of Aarhus", 300, "flaske");
 		opretStedPris(fredagsBar, soa, 300.0);
-		opretStedPris(butik,soa, 300.0);
+		opretStedPris(butik, soa, 300.0);
 		Produkt soaP = opretProdukt(spiritus, "Spirit of Aarhus med pind", 350.0, "flaske");
 		opretStedPris(fredagsBar, soaP, 350.0);
 		opretStedPris(butik, soaP, 350.0);
@@ -334,8 +341,8 @@ public class Service {
 		Produkt loa = opretProdukt(spiritus, "Liquor of Aarhus", 175.0, "flaske");
 		opretStedPris(fredagsBar, loa, 175.0);
 		opretStedPris(butik, loa, 175.0);
-		
-		//fustage
+
+		// fustage
 		opretFustage("20 Liter", "Klosterbryg", 775.0);
 		opretFustage("25 Liter", "Jazz Classic", 625.0);
 		opretFustage("25 Liter", "Extra Pilsner", 575.0);
@@ -345,23 +352,23 @@ public class Service {
 		opretFustage("20 Liter", "India Pale Ale", 775.0);
 		opretFustage("20 Liter", "Julebryg", 775.0);
 		opretFustage("20 Liter", "Imperial Stout", 775.0);
-		
-		//Glass
+
+		// Glass
 		ProduktKategori glas = opretProduktKategori("Glas");
 		opretProdukt(glas, "Stort Glas", 15.0, "50cL");
 		opretProdukt(glas, "Lille Glas", 15.0, "30cL");
 		opretProdukt(glas, "Krus", 60.0, "Krus-stoerrelse");
-		
-		//kulsyre
+
+		// kulsyre
 		opretKulsyre(6, 400.0);
 		opretKulsyre(4, 400.0);
 		opretKulsyre(10, 400.0);
-		
-		//Malt
+
+		// Malt
 		ProduktKategori bryg = opretProduktKategori("Brygtilbehoer");
 		opretProdukt(bryg, "Malt", 300.0, "25 kg sæk");
-		
-		//Toej
+
+		// Toej
 		ProduktKategori toej = opretProduktKategori("Beklaedning");
 		Produkt tshirt = opretProdukt(toej, "T-shirt", 70.0, "XS - XL");
 		opretStedPris(fredagsBar, tshirt, 70.0);
@@ -372,20 +379,17 @@ public class Service {
 		Produkt cap = opretProdukt(toej, "Cap", 30.0, "One size fits all");
 		opretStedPris(fredagsBar, cap, 30.0);
 		opretStedPris(butik, cap, 30.0);
-		
-		//Anlaeg
+
+		// Anlaeg
 		opretAnlaeg("1-hane", 250.0, 0.0);
 		opretAnlaeg("2-haner", 400.0, 0.0);
 		opretAnlaeg("Bar med flere haner", 500.0, 0.0);
-		
-		//Gavepakker
+
+		// Gavepakker
 		ProduktKategori gave = opretProduktKategori("Gaveaeske");
 		Produkt g1 = opretProdukt(gave, "2 oel, 2 glas", 100.0, "aeske");
-		
-		
-		
-		
-		//NOT DONE
+
+		// NOT DONE
 	}
 
 }

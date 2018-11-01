@@ -1,11 +1,14 @@
 package gui;
 
+import java.time.LocalDate;
+
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -15,10 +18,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Produkt;
+import model.Anlaeg;
+import model.Fustage;
+import service.Service;
 
 public class UdlejningsWindow extends Stage {
+
+	private Service service;
+
 	public UdlejningsWindow() {
+
+		service = Service.getService();
+
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);
@@ -32,15 +43,14 @@ public class UdlejningsWindow extends Stage {
 
 	// Insert Attributes here:
 	// LISTVIEW SKAL ÆNDRES FRA PRODUKT TIL ANLÆG!
-	private ListView<Produkt> lwAnlag;
+	private ListView<Anlaeg> lwAnlag;
 
 	// SKal lige kigges igennem
-	private ListView<Produkt> lwPK;
-	private Label lbMuligAnlag, lbUdlej, lbEmail, lbKNavn, lbTlf, lbLejAnlaeg, lbFustager, lbFNavn, lbFStr, lbAntalF,
-			lbSpace;
-	private TextField txfUdlej, txfEmail, txfKNavn, txfTlf, txfFNavn, txfFStr, txfAntalF;
+	private ListView<Fustage> lwFustager;
+	private Label lbMuligAnlag, lbDP, lbEmail, lbKNavn, lbTlf, lbFustager, lbFNavn, lbFStr, lbAntalF, lbFPris, lbSpace;
+	private TextField txfEmail, txfKNavn, txfTlf, txfFNavn, txfFStr, txfFPris, txfAntalF;
 	private CheckBox chbLevering;
-	private ComboBox<?> cbbAnlag;
+	private DatePicker dp;
 	private Button btnTilfoj, btnOpret, btnLuk;
 
 	private void initContent(GridPane pane) {
@@ -59,29 +69,30 @@ public class UdlejningsWindow extends Stage {
 
 		lwAnlag = new ListView<>();
 		vboks1.getChildren().add(lwAnlag);
+		lwAnlag.getItems().addAll(service.getAllAnleag());
 
 		// -----------------VBox 2 ---------------------------------------
 
 		VBox vboks2 = new VBox();
 		pane.add(vboks2, 1, 0);
 
-		lbUdlej = new Label("Udlejningsperiode: ");
-		vboks2.getChildren().add(lbUdlej);
+		lbDP = new Label("Udlejningsperiode: ");
+		vboks2.getChildren().add(lbDP);
 
-		txfUdlej = new TextField();
-		vboks2.getChildren().add(txfUdlej);
-
-		lbEmail = new Label("Email: ");
-		vboks2.getChildren().add(lbEmail);
-
-		txfEmail = new TextField();
-		vboks2.getChildren().add(txfEmail);
+		dp = new DatePicker();
+		vboks2.getChildren().add(dp);
 
 		lbKNavn = new Label("Kunde navn: ");
 		vboks2.getChildren().add(lbKNavn);
 
 		txfKNavn = new TextField();
 		vboks2.getChildren().add(txfKNavn);
+
+		lbEmail = new Label("Email: ");
+		vboks2.getChildren().add(lbEmail);
+
+		txfEmail = new TextField();
+		vboks2.getChildren().add(txfEmail);
 
 		lbTlf = new Label("Telefon nummer: ");
 		vboks2.getChildren().add(lbTlf);
@@ -92,13 +103,6 @@ public class UdlejningsWindow extends Stage {
 		chbLevering = new CheckBox("Levering 800 kr.-");
 		vboks2.getChildren().add(chbLevering);
 
-		lbLejAnlaeg = new Label("Leje af anlæg");
-		vboks2.getChildren().add(lbLejAnlaeg);
-
-		cbbAnlag = new ComboBox<>();
-		vboks2.getChildren().add(cbbAnlag);
-		cbbAnlag.setPrefWidth(150);
-
 		// -----------------VBox 3 ---------------------------------------
 
 		VBox vboks3 = new VBox();
@@ -107,8 +111,12 @@ public class UdlejningsWindow extends Stage {
 		lbFustager = new Label("Fustager");
 		vboks3.getChildren().add(lbFustager);
 
-		lwPK = new ListView<>();
-		vboks3.getChildren().add(lwPK);
+		lwFustager = new ListView<>();
+		vboks3.getChildren().add(lwFustager);
+		lwFustager.getItems().addAll(service.getAllFustager());
+
+		ChangeListener<Fustage> listener = (op, oldProduct, newProduct) -> updateControls();
+		lwFustager.getSelectionModel().selectedItemProperty().addListener(listener);
 
 		// -----------------VBox 4 ---------------------------------------
 
@@ -120,12 +128,19 @@ public class UdlejningsWindow extends Stage {
 
 		txfFNavn = new TextField();
 		vboks4.getChildren().add(txfFNavn);
+		txfFNavn.setEditable(false);
 
 		lbFStr = new Label("Fustage størrelse: ");
 		vboks4.getChildren().add(lbFStr);
 
 		txfFStr = new TextField();
 		vboks4.getChildren().add(txfFStr);
+
+		lbFPris = new Label("Fustage Pris");
+		vboks4.getChildren().add(lbFPris);
+
+		txfFPris = new TextField();
+		vboks4.getChildren().add(txfFPris);
 
 		lbAntalF = new Label("Antal fustager: ");
 		vboks4.getChildren().add(lbAntalF);
@@ -138,6 +153,7 @@ public class UdlejningsWindow extends Stage {
 
 		btnTilfoj = new Button("Tilføj til udlejning");
 		vboks4.getChildren().add(btnTilfoj);
+		btnTilfoj.setOnAction(event -> btnTilFojAction());
 
 		// -----------------HBox 1 ---------------------------------------
 
@@ -147,6 +163,7 @@ public class UdlejningsWindow extends Stage {
 
 		btnOpret = new Button("Opret Reservering");
 		hboks1.getChildren().add(btnOpret);
+		btnOpret.setOnAction(event -> btnOpretAction());
 
 		HBox hboks2 = new HBox();
 		pane.add(hboks2, 3, 3);
@@ -157,9 +174,38 @@ public class UdlejningsWindow extends Stage {
 		btnLuk.setOnAction(event -> btnLukAction());
 
 	}
-	
-	
-	public void btnLukAction(){
+
+	private void updateControls() {
+		Fustage fustage = lwFustager.getSelectionModel().getSelectedItem();
+
+		if (fustage != null) {
+			txfFNavn.setText(fustage.getOeltype());
+			txfFStr.setText(fustage.getStoerrelse());
+			txfFPris.setText(Double.toString(fustage.getPris()));
+
+		} else {
+			txfFNavn.clear();
+			txfFStr.clear();
+			txfFPris.clear();
+
+		}
+	}
+
+	public void btnTilFojAction() {
+
+	}
+
+	public void btnOpretAction() {
+		String navn = txfKNavn.getText().trim();
+		String tlf = txfTlf.getText().trim();
+		String email = txfEmail.getText().trim();
+		LocalDate dato = dp.getValue();
+
+		service.opretUdlejning(navn, tlf, email, dato);
+
+	}
+
+	public void btnLukAction() {
 		hide();
 	}
 
