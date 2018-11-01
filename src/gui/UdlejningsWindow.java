@@ -27,7 +27,7 @@ public class UdlejningsWindow extends Stage {
 
 	private Service service;
 
-	public UdlejningsWindow() {
+	public UdlejningsWindow() {		
 
 		service = Service.getService();
 
@@ -46,12 +46,14 @@ public class UdlejningsWindow extends Stage {
 	private ListView<Anlaeg> lwAnlag;
 	private ListView<Kulsyre> lwKulsyre;
 	private ListView<Fustage> lwFustager;
-	private Label lbMuligAnlag, lbDP, lbEmail, lbKNavn, lbTlf, lbFustager, lbFNavn, lbFStr, lbAntalF, lbFPris, lbSpace,
-			lbKulsyre;
-	private TextField txfEmail, txfKNavn, txfTlf, txfFNavn, txfFStr, txfFPris, txfAntalF;
+	//Superclass list view?
+	private Label lblAnlag, lblDato, lblEmail, lblNavn, lblTlf, lbFustager, lbFNavn, lbFStr, lbAntalF, lbFPris, lbSpace,
+			lblKulsyre;
+	private TextField txfEmail, txfNavn, txfTlf, txfFNavn, txfFStr, txfFPris, txfAntalF;
 	private CheckBox chbLevering;
 	private DatePicker dp;
-	private Button btnTilfoj, btnOpret, btnLuk;
+	private Button btnAnlag, btnFustage, btnKulsyure, btnOpret, btnLuk;
+	private VBox vboks1, vboks2, vboks3, vboks4, vboks5;
 
 	private void initContent(GridPane pane) {
 		pane.setPadding(new Insets(10));
@@ -61,102 +63,107 @@ public class UdlejningsWindow extends Stage {
 
 		// -----------------VBox 1 ---------------------------------------
 
-		VBox vboks1 = new VBox();
+		vboks1 = new VBox();
 		pane.add(vboks1, 0, 0);
 
-		lbMuligAnlag = new Label("Mulige anlæg til leje");
-		vboks1.getChildren().add(lbMuligAnlag);
-
-		lwAnlag = new ListView<>();
-		vboks1.getChildren().add(lwAnlag);
-		lwAnlag.getItems().addAll(service.getAllAnleag());
+		lblNavn = new Label("Navn:");
+		vboks1.getChildren().add(0, lblNavn);
+		
+		txfNavn = new TextField();
+		vboks1.getChildren().add(1, txfNavn);
+		
+		lblDato = new Label("Dato:");
+		vboks1.getChildren().add(2, lblDato);
+		
+		dp = new DatePicker();
+		vboks1.getChildren().add(3, dp);
+		
+		lblEmail = new Label("Email:");
+		vboks1.getChildren().add(4, lblEmail);
+		
+		txfEmail = new TextField();
+		vboks1.getChildren().add(5, txfEmail);
+		
+		lblTlf = new Label("Telefon");
+		vboks1.getChildren().add(6, lblTlf);
+		
+		txfTlf = new TextField();
+		vboks1.getChildren().add(7, txfTlf);
+		
+		chbLevering = new CheckBox("Levering");
+		vboks1.getChildren().add(8, chbLevering);
+		
+		
 
 		// -----------------VBox 2 ---------------------------------------
 
-		VBox vboks2 = new VBox();
-		pane.add(vboks2, 1, 0);
+		vboks2 = new VBox();
+		pane.add(vboks2, 0, 1);
 
-		lbDP = new Label("Udlejningsperiode: ");
-		vboks2.getChildren().add(lbDP);
-
-		dp = new DatePicker();
-		vboks2.getChildren().add(dp);
-
-		lbKNavn = new Label("Kunde navn: ");
-		vboks2.getChildren().add(lbKNavn);
-
-		txfKNavn = new TextField();
-		vboks2.getChildren().add(txfKNavn);
-
-		lbEmail = new Label("Email: ");
-		vboks2.getChildren().add(lbEmail);
-
-		txfEmail = new TextField();
-		vboks2.getChildren().add(txfEmail);
-
-		lbTlf = new Label("Telefon nummer: ");
-		vboks2.getChildren().add(lbTlf);
-
-		txfTlf = new TextField();
-		vboks2.getChildren().add(txfTlf);
-
-		chbLevering = new CheckBox("Levering 800 kr.-");
-		vboks2.getChildren().add(chbLevering);
+		lblAnlag = new Label("Anlaeg:");
+		vboks2.getChildren().add(0, lblAnlag);
+		
+		lwAnlag = new ListView<>();
+		vboks2.getChildren().add(1, lwAnlag);
+		
+		btnAnlag = new Button("->");
+		vboks2.getChildren().add(2, btnAnlag);
+		
 
 		// -----------------VBox 3 ---------------------------------------
 
-		VBox vboks3 = new VBox();
-		pane.add(vboks3, 2, 0);
+		vboks3 = new VBox();
+		pane.add(vboks3, 1, 0);
 
 		lbFustager = new Label("Fustager");
-		vboks3.getChildren().add(lbFustager);
+		vboks3.getChildren().add(0, lbFustager);
 
 		lwFustager = new ListView<>();
-		vboks3.getChildren().add(lwFustager);
-		lwFustager.getItems().addAll(service.getAllFustager());
+		vboks3.getChildren().add(1, lwFustager);
+		//lwFustager.getItems().addAll(service.getAllFustager());
 
-		ChangeListener<Fustage> listener = (op, oldProduct, newProduct) -> updateControls();
-		lwFustager.getSelectionModel().selectedItemProperty().addListener(listener);
+		//ChangeListener<Fustage> listener = (op, oldProduct, newProduct) -> updateControls();
+		//lwFustager.getSelectionModel().selectedItemProperty().addListener(listener);
+		
+		btnFustage = new Button("->");
+		vboks3.getChildren().add(2, btnFustage);
+		
+		
 
 		// -----------------VBox 4 ---------------------------------------
 
-		VBox vboks4 = new VBox();
-		pane.add(vboks4, 3, 0);
+		vboks4 = new VBox();
+		pane.add(vboks4, 1, 1);
+		
+		lblKulsyre = new Label("Kulsyre");
+		vboks4.getChildren().add(0, lblKulsyre);
+		
+		lwKulsyre = new ListView<>();
+		vboks4.getChildren().add(1, lwKulsyre);
 
-		lbFNavn = new Label("Fustage navn: ");
-		vboks4.getChildren().add(lbFNavn);
+		btnKulsyure = new Button("->");
+		vboks4.getChildren().add(2, btnKulsyure);
+		
 
-		txfFNavn = new TextField();
-		vboks4.getChildren().add(txfFNavn);
-		txfFNavn.setEditable(false);
-
-		lbFStr = new Label("Fustage størrelse: ");
-		vboks4.getChildren().add(lbFStr);
-
-		txfFStr = new TextField();
-		vboks4.getChildren().add(txfFStr);
-
-		lbFPris = new Label("Fustage Pris");
-		vboks4.getChildren().add(lbFPris);
-
-		txfFPris = new TextField();
-		vboks4.getChildren().add(txfFPris);
-
-		lbAntalF = new Label("Antal fustager: ");
-		vboks4.getChildren().add(lbAntalF);
-
-		txfAntalF = new TextField();
-		vboks4.getChildren().add(txfAntalF);
-
-		lbSpace = new Label();
-		vboks4.getChildren().add(lbSpace);
-
-		btnTilfoj = new Button("Tilføj til udlejning");
-		vboks4.getChildren().add(btnTilfoj);
-		btnTilfoj.setOnAction(event -> btnTilFojAction());
+		//btnTilfoj = new Button("Tilføj til udlejning");
+		//vboks4.getChildren().add(btnTilfoj);
+		//btnTilfoj.setOnAction(event -> btnTilFojAction());
+		
+		// -----------------VBox 4 ---------------------------------------
+		
+		vboks5 = new VBox();
+		pane.add(vboks5, 2, 0);
+		
+		
+		
+		
+		
+		
+		
+		
 
 		// -----------------HBox 1 ---------------------------------------
-
+/**
 		HBox hboks1 = new HBox();
 		pane.add(hboks1, 0, 3);
 		hboks1.setAlignment(Pos.BASELINE_LEFT);
@@ -171,9 +178,9 @@ public class UdlejningsWindow extends Stage {
 
 		btnLuk = new Button("Luk");
 		hboks2.getChildren().add(btnLuk);
-		btnLuk.setOnAction(event -> btnLukAction());
+		btnLuk.setOnAction(event -> btnLukAction());*/
 
-	}
+	} 
 
 	private void updateControls() {
 		Fustage fustage = lwFustager.getSelectionModel().getSelectedItem();
@@ -196,12 +203,12 @@ public class UdlejningsWindow extends Stage {
 	}
 
 	public void btnOpretAction() {
-		String navn = txfKNavn.getText().trim();
-		String tlf = txfTlf.getText().trim();
-		String email = txfEmail.getText().trim();
-		LocalDate dato = dp.getValue();
+		//String navn = txfKNavn.getText().trim();
+		//String tlf = txfTlf.getText().trim();
+		//String email = txfEmail.getText().trim();
+		//LocalDate dato = dp.getValue();
 
-		service.opretUdlejning(navn, tlf, email, dato);
+		//service.opretUdlejning(navn, tlf, email, dato);
 		hide();
 
 	}
