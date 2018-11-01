@@ -163,10 +163,13 @@ public class Service {
 	}
 
 	// Udlejnings metoder
-	public Udlejning opretUdlejning(String navn, String tlf, String email, LocalDate dato) {
-		Udlejning u = new Udlejning(navn, tlf, email, dato);
-		storage.addUdlejning(u);
+	public Udlejning opretUdlejning() {
+		Udlejning u = new Udlejning();
 		return u;
+	}
+	
+	public void gemUdlejning(Udlejning u) {
+		storage.addUdlejning(u);
 	}
 
 	// Fustage metoder
@@ -175,12 +178,20 @@ public class Service {
 		storage.addFustage(f);
 		return f;
 	}
+	
+	public List<Fustage> getAllFustager() {
+		return storage.getAllFustager();
+	}
 
 	// Kulsure metoder
 	public Kulsyre opretKulsyre(double stoerrelse, double pris) {
 		Kulsyre k = new Kulsyre(stoerrelse, pris);
 		storage.addKulsyre(k);
 		return k;
+	}
+	
+	public List<Kulsyre> getAllKulsyre() {
+		return storage.getAllKulsyre();
 	}
 
 	// anlaeg metoder
@@ -194,9 +205,7 @@ public class Service {
 		return storage.getAllAnlaeg();
 	}
 
-	public List<Fustage> getAllFustager() {
-		return storage.getAllFustager();
-	}
+
 
 	// INITIAL STUFF
 

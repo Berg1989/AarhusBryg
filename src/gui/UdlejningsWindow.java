@@ -21,6 +21,7 @@ import javafx.stage.StageStyle;
 import model.Anlaeg;
 import model.Fustage;
 import model.Kulsyre;
+import model.Udlejning;
 import service.Service;
 
 public class UdlejningsWindow extends Stage {
@@ -48,17 +49,19 @@ public class UdlejningsWindow extends Stage {
 	private ListView<Fustage> lwFustager;
 	private ListView<Object> lwValgt;
 	private Label lblAnlag, lblDato, lblEmail, lblNavn, lblTlf, lbFustager, lblKulsyre, lblValgt, lblPris, lblPant, lblTotalPris;
-	private TextField txfEmail, txfNavn, txfTlf, txfFPris, txfPant, txfTotal, txfAntalF, txfAntalA, txfAntalK;
+	private TextField txfEmail, txfNavn, txfTlf, txfPris, txfPant, txfTotal, txfAntalF, txfAntalA, txfAntalK;
 	private CheckBox chbLevering;
 	private DatePicker dp;
 	private Button btnAnlag, btnFustage, btnKulsyure, btnFjern, btnOpret, btnLuk;
 	private VBox vboks1, vboks2, vboks3, vboks4, vboks5, vboks6;
+	private Udlejning u;
 
 	private void initContent(GridPane pane) {
 		pane.setPadding(new Insets(10));
 		pane.setHgap(10);
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
+		u = new Udlejning();
 
 		// -----------------VBox 1 ---------------------------------------
 
@@ -70,27 +73,32 @@ public class UdlejningsWindow extends Stage {
 		
 		txfNavn = new TextField();
 		vboks1.getChildren().add(1, txfNavn);
+		addListenerNavn();
 		
 		lblDato = new Label("Dato:");
 		vboks1.getChildren().add(2, lblDato);
 		
 		dp = new DatePicker();
 		vboks1.getChildren().add(3, dp);
+		addListenerdp();
 		
 		lblEmail = new Label("Email:");
 		vboks1.getChildren().add(4, lblEmail);
 		
 		txfEmail = new TextField();
 		vboks1.getChildren().add(5, txfEmail);
+		addListenerEmail();
 		
 		lblTlf = new Label("Telefon");
 		vboks1.getChildren().add(6, lblTlf);
 		
 		txfTlf = new TextField();
 		vboks1.getChildren().add(7, txfTlf);
+		addListenerTlfl();
 		
 		chbLevering = new CheckBox("Levering");
 		vboks1.getChildren().add(8, chbLevering);
+		chbLevering.setOnAction(event -> selectedLevering());
 		
 		
 
@@ -126,7 +134,7 @@ public class UdlejningsWindow extends Stage {
 
 		lwFustager = new ListView<>();
 		vboks3.getChildren().add(1, lwFustager);
-		//lwFustager.getItems().addAll(service.getAllFustager());
+		lwFustager.getItems().addAll(service.getAllFustager());
 
 		//ChangeListener<Fustage> listener = (op, oldProduct, newProduct) -> updateControls();
 		//lwFustager.getSelectionModel().selectedItemProperty().addListener(listener);
@@ -139,6 +147,7 @@ public class UdlejningsWindow extends Stage {
 		
 		btnFustage = new Button("->");
 		hboks3.getChildren().add(1, btnFustage);
+		btnFustage.setOnAction(event -> btnFustageActino());
 		
 		
 
@@ -152,6 +161,7 @@ public class UdlejningsWindow extends Stage {
 		
 		lwKulsyre = new ListView<>();
 		vboks4.getChildren().add(1, lwKulsyre);
+		lwKulsyre.getItems().addAll(service.getAllKulsyre());
 		
 		HBox hboks4 = new HBox();
 		vboks4.getChildren().add(2, hboks4);
@@ -161,6 +171,7 @@ public class UdlejningsWindow extends Stage {
 
 		btnKulsyure = new Button("->");
 		hboks4.getChildren().add(1, btnKulsyure);
+		btnKulsyure.setOnAction(event -> btnKulsyreAction());
 		
 
 
@@ -178,6 +189,7 @@ public class UdlejningsWindow extends Stage {
 		
 		btnFjern = new Button("<-");
 		vboks5.getChildren().add(2, btnFjern);
+		btnFjern.setOnAction(event -> btnFjernAction());
 		
 		
 		
@@ -189,31 +201,36 @@ public class UdlejningsWindow extends Stage {
 		lblPris = new Label("Pris");
 		vboks6.getChildren().add(0, lblPris);
 		
-		txfFPris = new TextField();
-		vboks6.getChildren().add(1, txfFPris);
+		txfPris = new TextField("0.0");
+		vboks6.getChildren().add(1, txfPris);
+		txfPris.setEditable(false);
 		
 		lblPant = new Label("Pant");
 		vboks6.getChildren().add(2, lblPant);
 		
-		txfPant = new TextField();
+		txfPant = new TextField("0.0");
 		vboks6.getChildren().add(3, txfPant);
+		txfPant.setEditable(false);
 		
 		lblTotalPris = new Label("Total");
 		vboks6.getChildren().add(4, lblTotalPris);
 		
-		txfTotal = new TextField();
+		txfTotal = new TextField("0.0");
 		vboks6.getChildren().add(5, txfTotal);
+		txfTotal.setEditable(false);
 		
 		HBox hboks6 = new HBox();
 		vboks6.getChildren().add(6, hboks6);
+		//hboks6.setAlignment(Pos.BASELINE_RIGHT);
 		
 		btnLuk = new Button("Luk");
 		hboks6.getChildren().add(0, btnLuk);
+		btnLuk.setOnAction(event -> btnLukAction());
 		
 		btnOpret = new Button("Book");
 		hboks6.getChildren().add(1, btnOpret);
-		//boks6.setAlignment(Pos.BASELINE_RIGHT);
-		btnLuk.setOnAction(event -> btnLukAction());
+		btnOpret.setOnAction(event -> btnOpretAction());
+
 	
 
 
@@ -235,25 +252,92 @@ public class UdlejningsWindow extends Stage {
 
 		}
 	}*/
+	
 
 	public void btnAnlagAction() {
+		Anlaeg a = lwAnlag.getSelectionModel().getSelectedItem();
+		//if (a != null) 
+	}
+	
+	public void btnFustageActino() {
+		
+	}
+	
+	public void btnKulsyreAction() {
+		
+	}
+	
+	public void btnFjernAction() {
 		
 	}
 
 	public void btnOpretAction() {
-		String navn = txfNavn.getText().trim();
-		String tlf = txfTlf.getText().trim();
-		String email = txfEmail.getText().trim();
-		LocalDate dato = dp.getValue();
-
-		service.opretUdlejning(navn, tlf, email, dato);
-		hide();
+		//check all fiels
 		//Make alert
+		service.gemUdlejning(u);
+		hide();
 
 	}
 
 	public void btnLukAction() {
 		hide();
 	}
+	
+	//
+	// Methods
+	//
+	
+	
+	
+	
+	//
+	// Listeners
+	//
+	
+	public void addListenerNavn() {
+		txfNavn.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String navn = txfNavn.getText().trim();
+			if(navn.length() > 0) {
+				u.setKundeNavn(navn);
+			}
+		});
+	}
+	
+	public void addListenerEmail() {
+		txfEmail.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String email = txfEmail.getText().trim();
+			if(email.length() > 0) {
+				u.setKundeNavn(email);
+			}
+		});
+	}
+	
+	public void addListenerTlfl() {
+		txfTlf.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String tlf = txfTlf.getText().trim();
+			if(tlf.length() > 0) {
+				u.setKundeNavn(tlf);
+			}
+		});
+	}
+	
+	private void addListenerdp() {
+		dp.valueProperty().addListener((ov, oldValue, newValue) -> {
+			LocalDate d = dp.getValue();
+			u.setDato(d);
+		});
+	}
+	
+	private void  selectedLevering() {
+		boolean b;
+		if (chbLevering.isSelected()) {
+			b = true;
+		}
+		else {
+			b = false;
+		}
+		u.setLevering(b);
+	}
+	
 
 }

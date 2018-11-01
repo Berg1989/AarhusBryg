@@ -10,29 +10,21 @@ public class Udlejning {
 	private String kundeTlf;
 	private String kundeEmail;
 	private ArrayList<Fustage> fustager;
-	private double fustagepant;
+	private static double fustagepant = 200.0;
 	private ArrayList<Anlaeg> anlaeg;
 	private LocalDate dato;
-	//private int glas; ligger nu som produkt
 	private String kommentar;
 	private boolean levering;
-	private double leveringspris;
+	private static double leveringspris = 800.0;
 	private ArrayList<Kulsyre> kulsyre;
-	private double kulsyrepant;
+	private static double kulsyrepant = 1000.0;
 	private boolean betalt;
 	private double betaltBeloeb;
 	private double pantLagt;
 	
-	public Udlejning(String navn, String tlf, String email, LocalDate dato) {
-		this.kundeNavn = navn;
-		this.kundeTlf = tlf;
-		this.kundeEmail = email;
-		this.dato = dato;
+	public Udlejning() {
 		this.anlaeg = new ArrayList<>();
 		this.fustager = new ArrayList<>();
-		this.leveringspris = 800.0;
-		this.fustagepant = 200.0;
-		this.kulsyrepant = 1000.0;
 		this.betalt = false;
 		this.betaltBeloeb = 0.0;
 	}
@@ -148,6 +140,14 @@ public class Udlejning {
 	
 	public double getBetaltPris() {
 		return this.betaltBeloeb;
+	}
+	
+	public void setLevering(boolean b) {
+		this.levering = b;
+	}
+	
+	public boolean getLevering() {
+		return this.levering;
 	}
 
 }
