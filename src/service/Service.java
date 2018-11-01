@@ -224,11 +224,6 @@ public class Service {
 		StedPris sp2 = opretStedPris(butik, p1, 75);
 		StedPris sp3 = opretStedPris(bar, p1, 150);
 
-		// Tilføjelse af PK til salgsted
-
-		tilfoejKategori(fredagsBar, pk1);
-		tilfoejKategori(fredagsBar, pk2);
-
 		// Rundvisninger
 		Rundvisning r1 = opretRundvisning("Madeleine", LocalDate.of(2018, 6, 26), 42, LocalTime.of(13, 37));
 		r1.isStuderende();
@@ -278,6 +273,7 @@ public class Service {
 			opretStedPris(butik, p, 36.0);
 		}
 		tempList.clear();
+
 		Produkt monster = opretProdukt(flaske, "Black Monster", 50.0, "60.0cL");
 		opretStedPris(fredagsBar, monster, 50.0);
 		opretStedPris(butik, monster, 50.0);
@@ -390,6 +386,16 @@ public class Service {
 		Produkt g1 = opretProdukt(gave, "2 oel, 2 glas", 100.0, "aeske");
 
 		// NOT DONE
+
+		// Tilføjelse af PK til salgsted
+
+		tilfoejKategori(fredagsBar, pk1);
+		tilfoejKategori(fredagsBar, pk2);
+		tilfoejKategori(butik, flaske);
+		tilfoejKategori(butik, fad);
+		tilfoejKategori(butik, spiritus);
+		tilfoejKategori(butik, glas);
+
 	}
 
 }

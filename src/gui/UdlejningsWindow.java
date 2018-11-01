@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Anlaeg;
 import model.Fustage;
+import model.Kulsyre;
 import service.Service;
 
 public class UdlejningsWindow extends Stage {
@@ -42,12 +43,11 @@ public class UdlejningsWindow extends Stage {
 	}
 
 	// Insert Attributes here:
-	// LISTVIEW SKAL ÆNDRES FRA PRODUKT TIL ANLÆG!
 	private ListView<Anlaeg> lwAnlag;
-
-	// SKal lige kigges igennem
+	private ListView<Kulsyre> lwKulsyre;
 	private ListView<Fustage> lwFustager;
-	private Label lbMuligAnlag, lbDP, lbEmail, lbKNavn, lbTlf, lbFustager, lbFNavn, lbFStr, lbAntalF, lbFPris, lbSpace;
+	private Label lbMuligAnlag, lbDP, lbEmail, lbKNavn, lbTlf, lbFustager, lbFNavn, lbFStr, lbAntalF, lbFPris, lbSpace,
+			lbKulsyre;
 	private TextField txfEmail, txfKNavn, txfTlf, txfFNavn, txfFStr, txfFPris, txfAntalF;
 	private CheckBox chbLevering;
 	private DatePicker dp;
@@ -202,6 +202,7 @@ public class UdlejningsWindow extends Stage {
 		LocalDate dato = dp.getValue();
 
 		service.opretUdlejning(navn, tlf, email, dato);
+		hide();
 
 	}
 
