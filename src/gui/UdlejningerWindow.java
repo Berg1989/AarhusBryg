@@ -111,6 +111,10 @@ public class UdlejningerWindow extends Stage {
 		}
 		lwKvittering.getItems().addAll(u.getFullOrdre());
 	}
+	
+	public void lukAction() {
+		this.hide();
+	}
 }
 
 
