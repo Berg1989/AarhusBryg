@@ -423,6 +423,12 @@ public class Service {
 		
 		
 		//Udlejninger
+		Udlejning u1 = opretUdlejning();
+		u1.setKundeNavn("Madeleine");
+		u1.setDato(LocalDate.of(2018, 11, 6));
+		u1.setKundeEmail("madeleine.harbom@gmail.com");
+		u1.setKundeTlf("60653173");
+		u1.setLevering(true);
 		
 
 	}

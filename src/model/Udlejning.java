@@ -122,6 +122,11 @@ public class Udlejning {
 		return new ArrayList<>(this.ordre);
 	}
 	
+	@Override
+	public String toString() {
+		return this.dato.toString() + " (" + this.getKundeNavn() +")";
+	}
+	
 	
 
 }
