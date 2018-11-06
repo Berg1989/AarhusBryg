@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,14 +13,13 @@ import model.SalgSted;
 
 public class SalgTest {
 	ProduktKategori pk;
-	Produkt p1;
-	Produkt p2;
+	Produkt p1, p2;
 	SalgSted ss;
 	Salg s;
 	
 	
 	@Before
-	public void setUp() {
+	public void setUp1() {
 		pk = new ProduktKategori("Oel");
 		p1 = pk.createProdukt("BerlinerWeisse", 30.0, "33cL");
 		p2 = pk.createProdukt("Passionfruit IPA", 50.0, "50 cL");
@@ -27,36 +27,41 @@ public class SalgTest {
 		ss.addProduktKategori(pk);
 		s = new Salg(ss);
 	
-	
-		
 	}
 
 	@Test
-	public void test1() {
-		s.opretSalgslinie(-5, p2);
-		assertEquals(0.0, s.getTotalPris(), 0.0001);
+	public void TC01opret() {
+		s.opretSalgslinie(-2, p1);
+		assertEquals(0, s.getProdukter().size());
 	}
 	
 	@Test
-	public void test2() {
-		s.opretSalgslinie(0, p2);
-		assertEquals(0.0, s.getTotalPris(), 0.0001);
+	public void TC02opret() {
+		s.opretSalgslinie(0, p1);
+		assertEquals(0, s.getProdukter().size());
+	}
+	
+	@Test
+	public void TC03opret() {
+		s.opretSalgslinie(3, p1);
+		assertEquals(1, s.getProdukter().size());
 	}
 	
 	
+	
 	@Test
-	public void test3() {
+	public void TC04opret() {
 		s.opretSalgslinie(5, p1);
-		s.opretSalgslinie(10, p2);
-		assertEquals(650.0, s.getTotalPris(), 0.0001);
+		s.opretSalgslinie(2, p2);
+		s.opretSalgslinie(4, p2);
+		assertEquals(3, s.getProdukter().size());
 	}
 	
-	@Test
-	public void test4() {
-		s.opretSalgslinie(5, p1);
-		s.opretSalgslinie(10, p2);
-		s.opretSalgslinie(20, p1);
-		assertEquals(1250.0, s.getTotalPris(), 0.0001);
+	@After
+	public void tearDown() {
+		s = null;
 	}
+	
+
 	
 }

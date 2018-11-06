@@ -9,7 +9,7 @@ public class Produkt {
 	private String str;
 	private ArrayList<StedPris> stedPriser;
 
-	public Produkt(String navn, double pris, String str) {
+	public Produkt(String navn, double pris, String str) { //Skal vaere private?
 		this.navn = navn;
 		this.pris = pris;
 		this.str = str;

@@ -429,6 +429,7 @@ public class Service {
 		u1.setKundeEmail("madeleine.harbom@gmail.com");
 		u1.setKundeTlf("60653173");
 		u1.setLevering(true);
+		gemUdlejning(u1);
 		
 
 	}

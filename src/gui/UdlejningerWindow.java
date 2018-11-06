@@ -64,10 +64,11 @@ public class UdlejningerWindow extends Stage {
 		lwUdlejning.setOnMouseClicked(event -> update());
 		lwUdlejning.setPrefHeight(50);
 		lwUdlejning.setMaxHeight(400.0);
-		lwUdlejning.getItems().addAll(service.getAllUdlejninger());
+		lwUdlejning.getItems().addAll(service.getAllUdlejninger()); //DIS VAN
 		
 		btnOpret = new Button("Opret");
 		pane.add(btnOpret, 0, 8);
+		btnOpret.setOnAction(event -> opretReservation());
 		
 		btnFjern = new Button("Fjern");
 		pane.add(btnFjern, 1, 8);
@@ -132,7 +133,7 @@ public class UdlejningerWindow extends Stage {
 	public void opretReservation() {
 		UdlejningsWindow uw = new UdlejningsWindow();
 		this.hide();
-		uw.showAndWait();
+		uw.show();
 	
 	}
 }

@@ -96,7 +96,7 @@ public class Storage {
 	}
 	
 	public ArrayList<Udlejning> getAllUdlejninger() {
-		return new ArrayList<>(udlejninger);
+		return new ArrayList<>(this.udlejninger);
 	}
 	
 	public void addFustage(Fustage f) {
