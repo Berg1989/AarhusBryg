@@ -162,26 +162,14 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal1Lordag() {
+	public void TC01Lor() {
 		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(9, 0), 20);
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
-	@Test
-	public void testBetal2Lordag() {
-		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(14, 59), 20);
-		assertEquals(0.0, rv.beregnPris(), 0.001);
-	}
 	
 	@Test
-	public void testBetal3Lordag() {
-		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(14, 59), 20);
-		rv.tilmeldSpisning();
-		assertEquals(0.0, rv.beregnPris(), 0.001);
-	}
-	
-	@Test
-	public void testBetal4Lordag() {
+	public void TC02Lor() {
 		rv = new Rundvisning("Bryllop", LocalDate.of(2014, 12, 13), LocalTime.of(15, 0), 20);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);

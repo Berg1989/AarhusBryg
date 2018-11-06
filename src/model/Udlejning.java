@@ -11,10 +11,9 @@ public class Udlejning {
 	private String kundeEmail;
 	private ArrayList<UdlejningsLinje> ordre;
 	private LocalDate dato;
-	private String kommentar;
 	private boolean levering;
 	private static double leveringspris = 800.0; //FACT CHECK
-	private ArrayList<Kulsyre> kulsyre;
+	private ArrayList<Kulsyre> kulsyre; //Why?
 	private boolean betalt;
 	private double betaltBeloeb;
 	private double pantLagt;
