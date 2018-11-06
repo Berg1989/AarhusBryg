@@ -22,6 +22,7 @@ public class Storage {
 	private List<Fustage> fustager;
 	private List<Kulsyre> kulsyre;
 	private List<Anlaeg> anlaeg;
+	
 
 	public Storage() {
 		produktKategoriList = new ArrayList<>();

@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -45,7 +46,7 @@ public class UdlejningerWindow extends Stage {
 	private ListView<UdlejningsLinje> lwKvittering;
 	private TextField txfNavn, txfEmail, txfTlf;
 	private CheckBox chbLevering;
-	private Button btnFjern, btnLuk;
+	private Button btnFjern, btnLuk, btnOpret, btnUpdate;
 	private Udlejning u;
 	
 	
@@ -53,48 +54,60 @@ public class UdlejningerWindow extends Stage {
 		pane.setPadding(new Insets(10));
 		pane.setHgap(10);
 		pane.setVgap(10);
-		pane.setGridLinesVisible(false);
+		pane.setGridLinesVisible(true);
 		
 		lblUdlejninger = new Label("Udlejninger:");
 		pane.add(lblUdlejninger, 0, 0);
 		
 		lwUdlejning = new ListView<>();
-		pane.add(lwUdlejning, 0,1, 2, 6);
+		pane.add(lwUdlejning, 0, 1, 2, 6);
 		lwUdlejning.setOnMouseClicked(event -> update());
+		lwUdlejning.setPrefHeight(50);
+		lwUdlejning.setMaxHeight(400.0);
+		lwUdlejning.getItems().addAll(service.getAllUdlejninger());
+		
+		btnOpret = new Button("Opret");
+		pane.add(btnOpret, 0, 8);
 		
 		btnFjern = new Button("Fjern");
-		pane.add(btnFjern, 0, 8);
+		pane.add(btnFjern, 1, 8);
 		
 		lblNavn = new Label("Navn:");
-		pane.add(lblNavn, 1, 0);
+		pane.add(lblNavn, 2, 1);
 		
 		txfNavn = new TextField();
-		pane.add(txfNavn, 1, 1);
+		pane.add(txfNavn, 3, 1);
 		
 		lblEmail = new Label("Email:");
-		pane.add(lblEmail, 1, 2);
+		pane.add(lblEmail, 2, 2);
 		
 		txfEmail = new TextField();
-		pane.add(txfEmail, 1, 3);
+		pane.add(txfEmail, 3, 2);
 		
 		lblTlf = new Label("Telefon");
-		pane.add(lblTlf, 1, 4);
+		pane.add(lblTlf, 2, 3);
 		
 		txfTlf = new TextField();
-		pane.add(txfTlf, 1, 5);
+		pane.add(txfTlf, 3, 3);
 		
 		chbLevering = new CheckBox("Levering");
-		pane.add(chbLevering, 1, 6);
+		pane.add(chbLevering, 3, 4);
 		
 		lblKvittering = new Label("Kvittering");
-		pane.add(lblKvittering, 2, 0);
+		pane.add(lblKvittering, 2, 5);
 		
 		lwKvittering = new ListView<>();
-		pane.add(lwKvittering, 2, 1);
+		pane.add(lwKvittering, 2, 6, 2,1);
+		lwKvittering.setPrefHeight(200.0);
 		
+		btnUpdate = new Button("Opdatere");
+		pane.add(btnUpdate, 2, 8);
 		
+		btnLuk = new Button("Luk");
+		pane.add(btnLuk, 3, 8);
+		btnLuk.setAlignment(Pos.CENTER_RIGHT); //Not working
 		
-		
+	
 	}
 	
 	public void update() {
@@ -114,6 +127,13 @@ public class UdlejningerWindow extends Stage {
 	
 	public void lukAction() {
 		this.hide();
+	}
+	
+	public void opretReservation() {
+		UdlejningsWindow uw = new UdlejningsWindow();
+		this.hide();
+		uw.showAndWait();
+	
 	}
 }
 

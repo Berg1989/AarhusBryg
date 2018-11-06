@@ -48,14 +48,14 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetaling1antalGaester() {
+	public void TC01Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), -5);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal2antalGaester() {
+	public void TC02Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 0);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
@@ -63,7 +63,7 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal3antalGaester() {
+	public void TC03Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 14);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
@@ -71,7 +71,7 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal4antalGaester() {
+	public void TC04Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 15);
 		rv.tilmeldSpisning();
 		assertEquals(3450.0, rv.beregnPris(), 0.001);
@@ -79,7 +79,7 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal5antalGaester() {
+	public void TC05Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 19);
 		rv.tilmeldSpisning();
 		assertEquals(4370.0, rv.beregnPris(), 0.001);
@@ -87,7 +87,7 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal6antalGaester() {
+	public void TC06Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 45);
 		rv.tilmeldSpisning();
 		assertEquals(10350.0, rv.beregnPris(), 0.001);
@@ -95,7 +95,7 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal7antalGaester() {
+	public void TC07Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 74);
 		rv.tilmeldSpisning();
 		assertEquals(17020.0, rv.beregnPris(), 0.001);
@@ -103,7 +103,7 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal8antalGaester() {
+	public void TC08Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 76);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
@@ -111,52 +111,52 @@ public class RundvisningTest {
 	}
 	
 	@Test
-	public void testBetal9antalGaester() {
+	public void TC09Fre() {
 		rv = new Rundvisning("eaaa", LocalDate.of(2018, 9, 28), LocalTime.of(13, 0), 100);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal1Torsdag() {
+	public void TC01Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(9, 0), 15);
 		assertEquals(1500.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal2Torsdag() {
+	public void TC02Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(13, 59), 15);
 		assertEquals(1500.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal3Torsdag() {
+	public void TC03Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(13, 59), 15);
 		rv.tilmeldSpisning();
 		assertEquals(3450.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal4Torsdag() {
+	public void TC04Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 00), 15);
 		rv.tilmeldSpisning();
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal5Torsdag() {
+	public void TC05Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0), 15);
 		assertEquals(0.0, rv.beregnPris(), 0.001);
 	}
 	
 	@Test
-	public void testBetal6Torsdag() {
+	public void TC06Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0 ), 20);
 		rv.tilmeldSpisning();
 		assertEquals(5000.0, rv.beregnPris(), 0.001);
 	}
 	@Test
-	public void testBetal7Torsdag() {
+	public void TC07Tors() {
 		rv = new Rundvisning("Lucia", LocalDate.of(2018, 12, 13), LocalTime.of(15, 0 ), 20);
 		assertEquals(2400.0, rv.beregnPris(), 0.001);
 	}

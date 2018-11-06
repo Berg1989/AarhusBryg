@@ -171,6 +171,10 @@ public class Service {
 	public void gemUdlejning(Udlejning u) {
 		storage.addUdlejning(u);
 	}
+	
+	public List<Udlejning> getAllUdlejninger() {
+		return storage.getAllUdlejninger();
+	}
 
 	// Fustage metoder
 	public Fustage opretFustage(String stoerrelse, String oeltype, double pris) {
@@ -392,7 +396,13 @@ public class Service {
 
 		// Gavepakker
 		ProduktKategori gave = opretProduktKategori("Gaveaeske");
-		Produkt g1 = opretProdukt(gave, "2 oel, 2 glas", 100.0, "aeske");
+		Produkt g1 = opretProdukt(gave, "2 oel, 2 glas", 100.0, "gaveaeske");
+		Produkt g2 = opretProdukt(gave, "4 oel", 130.0, "gaveaeske");
+		Produkt g3 = opretProdukt(gave, "6 oel", 240.0, "traekasse");
+		Produkt g4 = opretProdukt(gave, "6 oel, 2 glas", 250.0, "gavekurv");
+		Produkt g5 = opretProdukt(gave, "6 oel, 6 glas", 290.0, "traekasse");
+		Produkt g6 = opretProdukt(gave, "12 oel", 390.0, "treakasse");
+		Produkt g7 = opretProdukt(gave, "12 oel", 360.0, "papkasse");
 
 		// NOT DONE
 
@@ -410,6 +420,10 @@ public class Service {
 		tilfoejKategori(fredagsBar, spiritus);
 		tilfoejKategori(fredagsBar, toej);
 		tilfoejKategori(fredagsBar, gave);
+		
+		
+		//Udlejninger
+		
 
 	}
 
