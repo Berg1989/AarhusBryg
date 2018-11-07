@@ -121,7 +121,7 @@ public class OpretRundvisningWindow extends Stage {
 
 	private void btnReserverAction() {
 		if (rv != null && rv.beregnPris() != 0.0) {
-			service.gemRundvisnign(rv);
+			service.gemRundvisning(rv);
 			RundvisningWindow rvw = new RundvisningWindow();
 			rvw.showAndWait();
 			hide();

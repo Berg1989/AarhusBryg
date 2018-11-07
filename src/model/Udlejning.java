@@ -109,6 +109,14 @@ public class Udlejning {
 		return this.levering;
 	}
 	
+	public void createOrdreLinje(int antal, Rentable p) {
+		UdlejningsLinje ul = new UdlejningsLinje(p, antal);
+		this.ordre.add(ul);
+		
+	}
+	
+	
+	//tror denne er udeless
 	public void addOrdre(UdlejningsLinje ul) {
 		this.ordre.add(ul);
 	}

@@ -93,7 +93,7 @@ public class Service {
 		return r;
 	}
 
-	public void gemRundvisnign(Rundvisning r) {
+	public void gemRundvisning(Rundvisning r) {
 		storage.addRundvisning(r);
 	}
 
@@ -175,6 +175,10 @@ public class Service {
 	public List<Udlejning> getAllUdlejninger() {
 		return storage.getAllUdlejninger();
 	}
+	
+	public void sletUdlejning(Udlejning u) {
+		storage.removeUdlejning(u);
+	}
 
 	// Fustage metoder
 	public Fustage opretFustage(String stoerrelse, String oeltype, double pris) {
@@ -242,12 +246,15 @@ public class Service {
 		r1.isStuderende();
 		r1.tilmeldSpsning(21);
 		r1.setBetalt();
+		gemRundvisning(r1);
 
 		Rundvisning r2 = opretRundvisning("Mads", LocalDate.of(2018, 5, 4), 20, LocalTime.of(10, 00));
 		r2.tilmeldSpisning();
+		gemRundvisning(r2);
 
 		Rundvisning r3 = opretRundvisning("Daniel", LocalDate.of(2018, 3, 14), 65, LocalTime.of(9, 30));
 		r3.setBetalt();
+		gemRundvisning(r3);
 
 		//
 		// Fra opgaven
@@ -352,15 +359,15 @@ public class Service {
 		opretStedPris(butik, loa, 175.0);
 
 		// fustage
-		opretFustage("20 Liter", "Klosterbryg", 775.0);
-		opretFustage("25 Liter", "Jazz Classic", 625.0);
-		opretFustage("25 Liter", "Extra Pilsner", 575.0);
-		opretFustage("20 Liter", "Celebration", 775.0);
-		opretFustage("25 Liter", "Blondie", 700.0);
-		opretFustage("20 Liter", "Foraarsbryg", 775.0);
-		opretFustage("20 Liter", "India Pale Ale", 775.0);
-		opretFustage("20 Liter", "Julebryg", 775.0);
-		opretFustage("20 Liter", "Imperial Stout", 775.0);
+		Fustage fu1 = opretFustage("20 Liter", "Klosterbryg", 775.0);
+		Fustage fu2 = opretFustage("25 Liter", "Jazz Classic", 625.0);
+		Fustage fu3 = opretFustage("25 Liter", "Extra Pilsner", 575.0);
+		Fustage fu4 = opretFustage("20 Liter", "Celebration", 775.0);
+		Fustage fu5 = opretFustage("25 Liter", "Blondie", 700.0);
+		Fustage fu6 = opretFustage("20 Liter", "Foraarsbryg", 775.0);
+		Fustage fu7 = opretFustage("20 Liter", "India Pale Ale", 775.0);
+		Fustage fu8 = opretFustage("20 Liter", "Julebryg", 775.0);
+		Fustage fu9 = opretFustage("20 Liter", "Imperial Stout", 775.0);
 
 		// Glass
 		ProduktKategori glas = opretProduktKategori("Glas");
@@ -430,6 +437,8 @@ public class Service {
 		u1.setKundeTlf("60653173");
 		u1.setLevering(true);
 		gemUdlejning(u1);
+		u1.createOrdreLinje(5, fu4);
+		u1.createOrdreLinje(7, fu7);
 		
 
 	}

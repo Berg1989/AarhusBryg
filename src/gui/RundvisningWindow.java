@@ -55,11 +55,7 @@ public class RundvisningWindow extends Stage {
 		lwRundvisning = new ListView<>();
 		pane.add(lwRundvisning, 0, 1, 1, 6);
 		lwRundvisning.setPrefHeight(50);
-		//lwRundvisning.setMinHeight(250);
-		//lwRundvisning.setPrefWidth(180);
-		//lwRundvisning.setMinWidth(480);
-		//lwRundvisning.setMaxHeight(100);
-		lwRundvisning.getItems().addAll(service.getAllRundvisninger());
+		lwRundvisning.getItems().addAll(service.getAllRundvisninger()); //check me
 		lwRundvisning.setOnMouseClicked(event -> {
 			rv = lwRundvisning.getSelectionModel().getSelectedItem();
 			if (rv == null) {

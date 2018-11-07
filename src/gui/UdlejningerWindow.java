@@ -160,7 +160,17 @@ public class UdlejningerWindow extends Stage {
 		if (email.length() > 0) {
 			u.setKundeEmail(email);
 		}
-		//Fix levering
+		if (chbLevering.isSelected()) {
+			u.setLevering(true);
+		}
+		else {
+			u.setLevering(false);
+		}
+	}
+	
+	public void btnFjernAction() {
+		u = lwUdlejning.getSelectionModel().getSelectedItem();
+		service.sletUdlejning(u);
 	}
 }
 
