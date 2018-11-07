@@ -11,7 +11,7 @@ import model.ProduktKategori;
 import model.Salg;
 import model.SalgSted;
 
-public class SalgTest {
+public class SalgTest1 {
 	ProduktKategori pk;
 	Produkt p1, p2;
 	SalgSted ss;
@@ -57,10 +57,8 @@ public class SalgTest {
 		assertEquals(3, s.getProdukter().size());
 	}
 	
-	@After
-	public void tearDown() {
-		s = null;
-	}
+	
+	//Totalpris her
 	
 
 	

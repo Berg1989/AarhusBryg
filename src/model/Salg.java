@@ -38,7 +38,11 @@ public class Salg {
 	public ArrayList<SalgsLinie> getProdukter() {
 		return produkter;
 	}
-
+ 
+	public LocalTime getTid() {
+		return this.tid;
+	}
+	
 	public void setTid(LocalTime tid) {
 		this.tid = tid;
 	}
@@ -62,13 +66,12 @@ public class Salg {
 		return p;
 	}
 
-	public void setProdukter(ArrayList<SalgsLinie> produkter) {
-		this.produkter = produkter;
-	}
-
+	//TROR DENNE SKAL SLETTES, HAR IKKE TESTS
 	public void setPris(double pris) {
 		this.pris = pris;
 	}
+	
+	//Fuldt testet hertil. Fortsaet herfra :)
 
 	public void givStudieRabat() {
 		// TODO
