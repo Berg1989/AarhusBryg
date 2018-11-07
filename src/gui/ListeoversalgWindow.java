@@ -76,7 +76,8 @@ public class ListeoversalgWindow extends Stage {
 
 		if (start.isBefore(end)) {
 			try {
-				String fileName = "C:\\Users\\Mads\\Desktop\\Uddannelse\\List over salg//List.txt";
+				//String fileName = "C:\\Users\\Mads\\Desktop\\Uddannelse\\List over salg//List.txt";
+				String fileName = "../../List.txt";
 				PrintWriter printwriter = new PrintWriter(fileName);
 				Scanner scan = new Scanner(System.in);
 				List<Salg> salg = service.getAllSalg();
