@@ -1,5 +1,7 @@
 package gui;
 
+import java.time.LocalDate;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -54,7 +56,7 @@ public class UdlejningerWindow extends Stage {
 		pane.setPadding(new Insets(10));
 		pane.setHgap(10);
 		pane.setVgap(10);
-		pane.setGridLinesVisible(true);
+		pane.setGridLinesVisible(false);
 		
 		lblUdlejninger = new Label("Udlejninger:");
 		pane.add(lblUdlejninger, 0, 0);
@@ -64,7 +66,8 @@ public class UdlejningerWindow extends Stage {
 		lwUdlejning.setOnMouseClicked(event -> update());
 		lwUdlejning.setPrefHeight(50);
 		lwUdlejning.setMaxHeight(400.0);
-		lwUdlejning.getItems().addAll(service.getAllUdlejninger()); //DIS VAN
+		lwUdlejning.getItems().addAll(service.getAllUdlejninger());
+		lwUdlejning.setOnMouseClicked(event -> lwListener());
 		
 		btnOpret = new Button("Opret");
 		pane.add(btnOpret, 0, 8);
@@ -72,6 +75,7 @@ public class UdlejningerWindow extends Stage {
 		
 		btnFjern = new Button("Fjern");
 		pane.add(btnFjern, 1, 8);
+		//Missing methode
 		
 		lblNavn = new Label("Navn:");
 		pane.add(lblNavn, 2, 1);
@@ -103,6 +107,7 @@ public class UdlejningerWindow extends Stage {
 		
 		btnUpdate = new Button("Opdatere");
 		pane.add(btnUpdate, 2, 8);
+		btnUpdate.setOnAction(event -> btnUpdateAction());
 		
 		btnLuk = new Button("Luk");
 		pane.add(btnLuk, 3, 8);
@@ -135,6 +140,27 @@ public class UdlejningerWindow extends Stage {
 		this.hide();
 		uw.show();
 	
+	}
+	
+	public void lwListener() {
+		u = lwUdlejning.getSelectionModel().getSelectedItem();
+		update();
+	}
+	
+	public void btnUpdateAction() {
+		String navn = txfNavn.getText().trim();
+		String tlf = txfTlf.getText().trim();
+		String email = txfEmail.getText().trim();
+		if (navn.length() > 0) {
+			u.setKundeNavn(navn);
+		}
+		if (tlf.length() > 0) {
+			u.setKundeTlf(tlf);
+		}
+		if (email.length() > 0) {
+			u.setKundeEmail(email);
+		}
+		//Fix levering
 	}
 }
 

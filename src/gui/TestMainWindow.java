@@ -36,9 +36,12 @@ public class TestMainWindow extends Application {
 	
 	private Label lblAdmin, lblBooking, lblSalg, lblStatistik;
 	private Button btnBar, btnRundvisning, btnAnlaeg, btnPKategori, btnSSteder, btnStatistik;
+	private int buttonHeight = 75;
+	private int buttonWidth = 125;
+	private int pad = 10;
 	
 	private void initContent(GridPane pane) {
-		pane.setPadding(new Insets(10));
+		pane.setPadding(new Insets(pad));
 		pane.setHgap(10);
 		pane.setVgap(10);
 		pane.setGridLinesVisible(false);
@@ -55,29 +58,35 @@ public class TestMainWindow extends Application {
 		lblStatistik = new Label("Statistik");
 		pane.add(lblStatistik, 3, 0);
 		
-		btnBar = new Button("Åben \n Salgsystem");
-		pane.add(btnBar, 0, 1);
+		btnBar = new Button("Åben\nSalgsystem");
+		pane.add(btnBar, 0, 1, 1, 2);
 		btnBar.setOnAction(event -> barAction());
+		btnBar.setPrefSize(buttonWidth, buttonHeight * 2 + pad);
 		
 		btnAnlaeg = new Button("Anlaeg");
 		pane.add(btnAnlaeg, 1, 1);
 		btnAnlaeg.setOnAction(event -> anlaegAction());
+		btnAnlaeg.setPrefSize(buttonWidth, buttonHeight);
 		
 		btnRundvisning = new Button("Rundvisning");
 		pane.add(btnRundvisning, 1, 2);
 		btnRundvisning.setOnAction(event -> rundvisningAction());
+		btnRundvisning.setPrefSize(buttonWidth, buttonHeight);
 		
-		btnPKategori = new Button("Produkt \n Kategorier");
+		btnPKategori = new Button("Produkt\nKategorier");
 		pane.add(btnPKategori, 2, 1);
+		btnPKategori.setOnAction(event -> pKategoriAction());
+		btnPKategori.setPrefSize(buttonWidth, buttonHeight);
 		
 		btnSSteder = new Button("Salgssted");
 		pane.add(btnSSteder, 2, 2);
 		btnSSteder.setOnAction(event -> salgStedAction());
+		btnSSteder.setPrefSize(buttonWidth, buttonHeight);
 		
 		btnStatistik = new Button("Statistik");
 		pane.add(btnStatistik, 3, 1);
 		btnStatistik.setOnAction(event -> statistikAction());
-		
+		btnStatistik.setPrefSize(buttonWidth, buttonHeight);
 	}
 	
 	private void barAction() {
@@ -103,6 +112,12 @@ public class TestMainWindow extends Application {
 	private void statistikAction() {
 		ListeoversalgWindow lsw = new ListeoversalgWindow();
 		lsw.showAndWait();
+	}
+	
+	
+	private void pKategoriAction() {
+		ProduktkategoriWindow pkw = new ProduktkategoriWindow();
+		pkw.showAndWait();
 	}
 
 
