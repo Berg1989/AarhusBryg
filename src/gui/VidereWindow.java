@@ -211,7 +211,7 @@ public class VidereWindow extends Stage {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Information mangler");
             alert.setHeaderText("Mangler betaling");
-            alert.setContentText("Mangler at vælge betalingsmulighed!");
+            alert.setContentText("Vaelg venligst en betalingsmetode!");
 
             alert.showAndWait();
         } else {
