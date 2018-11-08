@@ -20,17 +20,26 @@ import storage.Storage;
 
 public class Service {
 
-	// Attributter for klassen
+	/**
+	 * Attributter
+	 */
 	private static Service service;
 	private Storage storage;
 
-	// Denne metode laver en ny Storage
+	/**
+	 * Denne metode laver en ny Storage
+	 */
 	private Service() {
 		storage = new Storage();
 	}
 
-	// Denne metode tjekker om service eksistere, hvis ikke så laves der en ny
-	// service. (Singleton)
+	/**
+	 * Dette er Singleton, som forhindrer mere end et service objekt at blive
+	 * oprettet.
+	 *
+	 * @return returnere en ny service, hvis service er null. Hvis ikke returnere
+	 *         den bare den service som eksistere
+	 */
 	public static Service getService() {
 		if (service == null) {
 			service = new Service();
@@ -38,24 +47,32 @@ public class Service {
 		return service;
 	}
 
-	// Denne metode returnere den nye service
+	/**
+	 * Denne metode returnere et nyt service objekt
+	 */
 	public static Service getTestService() {
 		return new Service();
 	}
 
 	// ------------------- Produkt Metoder ---------------------------
-	// Denne metode opretter et produkt på en produktkategori.
+	/*
+	 * Opretter et produkt på en produktkategori.
+	 */
 	public Produkt opretProdukt(ProduktKategori pk, String navn, double pris, String str) {
 		Produkt p = pk.createProdukt(navn, pris, str);
 		return p;
 	}
 
-	// Denne metode sletter et produkt fra en produktkategori
+	/*
+	 * Sletter et produkt fra en produktkategori
+	 */
 	public void sletProdukt(ProduktKategori pk, Produkt p) {
 		pk.removeProdukt(p);
 	}
 
-	// Denne metode redigere et produkt fra en produktkategori
+	/*
+	 * Redigere et produkt fra en produktkategori
+	 */
 	public void RedigerProdukt(ProduktKategori pk, Produkt p, String navn, double pris, String str) {
 		pk.redigerNavn(p, navn);
 		pk.redigerPris(p, pris);
@@ -63,30 +80,42 @@ public class Service {
 	}
 
 	// ------------------- Produktkategori Metoder ---------------------------
-	// Denne metode opretter en produkt kategori, og tilføjer den til storage
+
+	/*
+	 * Opretter en produkt kategori, og tilføjer den til storage
+	 */
 	public ProduktKategori opretProduktKategori(String navn) {
 		ProduktKategori pk = new ProduktKategori(navn);
 		storage.addProduktKategori(pk);
 		return pk;
 	}
 
-	// Denne metode sletter en produktkategori fra storage
+	/*
+	 * Sletter en produktkategori fra storage
+	 */
 	public void sletProduktKategori(ProduktKategori pk) {
 		storage.removeProduktKategori(pk);
 	}
 
-	// Denne metode returnere alle produktkategori objekter fra storage
+	/*
+	 * Returnere alle produktkategori objekter fra storage
+	 */
 	public List<ProduktKategori> getAllProduktKategorier() {
 		return storage.getAllProduktKategorier();
 	}
 
-	// Denne metode tilføjer en produktkategori til et salgssted
+	/*
+	 * Tilføjer en produktkategori til et salgssted
+	 */
 	public void tilfoejKategori(SalgSted ss, ProduktKategori pk) {
 		ss.addProduktKategori(pk);
 	}
 
-	// Denne metode viser alle mulige produktkategorier som ikke allerede eksister
-	// hos det enkelte salgssted.
+	/*
+	 * Viser alle mulige produktkategorier som ikke allerede eksister hos det
+	 * enkelte salgssted.
+	 */
+
 	public ArrayList<ProduktKategori> getMuligeKategorier(SalgSted ss) {
 		ArrayList<ProduktKategori> pkList = storage.getAllProduktKategorier();
 		ProduktKategori pk;
@@ -102,41 +131,55 @@ public class Service {
 	}
 	// ------------------- Rundvisnings Metoder ---------------------------
 
-	// Denne metode oprreter en rundvisning
+	/*
+	 * Oprreter en rundvisning
+	 */
 	public Rundvisning opretRundvisning(String kunde, LocalDate dato, int antal, LocalTime tid) {
 		Rundvisning r = new Rundvisning(kunde, dato, tid, antal);
 		return r;
 	}
 
-	// Denne metoder tilføjer rundvisningen fra parameteren til storage
+	/*
+	 * Tilføjer rundvisningen fra parameteren til storage
+	 */
 	public void gemRundvisning(Rundvisning r) {
 		storage.addRundvisning(r);
 	}
 
-	// Denne metode sletter rundvisningen i parameteren fra storage
+	/*
+	 * Sletter rundvisningen i parameteren fra storage
+	 */
 	public void sletRundvisning(Rundvisning r) {
 		storage.removeRundvisning(r);
 	}
 
-	// Denne metode returnere alle rundvisnings objekter fra storage
+	/*
+	 * Returnere alle rundvisnings objekter fra storage
+	 */
 	public List<Rundvisning> getAllRundvisninger() {
 		return storage.getAllRundvisninger();
 	}
 
 	// ------------------- Salgs Metoder ---------------------------
 
-	// Denne metode returnere alle produkt objekter fra en salgslinie
+	/*
+	 * Returnere alle produkt objekter fra en salgslinie
+	 */
 	public List<SalgsLinie> getAllSalgsLinier(Salg s) {
 		return s.getProdukter();
 	}
 
-	// Denne metode tilføjer en salgslinie til et salg
+	/*
+	 * Tilføjer en salgslinie til et salg
+	 */
 	public void tilfojProdukt(Salg s, int antal, Produkt p) {
 		s.opretSalgslinie(antal, p);
 
 	}
 
-	// Denne metode opretter et salgssted og tilføjer det til storage
+	/*
+	 * Opretter et salgssted og tilføjer det til storage
+	 */
 	public SalgSted opretSalgSted(String navn) {
 		SalgSted ss = new SalgSted(navn);
 		storage.addSalgSted(ss);
@@ -144,7 +187,9 @@ public class Service {
 
 	}
 
-	// Denne metode sletter et salgssted samt det salgssteds stedpriser.
+	/*
+	 * Denne metode sletter et salgssted samt det salgssteds stedpriser.
+	 */
 	public void sletSalgSted(SalgSted ss) {
 		ProduktKategori pk;
 		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
@@ -158,42 +203,53 @@ public class Service {
 
 	// ------------------- Salgssted Metoder ---------------------------
 
-	// Denne metode opretter en stedpris og tilføjer derefter stedprisen på
-	// produktet i parameteren
+	/*
+	 * Opretter en stedpris og tilføjer derefter stedprisen på produktet i
+	 * parameteren
+	 */
+
 	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
-		// Tjek saa produktkategorien findes paa salgssstedet?????
 		if (pris >= 0) {
 			StedPris sp = new StedPris(ss, p, pris);
 			p.addStedPris(sp);
 			return sp;
-		}
-		else {
+		} else {
 			return null;
 		}
-		
+
 	}
 
-	// Denne metode returnere et produkts stedpris
+	/*
+	 * Returnere et produkts stedpris
+	 */
 	public double getStedPris(SalgSted ss, Produkt p) {
 		return p.getStedPrisPris(ss);
 	}
 
-	// ???????????????????????++
+	/*
+	 * Opretter et salg med et salgssted som parameter
+	 */
 	public Salg createSalg(SalgSted sted) {
 		return new Salg(sted);
 	}
 
-	// Denne metode tilføjer et salg til storage
+	/*
+	 * Tilføjer et salg til storage
+	 */
 	public void completeSalg(Salg salg) {
 		storage.addSalg(salg);
 	}
 
-	// Denne metode returnere alle salgssted objekter fra storage
+	/*
+	 * Returnere alle salgssted objekter fra storage
+	 */
 	public List<SalgSted> getAllSalgSted() {
 		return storage.getAllSalgSted();
 	}
 
-	// Denne metode returnere alle salg objekter fra storage
+	/*
+	 * Returnere alle salg objekter fra storage
+	 */
 	public List<Salg> getAllSalg() {
 		return storage.getAllSalg();
 
@@ -201,70 +257,88 @@ public class Service {
 
 	// ------------------- Udlejnings Metoder ---------------------------
 
-	// Denne metode opretter en udlejning
+	/*
+	 * Opretter en udlejning
+	 */
 	public Udlejning opretUdlejning() {
 		Udlejning u = new Udlejning();
 		return u;
 	}
 
-	// Denne metode tilføjer en udlejning til storage
+	/*
+	 * Tilføjer en udlejning til storage
+	 */
 	public void gemUdlejning(Udlejning u) {
 		storage.addUdlejning(u);
 	}
 
-	// Denne metode returnere alle udlejnings objekter fra storage
+	/*
+	 * Returnere alle udlejnings objekter fra storage
+	 */
 	public List<Udlejning> getAllUdlejninger() {
 		return storage.getAllUdlejninger();
 	}
 
-	// Denne metode sletter udlejningen som der er i parameteren fra storage
+	/*
+	 * Sletter udlejningen som der er i parameteren fra storage
+	 */
 	public void sletUdlejning(Udlejning u) {
 		storage.removeUdlejning(u);
 	}
 
 	// ------------------- Fustage Metoder ---------------------------
 
-	// Denne metode opretter et fustage objekt og tilføjer den til storage
+	/*
+	 * Opretter et fustage objekt og tilføjer den til storage
+	 */
 	public Fustage opretFustage(String stoerrelse, String oeltype, double pris) {
 		Fustage f = new Fustage(stoerrelse, oeltype, pris);
 		storage.addFustage(f);
 		return f;
 	}
 
-	// Denne metode returnere alle fustage objekter fra storage
+	/*
+	 * Returnere alle fustage objekter fra storage
+	 */
 	public List<Fustage> getAllFustager() {
 		return storage.getAllFustager();
 	}
 
 	// ------------------- Kulsyre Metoder ---------------------------
 
-	// Denne metode opretter et kulsyre objekt og tilføjer det til storage
+	/*
+	 * Opretter et kulsyre objekt og tilføjer det til storage
+	 */
 	public Kulsyre opretKulsyre(double stoerrelse, double pris) {
 		Kulsyre k = new Kulsyre(stoerrelse, pris);
 		storage.addKulsyre(k);
 		return k;
 	}
 
-	// Denne metode returnere alle kulsyre objekter fra storage
+	/*
+	 * Returnere alle kulsyre objekter fra storage
+	 */
 	public List<Kulsyre> getAllKulsyre() {
 		return storage.getAllKulsyre();
 	}
 
 	// ------------------- Anlægs Metoder ---------------------------
 
-	// Denne metode opretter et anlægs objekt og tilføjer det til storage
+	/*
+	 * Opretter et anlægs objekt og tilføjer det til storage
+	 */
 	public Anlaeg opretAnlaeg(String type, double pris, double pant) {
 		Anlaeg a = new Anlaeg(type, pris, pant);
 		storage.addAnlaeg(a);
 		return a;
 	}
 
-	// Denne metode returnere alle Anlægs objekter fra storage
+	/*
+	 * Returnere alle Anlægs objekter fra storage
+	 */
 	public List<Anlaeg> getAllAnleag() {
 		return storage.getAllAnlaeg();
 	}
-
-	// INITIAL STUFF
 
 	public void initStorage() {
 
