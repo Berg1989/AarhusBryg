@@ -6,29 +6,29 @@ import java.util.ArrayList;
 
 public class Salg {
 
-	private SalgSted sted;
-	private ArrayList<SalgsLinie> produkter;
-	private Betalingsmetode betalingmetode;
-	private LocalDate dato;
-	private LocalTime tid;
-	private double pris;
-	private double rabat;
-	private static int counter = 0;
-	private int id;
-	private boolean studerende;
-	private static double studierabat = 20.0;
+    private SalgSted sted;
+    private ArrayList<SalgsLinie> produkter;
+    private Betalingsmetode betalingmetode;
+    private LocalDate dato;
+    private LocalTime tid;
+    private double pris;
+    private double rabat;
+    private static int counter = 0;
+    private int id;
+    private boolean studerende;
+    private static double studierabat = 20.0;
 
-     */
-     * @param sted
-     *
-     * Constructor
     /**
-	public Salg(SalgSted sted) {
-		this.sted = sted;
-		produkter = new ArrayList<>();
-		counter++;
-		id = counter;
-		this.studerende = false;
+     * Constructor
+     *
+     * @param sted
+     */
+    public Salg(SalgSted sted) {
+        this.sted = sted;
+        produkter = new ArrayList<>();
+        counter++;
+        id = counter;
+        this.studerende = false;
 
     }
 
@@ -40,16 +40,16 @@ public class Salg {
      * @param produkt
      */
 
-	public void opretSalgslinie(int antal, Produkt produkt) {
-		if (antal > 0) {
-			SalgsLinie linie = new SalgsLinie(antal, produkt, this.sted);
-			produkter.add(linie);
-		}
-	}
-	
-	public void sletSalgsLinje(SalgsLinie sl) {
-		this.produkter.remove(sl);
-	}
+    public void opretSalgslinie(int antal, Produkt produkt) {
+        if (antal > 0) {
+            SalgsLinie linie = new SalgsLinie(antal, produkt, this.sted);
+            produkter.add(linie);
+        }
+    }
+
+    public void sletSalgsLinje(SalgsLinie sl) {
+        this.produkter.remove(sl);
+    }
 
     /**
      *
@@ -63,50 +63,50 @@ public class Salg {
         return this.tid;
     }
 
-	public void setTid(LocalTime tid) {
-		this.tid = tid;
-	}
-
+    public void setTid(LocalTime tid) {
+        this.tid = tid;
     }
 
-	}
-	
-	public void setStudieRabat(double procent) {
-		studierabat = procent;
-	}
+    public LocalDate getDato() {
+        return this.dato;
+    }
 
-    // Fuldt testet hertil. Fortsaet herfra :)
+    public void setDato(LocalDate dato) {
+        this.dato = dato;
+    }
+
+    public void setStudieRabat(double procent) {
+        studierabat = procent;
+    }
 
     /**
      * Beregner en total pris for en salgslinie
      *
-     * @return
+     * @return den lokale variable
      */
-	public double getTotalPris() {
-		double p = 0;
-		for (SalgsLinie s : this.produkter) {
-			p += s.getPris();
+    public double getTotalPris() {
+        double p = 0;
+        for (SalgsLinie s : this.produkter) {
+            p += s.getPris();
 
-		}
-		p -= this.rabat;
-		if (this.studerende) {
-			p = p * (1- (studierabat/ 100));
-		}
-		this.pris = p;
-		return p;
+        }
+        p -= this.rabat;
+        if (this.studerende) {
+            p = p * (1 - (studierabat / 100));
+        }
+        this.pris = p;
+        return p;
+    }
 
+    public void setStuderende(boolean b) {
+        this.studerende = b;
+    }
 
-	
-	//Fuldt testet hertil. Fortsaet herfra :)
-	public void setStuderende(boolean b) {
-		this.studerende = b;
-	}
-	
-	public void setPris(double nypris) {
-		if (nypris > 0) {
-			this.pris = nypris;
-		}
-	}
+    public void setPris(double nypris) {
+        if (nypris > 0) {
+            this.pris = nypris;
+        }
+    }
 
     /**
      * Sætter rabatten til 0.
@@ -116,39 +116,31 @@ public class Salg {
         getTotalPris();
     }
 
-	// Denne metode ændre rabatten til hvad som der står i parameteren
-	public void givRabatAbsolut(double inputRabat) {
-		if (inputRabat > 0) {
-			this.rabat = inputRabat;
-			getTotalPris();
-		}
-		
-     * Sætter rabatten til hvad der står i inputRabat
     /**
+     * Sætter rabatten til hvad der står i inputRabat
      *
      * @param inputRabat
      */
+    public void givRabatAbsolut(double inputRabat) {
+        if (inputRabat > 0) {
+            this.rabat = inputRabat;
+            getTotalPris();
+        }
 
     }
-
-	public void givRabatProcent(double inputRabat) {
-		if (inputRabat > 0) {
-			this.rabat = 0;
-			this.rabat = getTotalPris() * (1 - (inputRabat/(100)));
-			getTotalPris();
-		}
-		
-	}
 
     /**
      * Laver rabatten til procent og benytter sig af inputRabat,
      *
      * @param inputRabat
      */
-    public void givRabarProcent(double inputRabat) {
-        this.rabat = 0;
-        this.rabat = getTotalPris() * (1 - (inputRabat * 0.01));
-        getTotalPris();
+    public void givRabatProcent(double inputRabat) {
+        if (inputRabat > 0) {
+            this.rabat = 0;
+            this.rabat = getTotalPris() * (1 - (inputRabat / (100)));
+            getTotalPris();
+        }
+
     }
 
     public Betalingsmetode getBetalingsMetode() {

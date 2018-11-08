@@ -43,9 +43,10 @@ public class ProduktKategori {
      * Sletter produktet i parameteren fra arraylisten af produkter.
      *
      * @param p
-	public void removeProdukt(Produkt p) {
-		produkter.remove(p);
-	}
+     */
+    public void removeProdukt(Produkt p) {
+        produkter.remove(p);
+    }
 
     /**
      * Rediger på produkktets navn.
