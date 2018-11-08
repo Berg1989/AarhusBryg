@@ -220,7 +220,10 @@ public class VidereWindow extends Stage {
             s.setTid(LocalTime.now());
             service.completeSalg(s);
             System.out.println("Et Salg er blevet lavet");
+            SalgsWindow sw = new SalgsWindow();
+            sw.showAndWait();
             hide();
+            
         }
 
     }
