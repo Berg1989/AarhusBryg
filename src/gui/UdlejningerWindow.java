@@ -18,155 +18,157 @@ import service.Service;
 
 public class UdlejningerWindow extends Stage {
 
-    private Service service;
+	private Service service;
 
-    public UdlejningerWindow() {
+	public UdlejningerWindow() {
 
-        service = Service.getService();
+		service = Service.getService();
 
-        initStyle(StageStyle.UTILITY);
-        initModality(Modality.APPLICATION_MODAL);
-        setResizable(false);
-        setTitle("Udlejninger");
+		initStyle(StageStyle.UTILITY);
+		initModality(Modality.APPLICATION_MODAL);
+		setResizable(false);
+		setTitle("Udlejninger");
 
-        GridPane pane = new GridPane();
-        Scene scene = new Scene(pane);
-        initContent(pane);
-        setScene(scene);
-    }
+		GridPane pane = new GridPane();
+		Scene scene = new Scene(pane);
+		initContent(pane);
+		setScene(scene);
+	}
 
-    private ListView<Udlejning> lwUdlejning;
-    private Label lblUdlejninger, lblNavn, lblEmail, lblTlf, lblKvittering;
-    private ListView<UdlejningsLinje> lwKvittering;
-    private TextField txfNavn, txfEmail, txfTlf;
-    private CheckBox chbLevering;
-    private Button btnFjern, btnLuk, btnOpret, btnUpdate;
-    private Udlejning u;
+	private ListView<Udlejning> lwUdlejning;
+	private Label lblUdlejninger, lblNavn, lblEmail, lblTlf, lblKvittering;
+	private ListView<UdlejningsLinje> lwKvittering;
+	private TextField txfNavn, txfEmail, txfTlf;
+	private CheckBox chbLevering;
+	private Button btnFjern, btnLuk, btnOpret, btnUpdate;
+	private Udlejning u;
 
-    private void initContent(GridPane pane) {
-        pane.setPadding(new Insets(10));
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setGridLinesVisible(false);
+	private void initContent(GridPane pane) {
+		pane.setPadding(new Insets(10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setGridLinesVisible(false);
 
-        lblUdlejninger = new Label("Udlejninger:");
-        pane.add(lblUdlejninger, 0, 0);
+		lblUdlejninger = new Label("Udlejninger:");
+		pane.add(lblUdlejninger, 0, 0);
 
-        lwUdlejning = new ListView<>();
-        pane.add(lwUdlejning, 0, 1, 2, 6);
-        lwUdlejning.setOnMouseClicked(event -> update());
-        lwUdlejning.setPrefHeight(50);
-        lwUdlejning.setMaxHeight(400.0);
-        lwUdlejning.getItems().addAll(service.getAllUdlejninger());
-        lwUdlejning.setOnMouseClicked(event -> lwListener());
+		lwUdlejning = new ListView<>();
+		pane.add(lwUdlejning, 0, 1, 2, 6);
+		lwUdlejning.setOnMouseClicked(event -> update());
+		lwUdlejning.setPrefHeight(50);
+		lwUdlejning.setMaxHeight(400.0);
+		lwUdlejning.getItems().addAll(service.getAllUdlejninger());
+		lwUdlejning.setOnMouseClicked(event -> lwListener());
 
-        btnOpret = new Button("Opret");
-        pane.add(btnOpret, 0, 8);
-        btnOpret.setOnAction(event -> opretReservation());
+		btnOpret = new Button("Opret");
+		pane.add(btnOpret, 0, 8);
+		btnOpret.setOnAction(event -> opretReservation());
 
-        btnFjern = new Button("Fjern");
-        pane.add(btnFjern, 1, 8);
-        // Missing methode
+		btnFjern = new Button("Fjern");
+		pane.add(btnFjern, 1, 8);
+		// Missing methode
 
-        lblNavn = new Label("Navn:");
-        pane.add(lblNavn, 2, 1);
+		lblNavn = new Label("Navn:");
+		pane.add(lblNavn, 2, 1);
 
-        txfNavn = new TextField();
-        pane.add(txfNavn, 3, 1);
+		txfNavn = new TextField();
+		pane.add(txfNavn, 3, 1);
 
-        lblEmail = new Label("Email:");
-        pane.add(lblEmail, 2, 2);
+		lblEmail = new Label("Email:");
+		pane.add(lblEmail, 2, 2);
 
-        txfEmail = new TextField();
-        pane.add(txfEmail, 3, 2);
+		txfEmail = new TextField();
+		pane.add(txfEmail, 3, 2);
 
-        lblTlf = new Label("Telefon");
-        pane.add(lblTlf, 2, 3);
+		lblTlf = new Label("Telefon");
+		pane.add(lblTlf, 2, 3);
 
-        txfTlf = new TextField();
-        pane.add(txfTlf, 3, 3);
+		txfTlf = new TextField();
+		pane.add(txfTlf, 3, 3);
 
-        chbLevering = new CheckBox("Levering");
-        pane.add(chbLevering, 3, 4);
+		chbLevering = new CheckBox("Levering");
+		pane.add(chbLevering, 3, 4);
 
-        lblKvittering = new Label("Kvittering");
-        pane.add(lblKvittering, 2, 5);
+		lblKvittering = new Label("Kvittering");
+		pane.add(lblKvittering, 2, 5);
 
-        lwKvittering = new ListView<>();
-        pane.add(lwKvittering, 2, 6, 2, 1);
-        lwKvittering.setPrefHeight(200.0);
+		lwKvittering = new ListView<>();
+		pane.add(lwKvittering, 2, 6, 2, 1);
+		lwKvittering.setPrefHeight(200.0);
 
-        btnUpdate = new Button("Opdatere");
-        pane.add(btnUpdate, 2, 8);
-        btnUpdate.setOnAction(event -> btnUpdateAction());
+		btnUpdate = new Button("Opdatere");
+		pane.add(btnUpdate, 2, 8);
+		btnUpdate.setOnAction(event -> btnUpdateAction());
 
-        btnLuk = new Button("Luk");
-        pane.add(btnLuk, 3, 8);
-        btnLuk.setAlignment(Pos.CENTER_RIGHT); // Not working
+		btnLuk = new Button("Luk");
+		pane.add(btnLuk, 3, 8);
+		btnLuk.setOnAction(event -> lukAction());
+		btnLuk.setAlignment(Pos.CENTER_RIGHT); // Not working
 
-    }
+	}
 
-    // Denne metode holder textfield'sne opdateret
-    public void update() {
-        if (u != null) { // Just to be safe
-            txfTlf.setText(u.getKundeEmail());
-            txfNavn.setText(u.getKundeNavn());
-            txfEmail.setText(u.getKundeEmail());
-            if (u.getLevering()) {
-                chbLevering.setSelected(true);
-            } else {
-                chbLevering.setSelected(false);
-            }
-        }
-        lwKvittering.getItems().addAll(u.getFullOrdre());
-    }
+	// Denne metode holder textfield'sne opdateret
+	public void update() {
+		if (u != null) { // Just to be safe
+			txfTlf.setText(u.getKundeEmail());
+			txfNavn.setText(u.getKundeNavn());
+			txfEmail.setText(u.getKundeEmail());
+			if (u.getLevering()) {
+				chbLevering.setSelected(true);
+			} else {
+				chbLevering.setSelected(false);
+			}
+		}
+		lwKvittering.getItems().addAll(u.getFullOrdre());
+	}
 
-    // Denne metode er en buttom action, som lukker for det nuværende vindue
-    public void lukAction() {
-        hide();
-    }
+	// Denne metode er en buttom action, som lukker for det nuværende vindue
+	public void lukAction() {
+		hide();
+	}
 
-    // Denne metode er en buttom action, som åbner for et nyt vindue
-    public void opretReservation() {
-        UdlejningsWindow uw = new UdlejningsWindow();
-        hide();
-        uw.show();
+	// Denne metode er en buttom action, som åbner for et nyt vindue
+	public void opretReservation() {
+		UdlejningsWindow uw = new UdlejningsWindow();
+		uw.showAndWait();
 
-    }
+		;
 
-    // Denne metode tilføjer Udlejning attributten til et objekt man vælger fra
-    // listviewet
-    public void lwListener() {
-        u = lwUdlejning.getSelectionModel().getSelectedItem();
-        update();
-    }
+	}
 
-    // ??????
-    // Denne buttom er en buttom action, som opdater
-    public void btnUpdateAction() {
-        String navn = txfNavn.getText().trim();
-        String tlf = txfTlf.getText().trim();
-        String email = txfEmail.getText().trim();
-        if (navn.length() > 0) {
-            u.setKundeNavn(navn);
-        }
-        if (tlf.length() > 0) {
-            u.setKundeTlf(tlf);
-        }
-        if (email.length() > 0) {
-            u.setKundeEmail(email);
-        }
-        if (chbLevering.isSelected()) {
-            u.setLevering(true);
-        } else {
-            u.setLevering(false);
-        }
-    }
+	// Denne metode tilføjer Udlejning attributten til et objekt man vælger fra
+	// listviewet
+	public void lwListener() {
+		u = lwUdlejning.getSelectionModel().getSelectedItem();
+		update();
+	}
 
-    // Denne metode er en buttom action, som fjerner den udlejning som man har
-    // klikket på i listviewet
-    public void btnFjernAction() {
-        u = lwUdlejning.getSelectionModel().getSelectedItem();
-        service.sletUdlejning(u);
-    }
+	// ??????
+	// Denne buttom er en buttom action, som opdater
+	public void btnUpdateAction() {
+		String navn = txfNavn.getText().trim();
+		String tlf = txfTlf.getText().trim();
+		String email = txfEmail.getText().trim();
+		if (navn.length() > 0) {
+			u.setKundeNavn(navn);
+		}
+		if (tlf.length() > 0) {
+			u.setKundeTlf(tlf);
+		}
+		if (email.length() > 0) {
+			u.setKundeEmail(email);
+		}
+		if (chbLevering.isSelected()) {
+			u.setLevering(true);
+		} else {
+			u.setLevering(false);
+		}
+	}
+
+	// Denne metode er en buttom action, som fjerner den udlejning som man har
+	// klikket på i listviewet
+	public void btnFjernAction() {
+		u = lwUdlejning.getSelectionModel().getSelectedItem();
+		service.sletUdlejning(u);
+	}
 }
