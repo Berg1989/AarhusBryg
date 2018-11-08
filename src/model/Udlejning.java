@@ -11,8 +11,8 @@ public class Udlejning {
     private ArrayList<UdlejningsLinje> ordre;
     private LocalDate dato;
     private boolean levering;
-    private static double leveringspris = 800.0; // FACT CHECK
-    private ArrayList<Kulsyre> kulsyre; // Why?
+    private static double leveringspris = 800.0;
+    private ArrayList<Kulsyre> kulsyre;
     private boolean betalt;
     private double betaltBeloeb;
     private double pantLagt;
@@ -67,7 +67,7 @@ public class Udlejning {
     }
 
     /**
-     * Kører alle UdlejningsLinje igennem og lægger alle objekternes pant til den
+     * K�rer alle UdlejningsLinje igennem og laegger alle objekternes pant til den
      * lokale variabel
      *
      * @return den lokale variabel
@@ -81,7 +81,7 @@ public class Udlejning {
     }
 
     /**
-     * Kører alle UdlejningsLinje igennem og lægger alle objekternes pris til den
+     * Koerer alle UdlejningsLinje igennem og laegger alle objekternes pris til den
      * lokale variabel
      *
      * @return den lokale variabel
@@ -95,8 +95,8 @@ public class Udlejning {
     }
 
     /**
-     * Kører alle UdlejningsLinje igennem og lægger alle objekternes pant og pris
-     * til den lokale variabel, derudover lægger den leveringspris på også
+     * Koerer alle UdlejningsLinje igennem og laegger alle objekternes pant og pris
+     * til den lokale variabel, derudover laegger den leveringspris paa ogsaa
      *
      * @return den lokale variabel
      */
@@ -111,7 +111,7 @@ public class Udlejning {
     }
 
     /**
-     * Sætter betalt til true og bruger beloeb parameter som det der skal betales
+     * Saetter betalt til true og bruger beloeb parameter som det der skal betales
      *
      * @param beloeb
      */
@@ -133,7 +133,7 @@ public class Udlejning {
     }
 
     /**
-     * Opretter en Udlejningslinje, derefter tilføjer den til arraylisten ordre
+     * Opretter en Udlejningslinje, derefter tilfoejer den til arraylisten ordre
      * 
      * @param antal
      * @param p
@@ -144,7 +144,6 @@ public class Udlejning {
 
     }
 
-    // tror denne er udeless
     public void addOrdre(UdlejningsLinje ul) {
         this.ordre.add(ul);
     }

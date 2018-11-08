@@ -17,7 +17,7 @@ public class ProduktKategori {
     }
 
     /**
-     * Opretter et produkt og tilføjer det til arraylisten af produkter
+     * Opretter et produkt og tilfoejer det til arraylisten af produkter
      *
      * @param navn
      * @param pris
@@ -31,7 +31,7 @@ public class ProduktKategori {
     }
 
     /**
-     * Tilføjer et produkt til arraylisten af produkter.
+     * Tilfoejer et produkt til arraylisten af produkter.
      *
      * @param p
      */
@@ -49,7 +49,7 @@ public class ProduktKategori {
     }
 
     /**
-     * Rediger på produkktets navn.
+     * Aendrer produkktets navn.
      *
      * @param p
      * @param navn
@@ -59,7 +59,7 @@ public class ProduktKategori {
     }
 
     /**
-     * Rediger på produktets pris
+     * Aendrer produktets pris
      *
      * @param p
      * @param pris
@@ -69,7 +69,7 @@ public class ProduktKategori {
     }
 
     /**
-     * Rediger på produktets str
+     * Aendrer på produktets str
      *
      * @param p
      * @param str
@@ -80,7 +80,7 @@ public class ProduktKategori {
 
     /**
      *
-     * @return en ny arrayList af produkter
+     * @return en ny ArrayList af denne kategoris produkter
      */
     public ArrayList<Produkt> getProdukter() {
         return new ArrayList<>(produkter);
@@ -89,7 +89,7 @@ public class ProduktKategori {
     /**
      *
      * @param p
-     * @return det produkt som er i parameteren
+     * @return det valgte produkt (det produkt som er i parameteren)
      */
     public Produkt getProdukt(Produkt p) {
         return p;

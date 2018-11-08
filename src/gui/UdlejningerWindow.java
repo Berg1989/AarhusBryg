@@ -122,27 +122,26 @@ public class UdlejningerWindow extends Stage {
         lwKvittering.getItems().addAll(u.getFullOrdre());
     }
 
-    // Denne metode er en buttom action, som lukker for det nuværende vindue
+    // Denne metode er en buttom action, som lukker for det nuvaerende vindue
     public void lukAction() {
         hide();
     }
 
-    // Denne metode er en buttom action, som åbner for et nyt vindue
+    // Denne metode er en buttom action, som aabner for et nyt vindue
     public void opretReservation() {
         UdlejningsWindow uw = new UdlejningsWindow();
         uw.showAndWait();
 
     }
 
-    // Denne metode tilføjer Udlejning attributten til et objekt man vælger fra
+    // Denne metode tilfoejer Udlejning attributten til et objekt man vaelger fra
     // listviewet
     public void lwListener() {
         u = lwUdlejning.getSelectionModel().getSelectedItem();
         update();
     }
 
-    // ??????
-    // Denne buttom er en buttom action, som opdater
+    // Denne metode er en button action, som opdaterer
     public void btnUpdateAction() {
         String navn = txfNavn.getText().trim();
         String tlf = txfTlf.getText().trim();
@@ -164,7 +163,7 @@ public class UdlejningerWindow extends Stage {
     }
 
     // Denne metode er en buttom action, som fjerner den udlejning som man har
-    // klikket på i listviewet
+    // klikket paa i listviewet
     public void btnFjernAction() {
         u = lwUdlejning.getSelectionModel().getSelectedItem();
         service.sletUdlejning(u);

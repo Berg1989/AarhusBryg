@@ -238,8 +238,8 @@ public class UdlejningsWindow extends Stage {
 	 * } }
 	 */
 
-	// Dette er en buttom action, som tilføjer det anlæg man har klikket på i
-	// listviewet og tilføjer det til lwValgt listviewet
+	// Dette er en buttom action, som tilfoejer det anlaeg man har klikket paa i
+	// listviewet og tilfoejer det til lwValgt listviewet
 	public void btnAnlagAction() {
 		Anlaeg a = lwAnlag.getSelectionModel().getSelectedItem();
 		if (a != null) {
@@ -258,7 +258,7 @@ public class UdlejningsWindow extends Stage {
 		}
 	}
 
-	// Dette er en buttom action, som tilføjer det fustage man har klikket på i
+	// Dette er en buttom action, som tilfoejer det fustage man har klikket på i
 	// listviewet og tilføjer det til lwValgt listviewet
 	public void btnFustageAction() {
 		Fustage f = lwFustager.getSelectionModel().getSelectedItem();

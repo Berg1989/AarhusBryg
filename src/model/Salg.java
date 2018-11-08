@@ -33,8 +33,8 @@ public class Salg {
     }
 
     /**
-     * Denne metode opretter en salgslinie og tilføjer den til arraylisten
-     * "produkter", hvis antal er større end 0.
+     * Denne metode opretter en salgslinie og tilfoejer den til arraylisten
+     * "produkter", hvis antal er stoerre end 0.
      *
      * @param antal
      * @param produkt
@@ -105,7 +105,15 @@ public class Salg {
         return p;
     }
 
-    public void setStuderende(boolean b) {
+    public SalgSted getSted() {
+		return sted;
+	}
+
+	public void setSted(SalgSted sted) {
+		this.sted = sted;
+	}
+
+	public void setStuderende(boolean b) {
         this.studerende = b;
     }
 
@@ -116,7 +124,7 @@ public class Salg {
     }
 
     /**
-     * Sætter rabatten til 0.
+     * Saetter rabatten til 0.
      */
     public void fjernRabat() {
         this.rabat = 0;
@@ -124,7 +132,7 @@ public class Salg {
     }
 
     /**
-     * Sætter rabatten til hvad der står i inputRabat
+     * Saetter rabatten til hvad der staar i inputRabat
      *
      * @param inputRabat
      */

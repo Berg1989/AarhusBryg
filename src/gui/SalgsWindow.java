@@ -29,7 +29,7 @@ public class SalgsWindow extends Stage {
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);
-		setTitle("Administrator Window");
+		setTitle("Salg");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
@@ -123,7 +123,7 @@ public class SalgsWindow extends Stage {
 		VBox vboks5 = new VBox(10);
 		pane.add(vboks5, 4, 0);
 
-		lbTilfojet = new Label("Tilføjet til køblist");
+		lbTilfojet = new Label("Tilf�jet til koebsliste");
 		vboks5.getChildren().add(lbTilfojet);
 
 		lwTilfojet = new ListView<>();
@@ -150,8 +150,8 @@ public class SalgsWindow extends Stage {
 
 	}
 
-	// Denne metode holder tilføjer alle produktkategorier fra et salgssted til
-	// lwPK, så længe man har klikket på et salgsSted fra lwSS
+	// Denne metode holder tilfoejer alle produktkategorier fra et salgssted til
+	// lwPK, saa laenge man har klikket paa et salgsSted fra lwSS
 	private void updateControls() {
 		SalgSted ss = lwSS.getSelectionModel().getSelectedItem();
 		lwPK.getItems().clear();
@@ -160,8 +160,8 @@ public class SalgsWindow extends Stage {
 		}
 	}
 
-	// Denne metode holder tilføjer alle produkter fra en produktkategori til
-	// lwP, så længe man har klikket på en produktkategori fra lwPK
+	// Denne metode holder tilfoejer alle produkter fra en produktkategori til
+	// lwP, saa laenge man har klikket paa en produktkategori fra lwPK
 	private void updateControlsTwo() {
 		ProduktKategori pk = lwPK.getSelectionModel().getSelectedItem();
 		lwP.getItems().clear();
@@ -170,7 +170,7 @@ public class SalgsWindow extends Stage {
 		}
 	}
 
-	// Denne metode sætter Textfield "txtAntal" til 1.
+	// Denne metode saetter Textfield "txtAntal" til 1.
 
 	// Kan fjernes.
 	private void updateControlsThree() {
@@ -184,8 +184,8 @@ public class SalgsWindow extends Stage {
 		txfTP.setText(Double.toString(s.getTotalPris()));
 	}
 
-	// Denne metode tilføjer et valgt produkt og bestemt antal fra texfield, og
-	// lægger det over i Listviewet for "tilføjet til købslist"
+	// Denne metode tilfoejer et valgt produkt og bestemt antal fra texfield, og
+	// laegger det over i Listviewet for "tilfoejet til koebslist"
 	private void pilHojreAction() {
 		if (s == null && lwP.getSelectionModel().getSelectedItem() != null && !lwSS.isDisabled()) {
 			s = service.createSalg(lwSS.getSelectionModel().getSelectedItem());
@@ -205,7 +205,7 @@ public class SalgsWindow extends Stage {
 
 	}
 
-	// Denne metode fjerner det valgte produkt fra "tilføjet til købslist".
+	// Denne metode fjerner det valgte produkt fra "tilfoejet til koebslist".
 	private void pilVenstreAction() {
 
 		if (lwTilfojet.getSelectionModel().getSelectedItem() != null) {
@@ -218,15 +218,15 @@ public class SalgsWindow extends Stage {
 			}
 	}
 
-	// Denne metode er en bottom action, som åbner vinduet VidereWindow, hvor den
-	// tager det nuværende salg med som parameter
+	// Denne metode er en bottom action, som aabner vinduet VidereWindow, hvor den
+	// tager det nuvaerende salg med som parameter
 	private void videreAction() {
 		VidereWindow vw = new VidereWindow(s);
 		vw.showAndWait();
 
 	}
 
-	// Denne metode er en buttom action, som lukker for det nuværende vindue
+	// Denne metode er en buttom action, som lukker for det nuvaerende vindue
 	private void lukAction() {
 		hide();
 	}

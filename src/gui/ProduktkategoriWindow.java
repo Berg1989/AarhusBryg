@@ -63,7 +63,7 @@ public class ProduktkategoriWindow extends Stage {
         pane.add(btnLuk, 1, 4);
         btnLuk.setOnAction(event -> btnLukAction());
 
-        btnGaaTil = new Button("G� Til");
+        btnGaaTil = new Button("Gaa Til");
         pane.add(btnGaaTil, 0, 4);
         btnGaaTil.setOnAction(event -> btnGaaTilAction());
 
@@ -78,11 +78,11 @@ public class ProduktkategoriWindow extends Stage {
         return list;
     }
 
-    // Denne metode er Button action for Opret Kategori Button, hvor den åbner
+    // Denne metode er Button action for Opret Kategori Button, hvor den aabner
     // vinduet
     // OpretKategoriWindow, og venter på OpretKategoriWindow er lukket, hvorefter
     // den
-    // tager alle objekter fra InitAllProdukter og tilføjer dem til Produkt
+    // tager alle objekter fra InitAllProdukter og tilfoejer dem til Produkt
     // Listviewet
     private void btnOpretAction() {
         OpretKategoriWindow okw = new OpretKategoriWindow();
@@ -94,15 +94,15 @@ public class ProduktkategoriWindow extends Stage {
     // Denne metode er Button action for slet Button, hvor den sletter det objekt
     // man har klikket på i Produktkategori Listviewet, hvorefter den tager alle
     // objekter
-    // fra InitAllProdukter og tilføjer dem til Produktkategori Listviewet
+    // fra InitAllProdukter og tilfoejer dem til Produktkategori Listviewet
     private void btnRemoveAction() {
         service.sletProduktKategori(lwPKategori.getSelectionModel().getSelectedItem());
         lwPKategori.getItems().setAll(initAllProdukter());
     }
 
-    // Denne metode er Button action for Gaa til Button, hvor den åbner
-    // vinduet GaaTilWindow, hvis man har klikket på en produktkategori fra
-    // Listviewet. Hvorefter den venter på GaaTilWindow er lukket.
+    // Denne metode er Button action for Gaa til Button, hvor den aabner
+    // vinduet GaaTilWindow, hvis man har klikket paa en produktkategori fra
+    // Listviewet. Hvorefter den venter paa GaaTilWindow er lukket.
     private void btnGaaTilAction() {
         if (lwPKategori.getSelectionModel().getSelectedItem() != null) {
             pk = lwPKategori.getSelectionModel().getSelectedItem();

@@ -144,10 +144,10 @@ public class GaaTilWindow extends Stage {
         return list;
     }
 
-    // Denne metode er Button action for Opret Button, hvor den åbner vinduet
-    // OpretProduktWindow, og venter på OpretProduktWindow er lukket, hvorefter den
-    // tager alle objekter fra InitAllProdukter og tilføjer dem til Produkt
-    // Listviewet
+    // Denne metode er Button action for Opret Button, hvor den aabner vinduet
+    // OpretProduktWindow, og venter paa OpretProduktWindow er lukket, hvorefter den
+    // tager alle objekter fra InitAllProdukter og tilfoejer dem til Produkt
+    // ListViewet
 
     private void btnOpretAction() {
         OpretProduktWindow opw = new OpretProduktWindow(this.pk);
@@ -156,10 +156,10 @@ public class GaaTilWindow extends Stage {
 
     }
 
-    // Denne metode er Button action for redigere Button, hvor den åbner vinduet
-    // OpretProduktWindow, hvis man har klikket på et produkt i Produkt listviewet,
+    // Denne metode er Button action for redigere Button, hvor den aabner vinduet
+    // OpretProduktWindow, hvis man har klikket paa et produkt i Produkt listviewet,
     // og venter på OpretProduktWindow er lukket, hvorefter den
-    // tager alle objekter fra InitAllProdukter og tilføjer dem til Produkt
+    // tager alle objekter fra InitAllProdukter og tilfoejer dem til Produkt
     // Listviewet
     private void btnRedigerAction() {
         if (lwProdukter.getSelectionModel().getSelectedItem() != null) {
@@ -172,8 +172,8 @@ public class GaaTilWindow extends Stage {
     }
 
     // Denne metode er Button action for slet Button, hvor den sletter det objekt
-    // man har klikket på i Produkt Listviewet, hvorefter den tager alle objekter
-    // fra InitAllProdukter og tilføjer dem til Produkt Listviewet
+    // man har klikket paa i Produkt Listviewet, hvorefter den tager alle objekter
+    // fra InitAllProdukter og tilfoejer dem til Produkt Listviewet
     private void btnSletAction() {
         Produkt p = lwProdukter.getSelectionModel().getSelectedItem();
         service.sletProdukt(pk, p);
@@ -181,8 +181,8 @@ public class GaaTilWindow extends Stage {
 
     }
 
-    // Denne metode holder TextFieldene "Navn,str,Pris" opdateret, når man klikker
-    // på diverse produkter i Listviewet
+    // Denne metode holder TextFieldene "Navn,str,Pris" opdateret, naar man klikker
+    // paa diverse produkter i Listviewet
     private void updateControls() {
         Produkt produkt = lwProdukter.getSelectionModel().getSelectedItem();
         lwProduktPriser.getItems().clear();
@@ -199,9 +199,9 @@ public class GaaTilWindow extends Stage {
         }
     }
 
-    // Denne metode er Button action for RedigereSP Button, hvor den åbner vinduet
-    // RedigereSPWindow, venter på RedigereSPWindow er lukket, hvorefter den
-    // tager alle objekter fra InitAllStedPriser og tilføjer dem til ProduktPriser
+    // Denne metode er Button action for RedigereSP Button, hvor den aabner vinduet
+    // RedigereSPWindow, venter paa RedigereSPWindow er lukket, hvorefter den
+    // tager alle objekter fra InitAllStedPriser og tilfoejer dem til ProduktPriser
     // Listviewet
     private void btnRedigerSPAction() {
         Produkt produkt = lwProdukter.getSelectionModel().getSelectedItem();

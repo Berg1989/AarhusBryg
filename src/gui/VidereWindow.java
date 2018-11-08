@@ -63,7 +63,7 @@ public class VidereWindow extends Stage {
         VBox vboks1 = new VBox();
         pane.add(vboks1, 0, 0);
 
-        lbTF = new Label("Tilføjet produkter");
+        lbTF = new Label("Tilfoejede produkter");
         vboks1.getChildren().add(lbTF);
 
         lwTilFojet = new ListView<>();

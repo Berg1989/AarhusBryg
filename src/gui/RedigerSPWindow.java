@@ -80,7 +80,7 @@ public class RedigerSPWindow extends Stage {
 
 	/// ADAWD//A DAW/D/AW/D
 	// Denne metode er en button action for "Rediger" hvor den opretter en stedpris,
-	/// hvis ComboBox'en er tom. Hvis HÆLP
+	/// hvis ComboBox'en er tom. 
 	private void btnRedigerAction() {
 		if (p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem()) == null) {
 			service.opretStedPris(cbSalgsSted.getSelectionModel().getSelectedItem(), p,

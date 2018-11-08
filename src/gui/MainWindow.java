@@ -58,7 +58,7 @@ public class MainWindow extends Application {
         lblStatistik = new Label("Statistik");
         pane.add(lblStatistik, 3, 0);
 
-        btnBar = new Button("Åben\nSalgsystem");
+        btnBar = new Button("Aaben\nSalgsystem");
         pane.add(btnBar, 0, 1, 1, 2);
         btnBar.setOnAction(event -> barAction());
         btnBar.setPrefSize(buttonWidth, buttonHeight * 2 + pad);

@@ -33,7 +33,7 @@ public class SalgSted {
     }
 
     /**
-     * Tilføjer pk til pkList
+     * Tilfoejer pk til pkList
      *
      * @param pk
      */

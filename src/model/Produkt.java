@@ -48,7 +48,7 @@ public class Produkt {
     }
 
     /**
-     * Tilføjer en stedpris til arraylisten af stedpriser på det produkt.
+     * Tilfoejer en stedpris til arraylisten af stedpriser paa dette produkt.
      *
      * @param sp
      */
@@ -58,14 +58,14 @@ public class Produkt {
 
     /**
      *
-     * @return en ny arraylist af stedpriser
+     * @return en ny arraylist af produktets stedpriser
      */
     public ArrayList<StedPris> getStedPriser() {
         return new ArrayList<>(stedPriser);
     }
 
     /**
-     * Returner stedprisen på salgstedet i parameteren, hvis salgsstedet er i
+     * Returnerer stedprisen som double paa salgstedet i parameteren, hvis salgsstedet er i
      * arraylisten. Ellers return 0
      *
      * @param sted
@@ -82,7 +82,7 @@ public class Produkt {
     }
 
     /**
-     * Returner stedprisen på salgssedet i parameteren, hvis salgsstedet er i
+     * Returnerer stedprisen paa salgssedet i parameteren, hvis salgsstedet er i
      * arraylisten. Ellers return null
      *
      * @param sted

@@ -30,7 +30,7 @@ public class ListeoversalgWindow extends Stage {
 		initStyle(StageStyle.UTILITY);
 		initModality(Modality.APPLICATION_MODAL);
 		setResizable(false);
-		setTitle("Salgslinie Window");
+		setTitle("Liste over salg");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
@@ -70,8 +70,8 @@ public class ListeoversalgWindow extends Stage {
 		btnLuk.setOnAction(event -> btnLukAction());
 	}
 
-	// Denne metode er til at generere en fil.txt. Hvor man vælger 2 dato'ere og
-	// trækker data'en som er imellem de valgte datoer, og tilføjer det til en
+	// Denne metode er til at generere en fil.txt. Hvor man vaelger 2 dato'ere og
+	// traekker data'en som er imellem de valgte datoer, og tilfoejer det til en
 	// textfil
 	private void btnGetListeAction() {
 		LocalDate start = startDate.getValue().minusDays(1);
@@ -79,8 +79,6 @@ public class ListeoversalgWindow extends Stage {
 
 		if (start.isBefore(end)) {
 			try {
-				// String fileName = "C:\\Users\\Mads\\Desktop\\Uddannelse\\List over
-				// salg//List.txt";
 				String fileName = "../../List.txt";
 				PrintWriter printwriter = new PrintWriter(fileName);
 				Scanner scan = new Scanner(System.in);

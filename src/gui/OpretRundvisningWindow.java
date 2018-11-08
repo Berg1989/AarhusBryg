@@ -43,7 +43,6 @@ public class OpretRundvisningWindow extends Stage {
     private CheckBox chbSpisning, chbStuderende;
     private TextField txfTidspunkt, txfAntalM, txfAntalS, txfTotalPris, txfKundeNavn;
     private Button btnReserver, btnLuk;
-    private PauseTransition pause = new PauseTransition(Duration.seconds(1)); // NOT IN USE?
     Rundvisning rv;
 
     private void initContent(GridPane pane) {
@@ -63,7 +62,7 @@ public class OpretRundvisningWindow extends Stage {
         Hnavn.getChildren().add(txfKundeNavn);
         addListenerKunde();
 
-        lbDatePicker = new Label("Vælg dato");
+        lbDatePicker = new Label("Vaelg dato");
         pane.add(lbDatePicker, 0, 1);
 
         dp = new DatePicker();
@@ -88,7 +87,7 @@ public class OpretRundvisningWindow extends Stage {
         pane.add(txfAntalM, 1, 6);
         addListenerAntalM();
 
-        chbSpisning = new CheckBox("Spisning Ønskes - 120 kr.- pr. person");
+        chbSpisning = new CheckBox("Spisning oenskes - 120 kr.- pr. person");
         pane.add(chbSpisning, 0, 7);
         chbSpisning.setOnAction(event -> selectedSpisning());
 
@@ -300,7 +299,6 @@ public class OpretRundvisningWindow extends Stage {
 
     private void selectedSpisning() {
         if (chbSpisning.isSelected()) {
-            // txfAntalS.setEditable(true);
             txfAntalS.setDisable(false);
             System.out.println(txfAntalS.isEditable());
         } else {

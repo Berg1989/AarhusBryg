@@ -49,7 +49,7 @@ public class OpretProduktWindow extends Stage {
         txfNavn = new TextField();
         pane.add(txfNavn, 1, 0);
 
-        lbStr = new Label("Produktets St�rrelse:");
+        lbStr = new Label("Produktets Stoerrelse:");
         pane.add(lbStr, 0, 1);
 
         txfStr = new TextField();

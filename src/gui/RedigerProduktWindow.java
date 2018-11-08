@@ -25,7 +25,7 @@ public class RedigerProduktWindow extends Stage {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Opret produkt window");
+        setTitle("Opret/Rediger produkt window");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -49,7 +49,7 @@ public class RedigerProduktWindow extends Stage {
         txfNavn = new TextField();
         pane.add(txfNavn, 1, 0);
 
-        lbStr = new Label("Produktets St�rrelse:");
+        lbStr = new Label("Produktets Stoerrelse:");
         pane.add(lbStr, 0, 1);
 
         txfStr = new TextField();

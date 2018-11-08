@@ -25,7 +25,7 @@ public class UdlejningsLinje {
     }
 
     /**
-     * Beregner en totalpris, hvor man lægger pant og prisen sammen.
+     * Beregner en totalpris, hvor man laegger pant og prisen sammen.
      * 
      * @return
      */

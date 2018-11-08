@@ -39,7 +39,7 @@ public class OpretKategoriWindow extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
-        lbKategoriNavn = new Label("Navn p� kategori:");
+        lbKategoriNavn = new Label("Navn paa kategori:");
         pane.add(lbKategoriNavn, 0, 0);
 
         txfKategoriNavn = new TextField();
@@ -54,7 +54,7 @@ public class OpretKategoriWindow extends Stage {
         btnLuk.setOnAction(event -> btnLukAction());
     }
 
-    // Denne metode opretter en produktkategori. Derudover så giver metoden også en
+    // Denne metode opretter en produktkategori. Derudover saa giver metoden ogsaa en
     // alert, hvis textfieldet er tomt.
     private void btnOpretAction() {
         String navn = txfKategoriNavn.getText().trim();

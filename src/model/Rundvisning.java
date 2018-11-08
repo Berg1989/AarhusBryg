@@ -57,7 +57,7 @@ public class Rundvisning {
     }
 
     /**
-     * Denne metode ændrer betalt til true
+     * Denne metode aendrer betalt til true
      */
     public void setBetalt() {
         this.betalt = true;
@@ -68,7 +68,7 @@ public class Rundvisning {
     }
 
     /**
-     * Denne metode ændrer spisning til true og sætter antalspisende til det samme
+     * Denne metode aendrer spisning til true og saetter antalspisende til det samme
      * antal som er til rundvisning
      */
     public void tilmeldSpisning() {
@@ -81,7 +81,7 @@ public class Rundvisning {
     }
 
     /**
-     * Denne metode ændrer spisning til true og sætter antalspisende til det i
+     * Denne metode aendrer spisning til true og saetter antalspisende til det i
      * parameteren
      *
      * @param spisende
@@ -92,14 +92,14 @@ public class Rundvisning {
     }
 
     /**
-     * Denne metode ændrer spisning til false;
+     * Denne metode aendrer spisning til false;
      */
     public void frameldSpisning() {
         this.spisning = false;
     }
 
     /**
-     * Denne metode ændrer antal spisende det som i parameteren
+     * Denne metode aendrer antal spisende det som i parameteren
      *
      * @param as
      */
@@ -187,11 +187,11 @@ public class Rundvisning {
     }
 
     /**
-     * Tjekker om tidsrummet er efter eller førkl 16:00 og hvis antalGaester er
-     * indenfor accaptable grænser Require: (Efter 16:00) AntalGaester < 20 || > 75
-     * eller (Før 16:00) antalGaester < 15 || > 75
+     * Tjekker om tidsrummet er efter eller faarkl 16:00 og hvis antalGaester er
+     * indenfor accaptable graenser Require: (Efter 16:00) AntalGaester < 20 || > 75
+     * eller (Faar 16:00) antalGaester < 15 || > 75
      *
-     * @return true hvis antalGaester er inden for accaptable grænser. Ellers return
+     * @return true hvis antalGaester er inden for accaptable graenser. Ellers return
      *         false
      */
     public boolean isTilgaengeligtAntalGaester() {
@@ -211,7 +211,7 @@ public class Rundvisning {
     }
 
     /**
-     * Sætter tiden for rundvisning og eventuelt spisning.
+     * Saetter tiden for rundvisning og eventuelt spisning.
      *
      * @return hvor lang tid en rundvisning og eventuelt spisning vil tage i
      *         minutter
@@ -226,7 +226,7 @@ public class Rundvisning {
     }
 
     /**
-     * Beregner prisen for en rundvisning. Hvor prisen er differenseret angående
+     * Beregner prisen for en rundvisning. Hvor prisen er differenseret angaaende
      * antalGaester og hvis spisning er taget med
      *
      * @return en pris

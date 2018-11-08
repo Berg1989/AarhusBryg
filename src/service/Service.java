@@ -146,8 +146,9 @@ public class Service {
 
 	// Denne metode sletter et salgssted samt det salgssteds stedpriser.
 	public void sletSalgSted(SalgSted ss) {
+		ProduktKategori pk;
 		for (int i = 0; i < ss.getProduktKategorier().size(); i++) {
-			ProduktKategori pk = ss.getProduktKategorier().get(i);
+			pk = ss.getProduktKategorier().get(i);
 			for (int j = 0; j < pk.getProdukter().size(); j++) {
 				pk.getProdukter().get(j).removeStedPris(ss);
 			}

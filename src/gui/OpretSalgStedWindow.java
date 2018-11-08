@@ -21,7 +21,7 @@ public class OpretSalgStedWindow extends Stage {
         initStyle(StageStyle.UTILITY);
         initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
-        setTitle("Administrator Window");
+        setTitle("Opret SalgSted");
 
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -55,7 +55,7 @@ public class OpretSalgStedWindow extends Stage {
 
     }
 
-    // Denne metode opretter et salgssted. Derudover så giver metoden også en
+    // Denne metode opretter et salgssted. Derudover saa giver metoden ogsaa en
     // alert, hvis textfieldet er tomt.
     private void btnOpretAction() {
         String navn = txfNavn.getText().trim();
