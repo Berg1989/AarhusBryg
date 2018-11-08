@@ -123,7 +123,7 @@ public class SalgsWindow extends Stage {
 		VBox vboks5 = new VBox(10);
 		pane.add(vboks5, 4, 0);
 
-		lbTilfojet = new Label("Tilføjet til koebsliste");
+		lbTilfojet = new Label("Tilfï¿½jet til koebsliste");
 		vboks5.getChildren().add(lbTilfojet);
 
 		lwTilfojet = new ListView<>();
@@ -224,7 +224,6 @@ public class SalgsWindow extends Stage {
 		VidereWindow vw = new VidereWindow(s);
 		vw.showAndWait();
 		lwTilfojet.getItems().clear();
-		hide();
 
 	}
 
