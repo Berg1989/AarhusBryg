@@ -41,7 +41,7 @@ public class Rundvisning {
     // allerede
     // eksistere. Hvis den gør, så overrider den det der stod der før til det som
     // står i parameteren.
-    public void setDate(LocalDate d) {
+    public void setDato(LocalDate d) {
         this.dato = d;
     }
 
@@ -49,7 +49,7 @@ public class Rundvisning {
     // allerede
     // eksistere. Hvis den gør, så overrider den det der stod der før til det som
     // står i parameteren.
-    public void setTime(LocalTime t) {
+    public void setTid(LocalTime t) {
         this.tid = t;
     }
 

@@ -202,7 +202,7 @@ public class RundvisningWindow extends Stage {
             if (!(tid.equals(rv.getTid().toString()))) {
                 try {
                     LocalTime t = LocalTime.parse(tid);
-                    rv.setTime(t);
+                    rv.setTid(t);
                 } catch (Exception e) {
                     System.out.println("You shall not parse");
                 }
@@ -210,7 +210,7 @@ public class RundvisningWindow extends Stage {
             if (!(dato.equals(rv.getDato().toString()))) {
                 try {
                     LocalDate d = LocalDate.parse(dato);
-                    rv.setDate(d);
+                    rv.setDato(d);
                 } catch (Exception e) {
                     System.out.println("You shall not parse");
                 }

@@ -231,7 +231,7 @@ public class OpretRundvisningWindow extends Stage {
                     try {
 
                         LocalTime tid = LocalTime.parse(t);
-                        rv.setTime(tid);
+                        rv.setTid(tid);
                         txfTotalPris.setText("" + rv.beregnPris());
                     } catch (Exception e) {
                         System.out.println("Michelle, can you handle this?");
@@ -288,7 +288,7 @@ public class OpretRundvisningWindow extends Stage {
         dp.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (checkObject()) {
                 LocalDate d = dp.getValue();
-                rv.setDate(d);
+                rv.setDato(d);
                 txfTotalPris.setText("" + rv.beregnPris());
             }
         });

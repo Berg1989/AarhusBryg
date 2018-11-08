@@ -28,7 +28,7 @@ public class ProduktKategori {
 
 	// denne metode fjerner produktet som er skrevet i parameteren fra arraylisten
 	// af produkter.
-	public void sletProdukt(Produkt p) {
+	public void removeProdukt(Produkt p) {
 		produkter.remove(p);
 	}
 

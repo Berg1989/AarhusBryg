@@ -52,7 +52,7 @@ public class Service {
 
 	// Denne metode sletter et produkt fra en produktkategori
 	public void sletProdukt(ProduktKategori pk, Produkt p) {
-		pk.sletProdukt(p);
+		pk.removeProdukt(p);
 	}
 
 	// Denne metode redigere et produkt fra en produktkategori
@@ -281,9 +281,7 @@ public class Service {
 		r3.setBetalt();
 		gemRundvisning(r3);
 
-		//
 		// Fra opgaven
-		//
 		ArrayList<Produkt> tempList = new ArrayList<>();
 		// flaske Oel
 		ProduktKategori flaske = opretProduktKategori("Flaskeoel");
@@ -400,7 +398,7 @@ public class Service {
 		opretProdukt(glas, "Lille Glas", 15.0, "30cL");
 		opretProdukt(glas, "Krus", 60.0, "Krus-stoerrelse");
 
-		// kulsyre
+		// Kulsyre
 		opretKulsyre(6, 400.0);
 		opretKulsyre(4, 400.0);
 		opretKulsyre(10, 400.0);
