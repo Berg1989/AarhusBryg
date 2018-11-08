@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Udlejning {
 
-    // Attributter til klassen
     private String kundeNavn;
     private String kundeTlf;
     private String kundeEmail;
@@ -18,7 +17,9 @@ public class Udlejning {
     private double betaltBeloeb;
     private double pantLagt;
 
-    // Constuctor til klassen
+    /**
+     * Constuctor
+     */
     public Udlejning() {
         this.ordre = new ArrayList<>();
         this.betalt = false;
@@ -65,7 +66,12 @@ public class Udlejning {
         leveringspris = pris;
     }
 
-    // Denne metode beregner total pant for alle objekter i ordre arraylisten.
+    /**
+     * Kører alle UdlejningsLinje igennem og lægger alle objekternes pant til den
+     * lokale variabel
+     *
+     * @return den lokale variabel
+     */
     public double getPant() {
         double p = 0.0;
         for (UdlejningsLinje ul : this.ordre) {
@@ -74,7 +80,12 @@ public class Udlejning {
         return p;
     }
 
-    // Denne metode beregner den samlede pris for alle objekter i ordre arraylisten
+    /**
+     * Kører alle UdlejningsLinje igennem og lægger alle objekternes pris til den
+     * lokale variabel
+     *
+     * @return den lokale variabel
+     */
     public double getSamletPris() {
         double p = 0.0;
         for (UdlejningsLinje ul : this.ordre) {
@@ -83,8 +94,12 @@ public class Udlejning {
         return p;
     }
 
-    // Denne metode beregner det totale beløb, hvor pant og prisen bliver
-    // sammenlagt. Derudover bliver der lagt leveringspris oveni
+    /**
+     * Kører alle UdlejningsLinje igennem og lægger alle objekternes pant og pris
+     * til den lokale variabel, derudover lægger den leveringspris på også
+     *
+     * @return den lokale variabel
+     */
     public double getSamletPrisMedPant() {
         double p = 0.0;
         for (UdlejningsLinje ul : this.ordre) {
@@ -95,9 +110,11 @@ public class Udlejning {
         return p;
     }
 
-    // Denne metode sætter SADWAWDAWDAWDAWDAWDAW
-    ///
-    ////
+    /**
+     * Sætter betalt til true og bruger beloeb parameter som det der skal betales
+     *
+     * @param beloeb
+     */
     public void betal(double beloeb) {
         this.betalt = true;
         this.betaltBeloeb = beloeb;
@@ -115,8 +132,12 @@ public class Udlejning {
         return this.levering;
     }
 
-    // Denne metode oprreter en udlejningslinie, hvorefter den tilføjer den til
-    // ordre arraylisten
+    /**
+     * Opretter en Udlejningslinje, derefter tilføjer den til arraylisten ordre
+     * 
+     * @param antal
+     * @param p
+     */
     public void createOrdreLinje(int antal, Rentable p) {
         UdlejningsLinje ul = new UdlejningsLinje(p, antal);
         this.ordre.add(ul);

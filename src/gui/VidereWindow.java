@@ -84,14 +84,14 @@ public class VidereWindow extends Stage {
         txfTP.setEditable(false);
         txfTP.setText(Double.toString(s.getTotalPris()));
 
-        cbBP = new CheckBox("Bestemt pris");
+        cbBP = new CheckBox("Giv absolut rabat");
         vboks2.getChildren().add(cbBP);
         cbBP.setOnAction(event -> cbBPIsSelected());
 
         txfBP = new TextField();
         vboks2.getChildren().add(txfBP);
         txfBP.setDisable(true);
-        txfBP.setOnMouseExited(event -> updateNyPris());
+        txfBP.setOnMouseExited(event -> updateNyPrisAbs());
 
         cbPD = new CheckBox("Procent Discount %");
         vboks2.getChildren().add(cbPD);
@@ -100,7 +100,7 @@ public class VidereWindow extends Stage {
         txfPD = new TextField();
         vboks2.getChildren().add(txfPD);
         txfPD.setDisable(true);
-        txfPD.setOnMouseExited(event -> updateNyPris());
+        txfPD.setOnMouseExited(event -> updateNyPrisPro());
 
         lbTPNy = new Label("Ny total pris");
         vboks2.getChildren().add(lbTPNy);
@@ -224,6 +224,32 @@ public class VidereWindow extends Stage {
         }
 
     }
+    
+    private void updateNyPrisPro() {
+    	String str = txfPD.getText().trim();
+    	try {
+    		double rabat = Double.parseDouble(str);
+    		s.givRabatProcent(rabat);
+    	}
+    	catch  (Exception e){
+    		txfPD.setText("" + s.getRabat());
+    	}
+    	txfTPNy.setText("" + s.getTotalPris());
+    }
+    
+    
+    private void updateNyPrisAbs() {
+    	String str = txfBP.getText().trim();
+    	try {
+    		double rabat = Double.parseDouble(str);
+    		s.givRabatAbsolut(rabat);
+    	}
+    	catch  (Exception e){
+    		txfBP.setText("" + s.getRabat());
+    	}
+    	txfTPNy.setText("" + s.getTotalPris());
+    }
+
 
     // Denne metode er en buttom action, som lukker for det nuværende vindue
     private void btnLukAction() {

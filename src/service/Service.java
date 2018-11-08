@@ -161,9 +161,15 @@ public class Service {
 	// produktet i parameteren
 	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
 		// Tjek saa produktkategorien findes paa salgssstedet?????
-		StedPris sp = new StedPris(ss, p, pris);
-		p.addStedPris(sp);
-		return sp;
+		if (pris >= 0) {
+			StedPris sp = new StedPris(ss, p, pris);
+			p.addStedPris(sp);
+			return sp;
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 	// Denne metode returnere et produkts stedpris
@@ -264,7 +270,6 @@ public class Service {
 		// Bar
 		SalgSted fredagsBar = opretSalgSted("Fredagsbar"); // Slet ikke
 		SalgSted butik = opretSalgSted("Butik"); // Slet ikke
-		SalgSted bar = opretSalgSted("Bar"); // Slet ikke
 
 		// Rundvisninger
 		Rundvisning r1 = opretRundvisning("Madeleine", LocalDate.of(2018, 6, 26), 42, LocalTime.of(13, 37));

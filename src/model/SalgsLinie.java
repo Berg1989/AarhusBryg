@@ -2,13 +2,18 @@ package model;
 
 public class SalgsLinie {
 
-    // Attributer til klassen
     private int antal;
     private Produkt produkt;
     private double produktpris;
 
-    // Constructoren til klassen
-    public SalgsLinie(int antal, Produkt produkt, SalgSted sted) {
+    /**
+     * Constructoren
+     *
+     * @param antal
+     * @param produkt
+     * @param sted
+     */
+    protected SalgsLinie(int antal, Produkt produkt, SalgSted sted) {
         this.antal = antal;
         this.produkt = produkt;
         if (produkt.getStedPrisPris(sted) == 0) {
@@ -18,13 +23,11 @@ public class SalgsLinie {
         }
     }
 
-    // denne metode returnere hvad der står i pris attributen
     public double getPris() {
         double pris = this.antal * this.produktpris;
         return pris;
     }
 
-    // denne metode returnere hvad der står i produktpris attributen
     public double getProduktPris() {
         return this.produktpris;
     }

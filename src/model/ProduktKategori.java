@@ -4,62 +4,100 @@ import java.util.ArrayList;
 
 public class ProduktKategori {
 
-	// Attributter til klassen
-	private String navn;
-	private ArrayList<Produkt> produkter = new ArrayList<>();
+    private String navn;
+    private ArrayList<Produkt> produkter = new ArrayList<>();
 
-	// Constructoren til klassen
-	public ProduktKategori(String navn) {
-		this.navn = navn;
-	}
+    /**
+     * Constructor
+     *
+     * @param navn
+     */
+    public ProduktKategori(String navn) {
+        this.navn = navn;
+    }
 
-	// denne metode opretter et produkt og tilføjer det oprettet produkt til
-	// arraylisten af produkter.
-	public Produkt createProdukt(String navn, double pris, String str) {
-		Produkt p = new Produkt(navn, pris, str);
-		produkter.add(p);
-		return p;
-	}
+    /**
+     * Opretter et produkt og tilføjer det til arraylisten af produkter
+     *
+     * @param navn
+     * @param pris
+     * @param str
+     * @return et produkt
+     */
+    public Produkt createProdukt(String navn, double pris, String str) {
+        Produkt p = new Produkt(navn, pris, str);
+        produkter.add(p);
+        return p;
+    }
 
-	// Denne metode tilføjer et produkt til arraylisten af produkter
-	public void addProdukt(Produkt p) {
-		produkter.add(p);
-	}
+    /**
+     * Tilføjer et produkt til arraylisten af produkter.
+     *
+     * @param p
+     */
+    public void addProdukt(Produkt p) {
+        produkter.add(p);
+    }
 
-	// denne metode fjerner produktet som er skrevet i parameteren fra arraylisten
-	// af produkter.
-	public void removeProdukt(Produkt p) {
-		produkter.remove(p);
-	}
+    /**
+     * Sletter produktet i parameteren fra arraylisten af produkter.
+     *
+     * @param p
+     */
+    public void removeProdukt(Produkt p) {
+        produkter.remove(p);
+    }
 
-	// Denne metode redigere attributten "navn" på det produkt som er i parameteren.
-	public void redigerNavn(Produkt p, String navn) {
-		p.setNavn(navn);
-	}
+    /**
+     * Rediger på produkktets navn.
+     *
+     * @param p
+     * @param navn
+     */
+    public void redigerNavn(Produkt p, String navn) {
+        p.setNavn(navn);
+    }
 
-	// denne metode redigere attributten "pris" på det produkt som er i parameteren.
-	public void redigerPris(Produkt p, double pris) {
-		p.setPris(pris);
-	}
+    /**
+     * Rediger på produktets pris
+     *
+     * @param p
+     * @param pris
+     */
+    public void redigerPris(Produkt p, double pris) {
+        p.setPris(pris);
+    }
 
-	// denne metode redigere attributten "str" på det produkt som er i parameteren.
-	public void redigerStr(Produkt p, String str) {
-		p.setStr(str);
-	}
+    /**
+     * Rediger på produktets str
+     *
+     * @param p
+     * @param str
+     */
+    public void redigerStr(Produkt p, String str) {
+        p.setStr(str);
+    }
 
-	// denne metode returnere en ny arraylist med alle produkter.
-	public ArrayList<Produkt> getProdukter() {
-		return new ArrayList<>(produkter);
-	}
+    /**
+     *
+     * @return en ny arrayList af produkter
+     */
+    public ArrayList<Produkt> getProdukter() {
+        return new ArrayList<>(produkter);
+    }
 
-	// denne metode returnere det produkt, som er i parameteren.
-	public Produkt getProdukt(Produkt p) {
-		return p;
-	}
+    /**
+     *
+     * @param p
+     * @return det produkt som er i parameteren
+     */
+    public Produkt getProdukt(Produkt p) {
+        return p;
+    }
 
-	@Override
-	public String toString() {
-		return navn;
-	}
+    @Override
+    public String toString() {
+        return navn;
+    }
 
 }
