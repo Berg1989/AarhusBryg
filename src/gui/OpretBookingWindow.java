@@ -25,12 +25,12 @@ public class OpretBookingWindow extends Stage {
         initContent(pane);
         setScene(scene);
     }
-    
+
     private DatePicker dpRundvisning;
     private ComboBox cbMuligheder;
     private TextField tfTid, tfAntal, tfMadAntal, tfPris;
     private Button btnReserver, btnLuk;
-    
+
     private void initContent(GridPane pane) {
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
@@ -39,7 +39,7 @@ public class OpretBookingWindow extends Stage {
 
         btnReserver = new Button("Reserver");
         pane.add(btnReserver, 0, 1);
-//        btnReserver.setOnAction(event -> btnRundvisningAction());
+        // btnReserver.setOnAction(event -> btnRundvisningAction());
         btnReserver.setPrefSize(200, 100);
 
         btnLuk = new Button("Luk");
@@ -48,8 +48,9 @@ public class OpretBookingWindow extends Stage {
         btnLuk.setPrefSize(200, 100);
 
     }
-    
-    private void btnLukAction(){
-    	hide();
+
+    // Denne metode lukker for vinduet
+    private void btnLukAction() {
+        hide();
     }
 }

@@ -1,43 +1,46 @@
 package model;
 
 public class StedPris {
-	private SalgSted sted;
-	private Produkt produkt;
-	private double pris;
 
-	public StedPris(SalgSted sted, Produkt produkt, double pris) {
-		this.sted = sted;
-		this.produkt = produkt;
-		this.pris = pris;
-	}
+    // Attributter til klassen
+    private SalgSted sted;
+    private Produkt produkt;
+    private double pris;
 
-	public SalgSted getSted() {
-		return sted;
-	}
+    // Constructor til klassen
+    public StedPris(SalgSted sted, Produkt produkt, double pris) {
+        this.sted = sted;
+        this.produkt = produkt;
+        this.pris = pris;
+    }
 
-	public void setSted(SalgSted sted) {
-		this.sted = sted;
-	}
+    public SalgSted getSted() {
+        return sted;
+    }
 
-	public Produkt getProdukt() {
-		return produkt;
-	}
+    public void setSted(SalgSted sted) {
+        this.sted = sted;
+    }
 
-	public void setProdukt(Produkt produkt) {
-		this.produkt = produkt;
-	}
+    public Produkt getProdukt() {
+        return produkt;
+    }
 
-	public double getPris() {
-		return pris;
-	}
+    public void setProdukt(Produkt produkt) {
+        this.produkt = produkt;
+    }
 
-	public void setPris(double pris) {
-		this.pris = pris;
-	}
+    public double getPris() {
+        return pris;
+    }
 
-	@Override
-	public String toString() {
-		return getSted() + ", " + pris + "kr.";
-	}
+    public void setPris(double pris) {
+        this.pris = pris;
+    }
+
+    @Override
+    public String toString() {
+        return getSted() + ", " + pris + "kr.";
+    }
 
 }

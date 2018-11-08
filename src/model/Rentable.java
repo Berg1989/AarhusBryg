@@ -2,7 +2,10 @@ package model;
 
 public interface Rentable {
 
-	abstract double getPris();
-	abstract double getPant();
-	abstract double getTotal();
+    // Dette er et interface, som bliver brugt i klasserne.
+    abstract double getPris();
+
+    abstract double getPant();
+
+    abstract double getTotal();
 }

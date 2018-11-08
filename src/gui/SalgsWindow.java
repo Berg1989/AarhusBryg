@@ -106,7 +106,7 @@ public class SalgsWindow extends Stage {
         lbAntal = new Label("Antal");
         vboks4.getChildren().add(lbAntal);
 
-        txfAntal = new TextField();
+        txfAntal = new TextField("1");
         vboks4.getChildren().add(txfAntal);
         txfAntal.setMaxWidth(50);
 
@@ -150,6 +150,8 @@ public class SalgsWindow extends Stage {
 
     }
 
+    // Denne metode holder tilføjer alle produktkategorier fra et salgssted til
+    // lwPK, så længe man har klikket på et salgsSted fra lwSS
     private void updateControls() {
         SalgSted ss = lwSS.getSelectionModel().getSelectedItem();
         lwPK.getItems().clear();
@@ -158,6 +160,8 @@ public class SalgsWindow extends Stage {
         }
     }
 
+    // Denne metode holder tilføjer alle produkter fra en produktkategori til
+    // lwP, så længe man har klikket på en produktkategori fra lwPK
     private void updateControlsTwo() {
         ProduktKategori pk = lwPK.getSelectionModel().getSelectedItem();
         lwP.getItems().clear();
@@ -166,16 +170,22 @@ public class SalgsWindow extends Stage {
         }
     }
 
+    // Denne metode sætter Textfield "txtAntal" til 1.
+
+    // Kan fjernes.
     private void updateControlsThree() {
         txfAntal.setText("1");
     }
 
+    // Denne metode holder lwTilfojet updateret.
     private void initAllSalgsPK() {
         lwTilfojet.getItems().clear();
         lwTilfojet.getItems().addAll(s.getProdukter());
         txfTP.setText(Double.toString(s.getTotalPris()));
     }
 
+    // Denne metode tilføjer et valgt produkt og bestemt antal fra texfield, og
+    // lægger det over i Listviewet for "tilføjet til købslist"
     private void pilHojreAction() {
         if (s == null && lwP.getSelectionModel().getSelectedItem() != null) {
             s = service.createSalg(lwSS.getSelectionModel().getSelectedItem());
@@ -194,6 +204,7 @@ public class SalgsWindow extends Stage {
 
     }
 
+    // Denne metode fjerner det valgte produkt fra "tilføjet til købslist".
     private void pilVenstreAction() {
         if (lwTilfojet.getSelectionModel().getSelectedItem() != null) {
             s.getProdukter().remove(lwTilfojet.getSelectionModel().getSelectedItem());
@@ -201,12 +212,15 @@ public class SalgsWindow extends Stage {
         }
     }
 
+    // Denne metode er en bottom action, som åbner vinduet VidereWindow, hvor den
+    // tager det nuværende salg med som parameter
     private void videreAction() {
         VidereWindow vw = new VidereWindow(s);
         vw.showAndWait();
 
     }
 
+    // Denne metode er en buttom action, som lukker for det nuværende vindue
     private void lukAction() {
         hide();
     }

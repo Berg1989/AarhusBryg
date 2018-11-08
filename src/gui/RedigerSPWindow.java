@@ -18,79 +18,83 @@ import model.SalgSted;
 import service.Service;
 
 public class RedigerSPWindow extends Stage {
-	private Service service;
-	private Produkt p;
+    private Service service;
+    private Produkt p;
 
-	public RedigerSPWindow(Produkt p) {
-		service = Service.getService();
-		this.p = p;
+    public RedigerSPWindow(Produkt p) {
+        service = Service.getService();
+        this.p = p;
 
-		initStyle(StageStyle.UTILITY);
-		initModality(Modality.APPLICATION_MODAL);
-		setResizable(false);
-		setTitle("Special Pris");
+        initStyle(StageStyle.UTILITY);
+        initModality(Modality.APPLICATION_MODAL);
+        setResizable(false);
+        setTitle("Special Pris");
 
-		GridPane pane = new GridPane();
-		Scene scene = new Scene(pane);
-		initContent(pane);
-		setScene(scene);
-	}
+        GridPane pane = new GridPane();
+        Scene scene = new Scene(pane);
+        initContent(pane);
+        setScene(scene);
+    }
 
-	private Label lbNyP, lbSalgsSted;
-	private TextField txfNyP;
-	private Button btnRedigere, btnLuk;
-	private ComboBox<SalgSted> cbSalgsSted;
+    private Label lbNyP, lbSalgsSted;
+    private TextField txfNyP;
+    private Button btnRedigere, btnLuk;
+    private ComboBox<SalgSted> cbSalgsSted;
 
-	private void initContent(GridPane pane) {
-		pane.setPadding(new Insets(10));
-		pane.setHgap(10);
-		pane.setVgap(10);
-		pane.setGridLinesVisible(false);
+    private void initContent(GridPane pane) {
+        pane.setPadding(new Insets(10));
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.setGridLinesVisible(false);
 
-		VBox vboks = new VBox();
-		pane.add(vboks, 0, 0);
+        VBox vboks = new VBox();
+        pane.add(vboks, 0, 0);
 
-		lbSalgsSted = new Label("Salgs sted");
-		vboks.getChildren().add(lbSalgsSted);
+        lbSalgsSted = new Label("Salgs sted");
+        vboks.getChildren().add(lbSalgsSted);
 
-		cbSalgsSted = new ComboBox<>();
-		vboks.getChildren().add(cbSalgsSted);
-		cbSalgsSted.getItems().addAll(service.getAllSalgSted());
+        cbSalgsSted = new ComboBox<>();
+        vboks.getChildren().add(cbSalgsSted);
+        cbSalgsSted.getItems().addAll(service.getAllSalgSted());
 
-		lbNyP = new Label("Ny Pris");
-		vboks.getChildren().add(lbNyP);
+        lbNyP = new Label("Ny Pris");
+        vboks.getChildren().add(lbNyP);
 
-		txfNyP = new TextField();
-		vboks.getChildren().add(txfNyP);
+        txfNyP = new TextField();
+        vboks.getChildren().add(txfNyP);
 
-		HBox hboks = new HBox(20);
-		pane.add(hboks, 0, 2);
-		hboks.setPadding(new Insets(0, 0, 0, 10));
-		hboks.setAlignment(Pos.BASELINE_LEFT);
+        HBox hboks = new HBox(20);
+        pane.add(hboks, 0, 2);
+        hboks.setPadding(new Insets(0, 0, 0, 10));
+        hboks.setAlignment(Pos.BASELINE_LEFT);
 
-		btnRedigere = new Button("Rediger");
-		hboks.getChildren().add(btnRedigere);
-		btnRedigere.setOnAction(event -> btnRedigerAction());
+        btnRedigere = new Button("Rediger");
+        hboks.getChildren().add(btnRedigere);
+        btnRedigere.setOnAction(event -> btnRedigerAction());
 
-		btnLuk = new Button("Luk");
-		hboks.getChildren().add(btnLuk);
-		btnLuk.setOnAction(event -> btnLukAction());
+        btnLuk = new Button("Luk");
+        hboks.getChildren().add(btnLuk);
+        btnLuk.setOnAction(event -> btnLukAction());
 
-	}
+    }
 
-	private void btnRedigerAction() {
-		if (p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem()) == null) {
-			service.opretStedPris(cbSalgsSted.getSelectionModel().getSelectedItem(), p,
-					Double.parseDouble(txfNyP.getText().trim()));
-		} else {
-			p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem())
-					.setPris(Double.parseDouble(txfNyP.getText().trim()));
-		}
+    /// ADAWD//A DAW/D/AW/D
+    // Denne metode er en button action for "Rediger" hvor den opretter en stedpris,
+    /// hvis ComboBox'en er tom. Hvis HÆLP
+    private void btnRedigerAction() {
+        if (p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem()) == null) {
+            service.opretStedPris(cbSalgsSted.getSelectionModel().getSelectedItem(), p,
+                    Double.parseDouble(txfNyP.getText().trim()));
+        } else {
+            p.stedPris(cbSalgsSted.getSelectionModel().getSelectedItem())
+                    .setPris(Double.parseDouble(txfNyP.getText().trim()));
+        }
 
-		hide();
-	}
+        hide();
+    }
 
-	private void btnLukAction() {
-		hide();
-	}
+    // Denne metode lukker for vinduet
+    private void btnLukAction() {
+        hide();
+    }
 }
