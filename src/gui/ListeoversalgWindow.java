@@ -70,9 +70,10 @@ public class ListeoversalgWindow extends Stage {
 		btnLuk.setOnAction(event -> btnLukAction());
 	}
 
-	// Denne metode er til at generere en fil.txt. Hvor man vaelger 2 dato'ere og
-	// traekker data'en som er imellem de valgte datoer, og tilfoejer det til en
-	// textfil
+	/*
+	 * Generer en fil.txt, hvor man vaelger 2 dato'er og traekker data'en som er
+	 * imellem de valgte datoer, og tilfoejer det til fil.txt
+	 */
 	private void btnGetListeAction() {
 		LocalDate start = startDate.getValue().minusDays(1);
 		LocalDate end = endDate.getValue().plusDays(1);
@@ -101,7 +102,9 @@ public class ListeoversalgWindow extends Stage {
 		}
 	}
 
-	// Denne metode lukker for vinduet
+	/*
+	 * Lukker for vinduet
+	 */
 	private void btnLukAction() {
 		hide();
 	}

@@ -14,69 +14,77 @@ import javafx.stage.StageStyle;
 import service.Service;
 
 public class OpretSalgStedWindow extends Stage {
-    private Service service;
+	private Service service;
 
-    public OpretSalgStedWindow() {
-        service = Service.getService();
-        initStyle(StageStyle.UTILITY);
-        initModality(Modality.APPLICATION_MODAL);
-        setResizable(false);
-        setTitle("Opret SalgSted");
+	public OpretSalgStedWindow() {
+		service = Service.getService();
+		initStyle(StageStyle.UTILITY);
+		initModality(Modality.APPLICATION_MODAL);
+		setResizable(false);
+		setTitle("Opret SalgSted");
 
-        GridPane pane = new GridPane();
-        Scene scene = new Scene(pane);
-        initContent(pane);
-        setScene(scene);
-    }
+		GridPane pane = new GridPane();
+		Scene scene = new Scene(pane);
+		initContent(pane);
+		setScene(scene);
+	}
 
-    private Label lbNavn;
-    private TextField txfNavn;
-    private Button btnLuk, btnOpret;
+	private Label lbNavn;
+	private TextField txfNavn;
+	private Button btnLuk, btnOpret;
 
-    private void initContent(GridPane pane) {
-        pane.setPadding(new Insets(10));
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setGridLinesVisible(false);
+	private void initContent(GridPane pane) {
+		pane.setPadding(new Insets(10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setGridLinesVisible(false);
 
-        lbNavn = new Label("Salgssted navn: ");
-        pane.add(lbNavn, 0, 0);
+		lbNavn = new Label("Salgssted navn: ");
+		pane.add(lbNavn, 0, 0);
 
-        txfNavn = new TextField();
-        pane.add(txfNavn, 0, 1);
+		txfNavn = new TextField();
+		pane.add(txfNavn, 0, 1);
 
-        btnOpret = new Button("Opret");
-        pane.add(btnOpret, 0, 2);
-        btnOpret.setOnAction(event -> btnOpretAction());
+		btnOpret = new Button("Opret");
+		pane.add(btnOpret, 0, 2);
+		btnOpret.setOnAction(event -> btnOpretAction());
 
-        btnLuk = new Button("Luk");
-        pane.add(btnLuk, 1, 2);
-        btnLuk.setOnAction(event -> btnLukAction());
+		btnLuk = new Button("Luk");
+		pane.add(btnLuk, 1, 2);
+		btnLuk.setOnAction(event -> btnLukAction());
 
-    }
+	}
 
-    // Denne metode opretter et salgssted. Derudover saa giver metoden ogsaa en
-    // alert, hvis textfieldet er tomt.
-    private void btnOpretAction() {
-        String navn = txfNavn.getText().trim();
-        if (navn.isEmpty()) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Mangler");
-            alert.setHeaderText("Salgssted navn");
-            alert.setContentText("Du mangler at give salgssted et navn!");
+	// Denne metode opretter et salgssted. Derudover saa giver metoden ogsaa en
+	// alert, hvis textfieldet er tomt.
 
-            alert.showAndWait();
+	/*
+	 * Opretter et salgssted. Derudover saa giver metoden ogsaa en alert, hvis
+	 * textfieldet er tomt.
+	 */
 
-        } else {
-            service.opretSalgSted(navn);
-            hide();
-        }
+	private void btnOpretAction() {
+		String navn = txfNavn.getText().trim();
+		if (navn.isEmpty()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information Mangler");
+			alert.setHeaderText("Salgssted navn");
+			alert.setContentText("Du mangler at give salgssted et navn!");
 
-    }
+			alert.showAndWait();
 
-    // Denne metode lukker for vinduet
-    private void btnLukAction() {
-        hide();
-    }
+		} else {
+			service.opretSalgSted(navn);
+			hide();
+		}
+
+	}
+
+	/*
+	 * Lukker for vinduet
+	 */
+	private void btnLukAction() {
+		hide();
+	}
 
 }

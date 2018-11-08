@@ -112,14 +112,16 @@ public class UdlejningsWindow extends Stage {
 		vboks2.getChildren().add(1, lwAnlag);
 		lwAnlag.getItems().addAll(service.getAllAnleag());
 
-		HBox hboks2 = new HBox();
-		vboks2.getChildren().add(2, hboks2);
+		// -----------------HBox 1 ---------------------------------------
+
+		HBox hboks1 = new HBox();
+		vboks2.getChildren().add(2, hboks1);
 
 		txfAntalA = new TextField("1");
-		hboks2.getChildren().add(0, txfAntalA);
+		hboks1.getChildren().add(0, txfAntalA);
 
 		btnAnlag = new Button("->");
-		hboks2.getChildren().add(1, btnAnlag);
+		hboks1.getChildren().add(1, btnAnlag);
 		btnAnlag.setOnAction(event -> btnAnlagAction());
 
 		// -----------------VBox 3 ---------------------------------------
@@ -134,18 +136,16 @@ public class UdlejningsWindow extends Stage {
 		vboks3.getChildren().add(1, lwFustager);
 		lwFustager.getItems().addAll(service.getAllFustager());
 
-		// ChangeListener<Fustage> listener = (op, oldProduct, newProduct) ->
-		// updateControls();
-		// lwFustager.getSelectionModel().selectedItemProperty().addListener(listener);
+		// -----------------HBox 2 ---------------------------------------
 
-		HBox hboks3 = new HBox();
-		vboks3.getChildren().add(2, hboks3);
+		HBox hboks2 = new HBox();
+		vboks3.getChildren().add(2, hboks2);
 
 		txfAntalF = new TextField("1");
-		hboks3.getChildren().add(0, txfAntalF);
+		hboks2.getChildren().add(0, txfAntalF);
 
 		btnFustage = new Button("->");
-		hboks3.getChildren().add(1, btnFustage);
+		hboks2.getChildren().add(1, btnFustage);
 		btnFustage.setOnAction(event -> btnFustageAction());
 
 		// -----------------VBox 4 ---------------------------------------
@@ -160,14 +160,16 @@ public class UdlejningsWindow extends Stage {
 		vboks4.getChildren().add(1, lwKulsyre);
 		lwKulsyre.getItems().addAll(service.getAllKulsyre());
 
-		HBox hboks4 = new HBox();
-		vboks4.getChildren().add(2, hboks4);
+		// -----------------HBox 3 ---------------------------------------
+
+		HBox hboks3 = new HBox();
+		vboks4.getChildren().add(2, hboks3);
 
 		txfAntalK = new TextField("1");
-		hboks4.getChildren().add(0, txfAntalK);
+		hboks3.getChildren().add(0, txfAntalK);
 
 		btnKulsyure = new Button("->");
-		hboks4.getChildren().add(1, btnKulsyure);
+		hboks3.getChildren().add(1, btnKulsyure);
 		btnKulsyure.setOnAction(event -> btnKulsyreAction());
 
 		// -----------------VBox 5 ---------------------------------------
@@ -211,35 +213,25 @@ public class UdlejningsWindow extends Stage {
 		vboks6.getChildren().add(5, txfTotal);
 		txfTotal.setEditable(false);
 
-		HBox hboks6 = new HBox();
-		vboks6.getChildren().add(6, hboks6);
-		// hboks6.setAlignment(Pos.BASELINE_RIGHT);
+		// -----------------HBox 4 ---------------------------------------
+
+		HBox hboks4 = new HBox();
+		vboks6.getChildren().add(6, hboks4);
 
 		btnLuk = new Button("Luk");
-		hboks6.getChildren().add(0, btnLuk);
+		hboks4.getChildren().add(0, btnLuk);
 		btnLuk.setOnAction(event -> btnLukAction());
 
 		btnOpret = new Button("Book");
-		hboks6.getChildren().add(1, btnOpret);
+		hboks4.getChildren().add(1, btnOpret);
 		btnOpret.setOnAction(event -> btnOpretAction());
 
 	}
 
-	/**
-	 * private void updateControls() { Fustage fustage =
-	 * lwFustager.getSelectionModel().getSelectedItem();
-	 *
-	 * if (fustage != null) { txfFNavn.setText(fustage.getOeltype());
-	 * txfFStr.setText(fustage.getStoerrelse());
-	 * txfFPris.setText(Double.toString(fustage.getPris()));
-	 *
-	 * } else { txfFNavn.clear(); txfFStr.clear(); txfFPris.clear();
-	 *
-	 * } }
+	/*
+	 * Tilfoejer det anlaeg man har klikket paa i listviewet og tilfoejer det til
+	 * lwValgt listviewet
 	 */
-
-	// Dette er en buttom action, som tilfoejer det anlaeg man har klikket paa i
-	// listviewet og tilfoejer det til lwValgt listviewet
 	public void btnAnlagAction() {
 		Anlaeg a = lwAnlag.getSelectionModel().getSelectedItem();
 		if (a != null) {
@@ -260,6 +252,12 @@ public class UdlejningsWindow extends Stage {
 
 	// Dette er en buttom action, som tilfoejer det fustage man har klikket på i
 	// listviewet og tilføjer det til lwValgt listviewet
+
+	/*
+	 *
+	 * Tilfoejer det fustage man har klikket på i listviewet og tilføjer det til
+	 * lwValgt listviewet
+	 */
 	public void btnFustageAction() {
 		Fustage f = lwFustager.getSelectionModel().getSelectedItem();
 		if (f != null) {
@@ -278,8 +276,10 @@ public class UdlejningsWindow extends Stage {
 		}
 	}
 
-	// Dette er en buttom action, som tilføjer det kulsyre man har klikket på i
-	// listviewet og tilføjer det til lwValgt listviewet
+	/*
+	 * Tilfoejer det kulsyre man har klikket på i listviewet og tilføjer det til
+	 * lwValgt listviewet
+	 */
 	public void btnKulsyreAction() {
 		Kulsyre k = lwKulsyre.getSelectionModel().getSelectedItem();
 		if (k != null) {
@@ -298,8 +298,9 @@ public class UdlejningsWindow extends Stage {
 		}
 	}
 
-	// Denne metode er en buttom action, som sletter det objekt man har klikket på,
-	// fra lwValgt listviewet
+	/*
+	 * Ssletter det objekt man har klikket på, fra lwValgt listviewet
+	 */
 	public void btnFjernAction() {
 		UdlejningsLinje ul = lwValgt.getSelectionModel().getSelectedItem();
 		u.removeOrdre(ul);
@@ -307,30 +308,30 @@ public class UdlejningsWindow extends Stage {
 		setPriser();
 	}
 
-	// Denne buttom er en buttom Action, som opretter en udlejning
+	/*
+	 * Opretter en udlejning
+	 */
 	public void btnOpretAction() {
 		if (txfNavn.getText().trim().length() > 0 && txfEmail.getText().trim().length() > 0
 				&& txfTlf.getText().trim().length() > 0 && dp.getValue() != null) {
 			service.gemUdlejning(u);
 			hide();
-			// Make alert with info about booking
-		} else {
-			// Make alert about fiels missing
+
 		}
 
 	}
 
-	// Denne metode er en buttom action, som lukker for det nuværende vindue
+	/*
+	 * Lukker for det nuværende vindue
+	 */
 
 	public void btnLukAction() {
 		hide();
 	}
 
-	//
-	// Methods
-	//
-
-	// Denne metode sætter prisen på textfield'sne
+	/*
+	 * Denne metode sætter prisen på textfield'sne
+	 */
 	public void setPriser() {
 		txfPris.setText("" + u.getSamletPris());
 		txfPant.setText("" + u.getPant());
@@ -341,7 +342,6 @@ public class UdlejningsWindow extends Stage {
 	// Listeners
 	//
 
-	// SKal de kommenteres??
 	public void addListenerNavn() {
 		txfNavn.focusedProperty().addListener((obs, oldVal, newVal) -> {
 			String navn = txfNavn.getText().trim();

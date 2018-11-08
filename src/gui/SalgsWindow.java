@@ -150,8 +150,10 @@ public class SalgsWindow extends Stage {
 
 	}
 
-	// Denne metode holder tilfoejer alle produktkategorier fra et salgssted til
-	// lwPK, saa laenge man har klikket paa et salgsSted fra lwSS
+	/*
+	 * Holder tilfoejer alle produktkategorier fra et salgssted til lwPK, saa laenge
+	 * man har klikket paa et salgsSted fra lwSS
+	 */
 	private void updateControls() {
 		SalgSted ss = lwSS.getSelectionModel().getSelectedItem();
 		lwPK.getItems().clear();
@@ -160,8 +162,11 @@ public class SalgsWindow extends Stage {
 		}
 	}
 
-	// Denne metode holder tilfoejer alle produkter fra en produktkategori til
-	// lwP, saa laenge man har klikket paa en produktkategori fra lwPK
+	/*
+	 * Denne metode holder tilfoejer alle produkter fra en produktkategori til lwP,
+	 * saa laenge man har klikket paa en produktkategori fra lwPK
+	 *
+	 */
 	private void updateControlsTwo() {
 		ProduktKategori pk = lwPK.getSelectionModel().getSelectedItem();
 		lwP.getItems().clear();
@@ -170,22 +175,27 @@ public class SalgsWindow extends Stage {
 		}
 	}
 
-	// Denne metode saetter Textfield "txtAntal" til 1.
+	/*
+	 * Opdatere txfAntal til 1, hvis man klikker på nyt produkt i Produkt listview.
+	 */
 
-	// Kan fjernes.
 	private void updateControlsThree() {
 		txfAntal.setText("1");
 	}
 
-	// Denne metode holder lwTilfojet updateret.
+	/*
+	 * Holder lwTilfojet updateret.
+	 */
 	private void initAllSalgsPK() {
 		lwTilfojet.getItems().clear();
 		lwTilfojet.getItems().addAll(s.getProdukter());
 		txfTP.setText(Double.toString(s.getTotalPris()));
 	}
 
-	// Denne metode tilfoejer et valgt produkt og bestemt antal fra texfield, og
-	// laegger det over i Listviewet for "tilfoejet til koebslist"
+	/*
+	 * Tilfoejer et valgt produkt og bestemt antal fra texfield, og laegger det over
+	 * i Listviewet for "tilfoejet til koebslist"
+	 */
 	private void pilHojreAction() {
 		if (s == null && lwP.getSelectionModel().getSelectedItem() != null && !lwSS.isDisabled()) {
 			s = service.createSalg(lwSS.getSelectionModel().getSelectedItem());
@@ -205,7 +215,9 @@ public class SalgsWindow extends Stage {
 
 	}
 
-	// Denne metode fjerner det valgte produkt fra "tilfoejet til koebslist".
+	/*
+	 * jerner det valgte produkt fra "tilfoejet til koebslist".
+	 */
 	private void pilVenstreAction() {
 
 		if (lwTilfojet.getSelectionModel().getSelectedItem() != null) {
@@ -218,8 +230,10 @@ public class SalgsWindow extends Stage {
 		}
 	}
 
-	// Denne metode er en bottom action, som aabner vinduet VidereWindow, hvor den
-	// tager det nuvaerende salg med som parameter
+	/*
+	 * Aabner vinduet VidereWindow, hvor den tager det nuvaerende salg med som
+	 * parameter
+	 */
 	private void videreAction() {
 		VidereWindow vw = new VidereWindow(s);
 		vw.showAndWait();
@@ -227,7 +241,9 @@ public class SalgsWindow extends Stage {
 
 	}
 
-	// Denne metode er en buttom action, som lukker for det nuvaerende vindue
+	/*
+	 * Lukker for det nuvaerende vindue
+	 */
 	private void lukAction() {
 		hide();
 	}
