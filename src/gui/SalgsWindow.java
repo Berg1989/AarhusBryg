@@ -211,11 +211,11 @@ public class SalgsWindow extends Stage {
 		if (lwTilfojet.getSelectionModel().getSelectedItem() != null) {
 			s.getProdukter().remove(lwTilfojet.getSelectionModel().getSelectedItem());
 			initAllSalgsPK();
-			
+
 		}
-		if (s.getProdukter().isEmpty()){
+		if (s.getProdukter().isEmpty()) {
 			lwSS.setDisable(false);
-			}
+		}
 	}
 
 	// Denne metode er en bottom action, som aabner vinduet VidereWindow, hvor den
@@ -223,6 +223,8 @@ public class SalgsWindow extends Stage {
 	private void videreAction() {
 		VidereWindow vw = new VidereWindow(s);
 		vw.showAndWait();
+		lwTilfojet.getItems().clear();
+		hide();
 
 	}
 
