@@ -187,7 +187,7 @@ public class SalgsWindow extends Stage {
 	// Denne metode tilføjer et valgt produkt og bestemt antal fra texfield, og
 	// lægger det over i Listviewet for "tilføjet til købslist"
 	private void pilHojreAction() {
-		if (s == null && lwP.getSelectionModel().getSelectedItem() != null) {
+		if (s == null && lwP.getSelectionModel().getSelectedItem() != null && !lwSS.isDisabled()) {
 			s = service.createSalg(lwSS.getSelectionModel().getSelectedItem());
 			if (lwP.getSelectionModel().getSelectedItem() != null) {
 				int antal = Integer.parseInt(txfAntal.getText().trim());
