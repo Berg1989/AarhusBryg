@@ -22,7 +22,6 @@ public class AdministrationsWindow extends Stage {
 		setScene(scene);
 	}
 
-	// Insert Attributes here:
 	private Button btnProduktategori, btnBooking, btnSalgSted;
 
 	private void initContent(GridPane pane) {
