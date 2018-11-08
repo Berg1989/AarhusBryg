@@ -99,7 +99,7 @@ public class SalgStedWindow extends Stage {
         hboks.setAlignment(Pos.BASELINE_LEFT);
         hboks.setPadding(new Insets(10, 0, 0, 0));
 
-        btnOpret = new Button("Opret");
+        btnOpret = new Button("Opret salgssted");
         hboks.getChildren().add(btnOpret);
         btnOpret.setOnAction(event -> btnOpretAction());
 
