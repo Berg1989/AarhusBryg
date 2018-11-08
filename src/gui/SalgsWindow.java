@@ -200,16 +200,22 @@ public class SalgsWindow extends Stage {
 			Produkt p = lwP.getSelectionModel().getSelectedItem();
 			service.tilfojProdukt(s, antal, p);
 		}
+		lwSS.setDisable(true);
 		initAllSalgsPK();
 
 	}
 
 	// Denne metode fjerner det valgte produkt fra "tilføjet til købslist".
 	private void pilVenstreAction() {
+
 		if (lwTilfojet.getSelectionModel().getSelectedItem() != null) {
 			s.getProdukter().remove(lwTilfojet.getSelectionModel().getSelectedItem());
 			initAllSalgsPK();
+			
 		}
+		if (s.getProdukter().isEmpty()){
+			lwSS.setDisable(false);
+			}
 	}
 
 	// Denne metode er en bottom action, som åbner vinduet VidereWindow, hvor den
