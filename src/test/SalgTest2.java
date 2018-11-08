@@ -46,29 +46,29 @@ public class SalgTest2 {
 	@Test
 	public void TC01slet() {
 		sl = s.getProdukter().get(0);
-		s.sletSalgsLinie(sl);
+		s.sletSalgsLinje(sl);
 		assertEquals(2, s.getProdukter().size());
 	}
 	
 	public void TC02slet() {
 		sl = s.getProdukter().get(0);
-		s.sletSalgsLinie(sl);
+		s.sletSalgsLinje(sl);
 		sl = s.getProdukter().get(0);
-		s.sletSalgsLinie(sl);
+		s.sletSalgsLinje(sl);
 		assertEquals(1, s.getProdukter().size());
 	}
 	
 	public void TC03slet() {
 		ArrayList<SalgsLinie> produkter = new ArrayList<>(s.getProdukter());
 		for (SalgsLinie linje : produkter) {
-			s.sletSalgsLinie(linje);
+			s.sletSalgsLinje(linje);
 		}
 		assertEquals(0, s.getProdukter().size());
 	}
 	
 	public void TC04slet() {
 		SalgsLinie idontexist;
-		s.sletSalgsLinie(idontexist);
+		s.sletSalgsLinje(idontexist);
 		assertEquals(3, s.getProdukter().size());
 	}
 	

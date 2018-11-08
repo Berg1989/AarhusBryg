@@ -57,9 +57,29 @@ public class SalgTest1 {
 		assertEquals(3, s.getProdukter().size());
 	}
 	
+	@Test
+	public void TC01pris() {
+		s.opretSalgslinie(1, p1);
+		assertEquals(30.0, s.getTotalPris(), 0.001);
+	}
 	
-	//Totalpris her
+	@Test
+	public void TC02pris() {
+		s.opretSalgslinie(5, p1);
+		s.opretSalgslinie(2, p2);
+		assertEquals(250.0, s.getTotalPris(), 0.01);
+	}
 	
-
+	@Test
+	public void TC03pris() {
+		s.opretSalgslinie(5, p1);
+		s.opretSalgslinie(2, p2);
+		s.opretSalgslinie(4, p2);
+		assertEquals(450.0, s.getTotalPris(), 0.01);
+	}
+	
+	public void TC04pris() {
+		assertEquals(0.0, s.getTotalPris(), 0.01);
+	}
 	
 }
