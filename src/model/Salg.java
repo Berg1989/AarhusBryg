@@ -47,6 +47,10 @@ public class Salg {
         }
     }
 
+    
+    public double getRabat() {
+    	return this.rabat;
+    }
     public void sletSalgsLinje(SalgsLinie sl) {
         this.produkter.remove(sl);
     }
