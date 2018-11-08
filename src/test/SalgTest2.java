@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Betalingsmetode;
 import model.Produkt;
 import model.ProduktKategori;
 import model.Salg;
@@ -39,6 +40,7 @@ public class SalgTest2 {
 		s.opretSalgslinie(7, p2);
 		s.setTid(LocalTime.of(13, 37));	
 		s.setDato(LocalDate.of(2016, 5, 4));
+		s.setBetalingsMetode(Betalingsmetode.DANKORT);
 	}
 	
 
@@ -67,8 +69,8 @@ public class SalgTest2 {
 	}
 	
 	public void TC04slet() {
-		SalgsLinie idontexist;
-		s.sletSalgsLinje(idontexist);
+		
+		s.sletSalgsLinje(null);
 		assertEquals(3, s.getProdukter().size());
 	}
 	
@@ -98,6 +100,39 @@ public class SalgTest2 {
 		assertEquals(LocalDate.of(1912, 4, 14), s.getDato());
 	}
 	
+	public void TC01studerende() {
+		s.setStuderende(true);
+		assertEquals(360.0, s.getTotalPris(), 0.1);
+	}
+	
+	public void TC02studerende() {
+		s.setStuderende(true);
+		s.getTotalPris();
+		s.setStuderende(false);
+		assertEquals(450.0, s.getTotalPris(), 0.1);
+	}
+	
+	public void TC01givRabatAbsolut() {
+		s.givRabatAbsolut(20.0);
+		assertEquals(430.0, s.getTotalPris(), 0.001);
+	}
+	
+	public void TC02givRabatAbsolut() {
+		s.givRabatAbsolut(-20.0);
+		assertEquals(450.0, s.getTotalPris(), 0.001);
+	}
 
+	public void TC01givRabatProcent() {
+		s.givRabatProcent(50.0);
+		assertEquals(225.0, s.getTotalPris(), 0.001);
+	}
+	public void TC01bmet () {
+		assertEquals(Betalingsmetode.DANKORT, s.getBetalingsMetode());
+	}
+	
+	public void TC02bmet() {
+		s.setBetalingsMetode(Betalingsmetode.MOBILEPAY);
+		assertEquals(Betalingsmetode.MOBILEPAY, s.getBetalingsMetode());
+	}
 	
 }

@@ -62,6 +62,8 @@ public class SalgTest3 {
 	public void TC04pris() {
 		assertEquals(0.00, s.getTotalPris(), 0.001);
 	}
+
+	
 	
 
 }

@@ -13,7 +13,7 @@ public class SalgsLinie {
      * @param produkt
      * @param sted
      */
-    public SalgsLinie(int antal, Produkt produkt, SalgSted sted) {
+    protected SalgsLinie(int antal, Produkt produkt, SalgSted sted) {
         this.antal = antal;
         this.produkt = produkt;
         if (produkt.getStedPrisPris(sted) == 0) {

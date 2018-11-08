@@ -76,7 +76,10 @@ public class Salg {
     }
 
     public void setStudieRabat(double procent) {
-        studierabat = procent;
+    	if (procent >= 0) {
+    		studierabat = procent;
+    	}
+        
     }
 
     /**

@@ -16,7 +16,7 @@ public class Produkt {
      * @param pris
      * @param str
      */
-    public Produkt(String navn, double pris, String str) { // Skal vaere private?
+    protected Produkt(String navn, double pris, String str) { // Skal vaere private?
         this.navn = navn;
         this.pris = pris;
         this.str = str;
