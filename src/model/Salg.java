@@ -34,23 +34,17 @@ public class Salg {
             SalgsLinie linie = new SalgsLinie(antal, produkt, this.sted);
             produkter.add(linie);
         }
+    }
 
-	public ArrayList<SalgsLinie> getProdukter() {
-		return produkter;
-	}
- 
-	public LocalTime getTid() {
-		return this.tid;
-	}
-	
-	public void setTid(LocalTime tid) {
-		this.tid = tid;
-	}
-
-    // Denne metode returnere alle produkter i arraylisten
     public ArrayList<SalgsLinie> getProdukter() {
         return produkter;
     }
+
+    public LocalTime getTid() {
+        return this.tid;
+    }
+
+    // Denne metode returnere alle produkter i arraylisten
 
     // denne metode gør det muligt at sætte en tid, hvis tiden ikke allerede
     // eksistere. Hvis den gør, så overrider den det der stod der før til det som
@@ -65,12 +59,11 @@ public class Salg {
 
     }
 
-	//TROR DENNE SKAL SLETTES, HAR IKKE TESTS
-	public void setPris(double pris) {
-		this.pris = pris;
-	}
-	
-	//Fuldt testet hertil. Fortsaet herfra :)
+    public LocalDate setDato(LocalDate dato) {
+        return this.dato = dato;
+    }
+
+    // Fuldt testet hertil. Fortsaet herfra :)
 
     /// KIG HER///
     // Denne metode gør at man kan sætte hele nye objekter fra en anden salgslinie
@@ -84,6 +77,17 @@ public class Salg {
     // står i parameteren.
     public void setPris(double pris) {
         this.pris = pris;
+    }
+
+    public double getTotalPris() {
+        double p = 0;
+        for (SalgsLinie s : this.produkter) {
+            p += s.getPris();
+
+        }
+        p -= this.rabat;
+        this.pris = p;
+        return p;
     }
 
     public void givStudieRabat() {
