@@ -16,6 +16,8 @@ public class Salg {
 	private double rabat;
 	private static int counter = 0;
 	private int id;
+	private boolean studerende;
+	private static double studierabat = 20.0;
 
 	// Constructor til klassen
 	public Salg(SalgSted sted) {
@@ -23,6 +25,7 @@ public class Salg {
 		produkter = new ArrayList<>();
 		counter++;
 		id = counter;
+		this.studerende = false;
 
 	}
 
@@ -35,6 +38,10 @@ public class Salg {
 			produkter.add(linie);
 		}
 	}
+	
+	public void sletSalgsLinje(SalgsLinie sl) {
+		this.produkter.remove(sl);
+	}
 
 	public ArrayList<SalgsLinie> getProdukter() {
 		return produkter;
@@ -43,8 +50,6 @@ public class Salg {
 	public LocalTime getTid() {
 		return this.tid;
 	}
-
-	// Denne metode returnere alle produkter i arraylisten
 
 	// denne metode gør det muligt at sætte en tid, hvis tiden ikke allerede
 	// eksistere. Hvis den gør, så overrider den det der stod der før til det som
@@ -58,27 +63,19 @@ public class Salg {
 		return dato;
 
 	}
+	
+	public void setStudieRabat(double procent) {
+		studierabat = procent;
+	}
 
 	public LocalDate setDato(LocalDate dato) {
 		return this.dato = dato;
 	}
 
-	// Fuldt testet hertil. Fortsaet herfra :)
-
-	/// KIG HER///
-	// Denne metode gør at man kan sætte hele nye objekter fra en anden salgslinie
-	/// til en anden
-	public void setProdukter(ArrayList<SalgsLinie> produkter) {
-		this.produkter = produkter;
-	}
-
-	// denne metode gør det muligt at sætte en pris, hvis prisen ikke allerede
-	// eksistere. Hvis den gør, så overrider den det der stod der før til det som
-	// står i parameteren.
-	public void setPris(double pris) {
-		this.pris = pris;
-	}
-
+	/**
+	 * 
+	 * @return double with the total price of the purchase, with discouts subtracted
+	 */
 	public double getTotalPris() {
 		double p = 0;
 		for (SalgsLinie s : this.produkter) {
@@ -86,13 +83,24 @@ public class Salg {
 
 		}
 		p -= this.rabat;
+		if (this.studerende) {
+			p = p * (1- (studierabat/ 100));
+		}
 		this.pris = p;
 		return p;
 	}
 
-	public void givStudieRabat() {
-		// TODO
-		// opdatere pris
+
+	
+	//Fuldt testet hertil. Fortsaet herfra :)
+	public void setStuderende(boolean b) {
+		this.studerende = b;
+	}
+	
+	public void setPris(double nypris) {
+		if (nypris > 0) {
+			this.pris = nypris;
+		}
 	}
 
 	// Denne metode sætter rabat til 0, derved fjerner rabatten
@@ -103,16 +111,22 @@ public class Salg {
 
 	// Denne metode ændre rabatten til hvad som der står i parameteren
 	public void givRabatAbsolut(double inputRabat) {
-		this.rabat = inputRabat;
-		getTotalPris();
+		if (inputRabat > 0) {
+			this.rabat = inputRabat;
+			getTotalPris();
+		}
+		
 
 	}
 
 	// Denne metode gør det muligt at give % rabat
-	public void givRabarProcent(double inputRabat) {
-		this.rabat = 0;
-		this.rabat = getTotalPris() * (1 - (inputRabat * 0.01));
-		getTotalPris();
+	public void givRabatProcent(double inputRabat) {
+		if (inputRabat > 0) {
+			this.rabat = 0;
+			this.rabat = getTotalPris() * (1 - (inputRabat/(100)));
+			getTotalPris();
+		}
+		
 	}
 
 	// Denne metode returnere en betalingsmetode fra Enum klassen
