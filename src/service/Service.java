@@ -161,9 +161,15 @@ public class Service {
 	// produktet i parameteren
 	public StedPris opretStedPris(SalgSted ss, Produkt p, double pris) {
 		// Tjek saa produktkategorien findes paa salgssstedet?????
-		StedPris sp = new StedPris(ss, p, pris);
-		p.addStedPris(sp);
-		return sp;
+		if (pris >= 0) {
+			StedPris sp = new StedPris(ss, p, pris);
+			p.addStedPris(sp);
+			return sp;
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 	// Denne metode returnere et produkts stedpris
