@@ -264,7 +264,6 @@ public class Service {
 		// Bar
 		SalgSted fredagsBar = opretSalgSted("Fredagsbar"); // Slet ikke
 		SalgSted butik = opretSalgSted("Butik"); // Slet ikke
-		SalgSted bar = opretSalgSted("Bar"); // Slet ikke
 
 		// Rundvisninger
 		Rundvisning r1 = opretRundvisning("Madeleine", LocalDate.of(2018, 6, 26), 42, LocalTime.of(13, 37));
