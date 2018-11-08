@@ -204,9 +204,13 @@ public class GaaTilWindow extends Stage {
     // tager alle objekter fra InitAllStedPriser og tilføjer dem til ProduktPriser
     // Listviewet
     private void btnRedigerSPAction() {
-        RedigerSPWindow rsp = new RedigerSPWindow(lwProdukter.getSelectionModel().getSelectedItem());
-        rsp.showAndWait();
-        lwProduktPriser.getItems().setAll(initAllStedPriser());
+        Produkt produkt = lwProdukter.getSelectionModel().getSelectedItem();
+        if (produkt != null) {
+            RedigerSPWindow rsp = new RedigerSPWindow(lwProdukter.getSelectionModel().getSelectedItem());
+            rsp.showAndWait();
+            lwProduktPriser.getItems().setAll(initAllStedPriser());
+        }
+
     }
 
     // Denne metode lukker for vinduet
