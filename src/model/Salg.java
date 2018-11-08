@@ -16,6 +16,8 @@ public class Salg {
 	private double rabat;
 	private static int counter = 0;
 	private int id;
+	private boolean studerende;
+	private static double studierabat = 20.0;
 
 	// Constructor til klassen
 	public Salg(SalgSted sted) {
@@ -23,6 +25,7 @@ public class Salg {
 		produkter = new ArrayList<>();
 		counter++;
 		id = counter;
+		this.studerende = false;
 
 	}
 
@@ -58,6 +61,10 @@ public class Salg {
 		return dato;
 
 	}
+	
+	public void setStudieRabat(double procent) {
+		studierabat = procent;
+	}
 
 	public LocalDate setDato(LocalDate dato) {
 		return this.dato = dato;
@@ -86,13 +93,21 @@ public class Salg {
 
 		}
 		p -= this.rabat;
+		if (this.studerende) {
+			p = p * (studierabat/ 100);
+		}
 		this.pris = p;
 		return p;
 	}
 
-	public void givStudieRabat() {
-		// TODO
-		// opdatere pris
+
+	
+	}
+	//Fuldt testet hertil. Fortsaet herfra :)
+	public void setStuderende(boolean b) {
+		this.studerende = b;
+		this.pris = pris;
+	public void setPris(double pris) {
 	}
 
 	// Denne metode sætter rabat til 0, derved fjerner rabatten
