@@ -2,12 +2,17 @@ package model;
 
 public class StedPris {
 
-    // Attributter til klassen
     private SalgSted sted;
     private Produkt produkt;
     private double pris;
 
-    // Constructor til klassen
+    /**
+     * Constructor
+     * 
+     * @param sted
+     * @param produkt
+     * @param pris
+     */
     public StedPris(SalgSted sted, Produkt produkt, double pris) {
         this.sted = sted;
         this.produkt = produkt;

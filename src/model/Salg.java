@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Salg {
 
-	// Attributter til klassen
 	private SalgSted sted;
 	private ArrayList<SalgsLinie> produkter;
 	private Betalingsmetode betalingmetode;
@@ -19,7 +18,11 @@ public class Salg {
 	private boolean studerende;
 	private static double studierabat = 20.0;
 
-	// Constructor til klassen
+     */
+     * @param sted
+     *
+     * Constructor
+    /**
 	public Salg(SalgSted sted) {
 		this.sted = sted;
 		produkter = new ArrayList<>();
@@ -27,10 +30,15 @@ public class Salg {
 		id = counter;
 		this.studerende = false;
 
-	}
+    }
 
-	// Denne metode opretter en salgslinie og tilføjer den til arraylisten
-	// "produkter", hvis antal paramenteren er større end 0.
+    /**
+     * Denne metode opretter en salgslinie og tilføjer den til arraylisten
+     * "produkter", hvis antal er større end 0.
+     *
+     * @param antal
+     * @param produkt
+     */
 
 	public void opretSalgslinie(int antal, Produkt produkt) {
 		if (antal > 0) {
@@ -43,24 +51,23 @@ public class Salg {
 		this.produkter.remove(sl);
 	}
 
-	public ArrayList<SalgsLinie> getProdukter() {
-		return produkter;
-	}
+    /**
+     *
+     * @return alle produkter i arraylisten
+     */
+    public ArrayList<SalgsLinie> getProdukter() {
+        return produkter;
+    }
 
-	public LocalTime getTid() {
-		return this.tid;
-	}
+    public LocalTime getTid() {
+        return this.tid;
+    }
 
-	// denne metode gør det muligt at sætte en tid, hvis tiden ikke allerede
-	// eksistere. Hvis den gør, så overrider den det der stod der før til det som
-	// står i parameteren.
 	public void setTid(LocalTime tid) {
 		this.tid = tid;
 	}
 
-	// denne metode returnere hvad der står i dato attributen
-	public LocalDate getDato() {
-		return dato;
+    }
 
 	}
 	
@@ -68,14 +75,13 @@ public class Salg {
 		studierabat = procent;
 	}
 
-	public LocalDate setDato(LocalDate dato) {
-		return this.dato = dato;
-	}
+    // Fuldt testet hertil. Fortsaet herfra :)
 
-	/**
-	 * 
-	 * @return double with the total price of the purchase, with discouts subtracted
-	 */
+    /**
+     * Beregner en total pris for en salgslinie
+     *
+     * @return
+     */
 	public double getTotalPris() {
 		double p = 0;
 		for (SalgsLinie s : this.produkter) {
@@ -88,7 +94,6 @@ public class Salg {
 		}
 		this.pris = p;
 		return p;
-	}
 
 
 	
@@ -103,11 +108,13 @@ public class Salg {
 		}
 	}
 
-	// Denne metode sætter rabat til 0, derved fjerner rabatten
-	public void fjernRabat() {
-		this.rabat = 0;
-		getTotalPris();
-	}
+    /**
+     * Sætter rabatten til 0.
+     */
+    public void fjernRabat() {
+        this.rabat = 0;
+        getTotalPris();
+    }
 
 	// Denne metode ændre rabatten til hvad som der står i parameteren
 	public void givRabatAbsolut(double inputRabat) {
@@ -116,10 +123,14 @@ public class Salg {
 			getTotalPris();
 		}
 		
+     * Sætter rabatten til hvad der står i inputRabat
+    /**
+     *
+     * @param inputRabat
+     */
 
-	}
+    }
 
-	// Denne metode gør det muligt at give % rabat
 	public void givRabatProcent(double inputRabat) {
 		if (inputRabat > 0) {
 			this.rabat = 0;
@@ -129,14 +140,23 @@ public class Salg {
 		
 	}
 
-	// Denne metode returnere en betalingsmetode fra Enum klassen
-	public Betalingsmetode getBetalingsMetode() {
-		return this.betalingmetode;
-	}
+    /**
+     * Laver rabatten til procent og benytter sig af inputRabat,
+     *
+     * @param inputRabat
+     */
+    public void givRabarProcent(double inputRabat) {
+        this.rabat = 0;
+        this.rabat = getTotalPris() * (1 - (inputRabat * 0.01));
+        getTotalPris();
+    }
 
-	// Denne metode sætter betalingsmetoden til hvad der står i parameteren
-	public void setBetalingsMetode(Betalingsmetode metode) {
-		this.betalingmetode = metode;
-	}
+    public Betalingsmetode getBetalingsMetode() {
+        return this.betalingmetode;
+    }
+
+    public void setBetalingsMetode(Betalingsmetode metode) {
+        this.betalingmetode = metode;
+    }
 
 }

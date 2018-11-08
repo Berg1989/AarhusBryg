@@ -2,11 +2,15 @@ package model;
 
 public class UdlejningsLinje {
 
-    // Attributter til klassen
     private Rentable produkt;
     private int antal;
 
-    // Constructor til klassen
+    /**
+     * Constructor
+     *
+     * @param produkt
+     * @param antal
+     */
     public UdlejningsLinje(Rentable produkt, int antal) {
         this.produkt = produkt;
         this.antal = antal;
@@ -20,7 +24,11 @@ public class UdlejningsLinje {
         return produkt.getPris() * antal;
     }
 
-    // denne metode beregner en total pris
+    /**
+     * Beregner en totalpris, hvor man lægger pant og prisen sammen.
+     * 
+     * @return
+     */
     public double getTotalPris() {
         return getPant() + getPris();
     }
