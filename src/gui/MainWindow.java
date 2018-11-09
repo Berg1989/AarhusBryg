@@ -119,6 +119,4 @@ public class MainWindow extends Application {
         pkw.showAndWait();
     }
 
-    // Bare en prototype
-
 }
